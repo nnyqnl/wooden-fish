@@ -95,15 +95,29 @@
             letter-spacing: 1px;
         }
         
-        .pray-count {
-            background-color: rgba(255, 255, 255, 0.25);
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 50px;
+        .counters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
             margin-top: 15px;
-            font-size: 1.3rem;
+            flex-wrap: wrap;
+        }
+        
+        .counter-item {
+            background-color: rgba(255, 255, 255, 0.25);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1.1rem;
             font-weight: 600;
             border: 1px solid rgba(255, 255, 255, 0.3);
+            min-width: 160px;
+        }
+        
+        .counter-item span {
+            display: block;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-top: 5px;
         }
         
         .content {
@@ -325,6 +339,20 @@
                 font-size: 1.8rem;
             }
             
+            .counters {
+                gap: 10px;
+            }
+            
+            .counter-item {
+                min-width: 140px;
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+            
+            .counter-item span {
+                font-size: 1.2rem;
+            }
+            
             .hit-count {
                 font-size: 1.3rem;
                 padding: 12px 25px;
@@ -383,7 +411,11 @@
         <header>
             <h1>祈福平安</h1>
             <div class="subtitle">静心祈福 平安喜乐</div>
-            <div class="pray-count">本次祈福 <span id="count">152</span> 次</div>
+            <div class="counters">
+                <div class="counter-item">本次祈福 <span id="sessionCount">0</span></div>
+                <div class="counter-item">今日祈福 <span id="todayCount">0</span></div>
+                <div class="counter-item">总祈福 <span id="totalCount">0</span></div>
+            </div>
         </header>
         
         <div class="content">
@@ -397,8 +429,6 @@
             
             <!-- 右侧控制区域 -->
             <div class="right-panel">
-                <div class="hit-count">今日已祈福 <span id="todayCount">0</span> 次</div>
-                
                 <div class="instructions">
                     <i class="fas fa-hands-praying"></i> 点击木鱼或使用下方按钮进行祈福，每次祈福都会增加计数
                 </div>
@@ -424,14 +454,16 @@
         // 获取DOM元素
         const woodenFish = document.getElementById('woodenFish');
         const mallet = document.getElementById('mallet');
-        const countElement = document.getElementById('count');
+        const sessionCountElement = document.getElementById('sessionCount');
         const todayCountElement = document.getElementById('todayCount');
+        const totalCountElement = document.getElementById('totalCount');
         const prayOnceBtn = document.getElementById('prayOnce');
         const autoPrayBtn = document.getElementById('autoPray');
         
         // 初始化计数
-        let totalCount = 152;
-        let todayCount = 0;
+        let sessionCount = 0; // 本次祈福（页面刷新重置）
+        let todayCount = 0;   // 今日祈福（每天重置）
+        let totalCount = 0;   // 总祈福（永久保存）
         
         // 自动敲击相关变量
         let autoPrayInterval = null;
@@ -441,6 +473,53 @@
         // 木鱼敲击音效（默认开启）
         const woodSound = new Audio('wooden-fish.wav');
         woodSound.volume = 0.4;
+        
+        // 从localStorage加载数据
+        function loadPrayerData() {
+            // 加载总祈福次数
+            const savedTotal = localStorage.getItem('totalPrayCount');
+            if (savedTotal) {
+                totalCount = parseInt(savedTotal);
+            }
+            
+            // 加载今日祈福次数
+            const today = new Date().toDateString(); // 获取今天的日期字符串
+            const savedToday = localStorage.getItem('todayPrayData');
+            if (savedToday) {
+                const todayData = JSON.parse(savedToday);
+                // 检查是否是今天的数据
+                if (todayData.date === today) {
+                    todayCount = todayData.count;
+                } else {
+                    // 不是今天的数据，重置今日计数
+                    todayCount = 0;
+                }
+            }
+            
+            // 更新显示
+            updateCounters();
+        }
+        
+        // 保存数据到localStorage
+        function savePrayerData() {
+            // 保存总祈福次数
+            localStorage.setItem('totalPrayCount', totalCount.toString());
+            
+            // 保存今日祈福数据
+            const today = new Date().toDateString();
+            const todayData = {
+                date: today,
+                count: todayCount
+            };
+            localStorage.setItem('todayPrayData', JSON.stringify(todayData));
+        }
+        
+        // 更新计数器显示
+        function updateCounters() {
+            sessionCountElement.textContent = sessionCount;
+            todayCountElement.textContent = todayCount;
+            totalCountElement.textContent = totalCount;
+        }
         
         // 敲击木鱼动画 - 使用Promise确保动画同步
         function hitWoodenFish() {
@@ -454,18 +533,25 @@
                 woodSound.play();
                 
                 // 增加计数
-                totalCount++;
+                sessionCount++;
                 todayCount++;
+                totalCount++;
                 
                 // 更新显示
-                countElement.textContent = totalCount;
-                todayCountElement.textContent = todayCount;
+                updateCounters();
+                
+                // 保存数据
+                savePrayerData();
                 
                 // 添加一个小的视觉反馈
-                document.querySelector('.pray-count').style.transform = 'scale(1.05)';
-                setTimeout(() => {
-                    document.querySelector('.pray-count').style.transform = 'scale(1)';
-                }, 150);
+                const counterItems = document.querySelectorAll('.counter-item');
+                counterItems.forEach(item => {
+                    item.style.transform = 'scale(1.05)';
+                    item.style.transition = 'transform 0.2s ease';
+                    setTimeout(() => {
+                        item.style.transform = 'scale(1)';
+                    }, 200);
+                });
                 
                 // 移除动画类以便下次使用
                 setTimeout(() => {
@@ -589,6 +675,27 @@
             }
         }
         
+        // 检查并重置今天的数据（如果日期已变更）
+        function checkAndResetTodayData() {
+            const today = new Date().toDateString();
+            const savedToday = localStorage.getItem('todayPrayData');
+            
+            if (savedToday) {
+                const todayData = JSON.parse(savedToday);
+                if (todayData.date !== today) {
+                    // 日期已变更，重置今日计数
+                    todayCount = 0;
+                    updateCounters();
+                    // 立即保存新的今日数据
+                    const newTodayData = {
+                        date: today,
+                        count: todayCount
+                    };
+                    localStorage.setItem('todayPrayData', JSON.stringify(newTodayData));
+                }
+            }
+        }
+        
         // 事件监听
         woodenFish.addEventListener('click', () => hitWoodenFish());
         prayOnceBtn.addEventListener('click', () => hitWoodenFish());
@@ -608,11 +715,15 @@
             }
         });
         
-        // 初始化今日计数
-        todayCountElement.textContent = todayCount;
-        
-        // 页面加载时显示一个简单的欢迎提示
+        // 页面加载时初始化
         window.addEventListener('load', () => {
+            // 加载数据
+            loadPrayerData();
+            
+            // 检查是否需要重置今日数据
+            checkAndResetTodayData();
+            
+            // 显示一个简单的欢迎提示
             setTimeout(() => {
                 const instructions = document.querySelector('.instructions');
                 instructions.style.transition = 'all 0.5s ease';
@@ -624,6 +735,11 @@
                     instructions.style.boxShadow = 'none';
                 }, 2000);
             }, 1000);
+        });
+        
+        // 页面关闭或刷新前保存数据
+        window.addEventListener('beforeunload', () => {
+            savePrayerData();
         });
     </script>
 </body>
