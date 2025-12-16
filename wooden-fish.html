@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木鱼祈福 - 祈福平安</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f1e6;
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+            color: #5a4a42;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            height: 90vh;
+            max-height: 800px;
+            background-color: #fff9e6;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(139, 107, 70, 0.15);
+            overflow: hidden;
+            border: 1px solid rgba(232, 211, 162, 0.5);
+            position: relative;
+            background: linear-gradient(180deg, #fffaf0 0%, #fff8e1 100%);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 添加佛家装饰元素 */
+        .container::before {
+            content: "卍";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            color: rgba(139, 107, 70, 0.1);
+            transform: rotate(0deg);
+        }
+        
+        .container::after {
+            content: "卍";
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: rgba(139, 107, 70, 0.1);
+            transform: rotate(0deg);
+        }
+        
+        header {
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            padding: 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #ffd700, #ffed4e, #ffd700);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            letter-spacing: 1px;
+        }
+        
+        .pray-count {
+            background-color: rgba(255, 255, 255, 0.25);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .content {
+            padding: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        
+        /* 左侧木鱼区域 */
+        .left-panel {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 30px;
+        }
+        
+        .wooden-fish-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 280px;
+        }
+        
+        .wooden-fish {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            filter: drop-shadow(0 8px 15px rgba(139, 107, 70, 0.25));
+        }
+        
+        .wooden-fish:active {
+            transform: scale(0.95);
+        }
+        
+        .wooden-fish.hit {
+            animation: hitAnimation 0.15s ease;
+        }
+        
+        @keyframes hitAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.96); }
+            100% { transform: scale(1); }
+        }
+        
+        .mallet {
+            position: absolute;
+            top: 0px;
+            right: 20px;
+            width: 150px;
+            transform-origin: bottom right;
+            transition: transform 0.2s ease;
+            z-index: 10;
+        }
+        
+        .mallet.swing {
+            animation: malletSwing 0.3s ease;
+        }
+        
+        @keyframes malletSwing {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-25deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        /* 右侧控制区域 */
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-left: 30px;
+            border-left: 1px solid rgba(184, 148, 70, 0.1);
+            min-height: 100%;
+        }
+        
+        .hit-count {
+            font-size: 1.5rem;
+            color: #8b6b46;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: rgba(255, 249, 230, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(184, 148, 70, 0.2);
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .hit-count span {
+            font-weight: 700;
+            color: #b89446;
+            font-size: 1.8rem;
+        }
+        
+        .instructions {
+            background-color: rgba(255, 249, 230, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: #8b6b46;
+            max-width: 350px;
+            text-align: center;
+            line-height: 1.6;
+            border: 1px solid rgba(184, 148, 70, 0.2);
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .btn {
+            padding: 18px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(139, 107, 70, 0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(to right, #8b6b46, #a87d4a);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-active {
+            background: linear-gradient(to right, #d45f5f, #e68a8a);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(139, 107, 70, 0.25);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        footer {
+            padding: 15px;
+            text-align: center;
+            color: #8b6b46;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(184, 148, 70, 0.2);
+            background-color: rgba(255, 249, 230, 0.8);
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                height: auto;
+                max-height: none;
+                min-height: 90vh;
+            }
+            
+            .content {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .left-panel {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .right-panel {
+                padding-left: 0;
+                border-left: none;
+                border-top: 1px solid rgba(184, 148, 70, 0.1);
+                padding-top: 30px;
+            }
+            
+            .wooden-fish-container {
+                max-width: 300px;
+                height: 250px;
+            }
+            
+            .wooden-fish {
+                max-width: 250px;
+            }
+            
+            .mallet {
+                top: 15px;
+                right: 15px;
+                width: 100px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hit-count {
+                font-size: 1.3rem;
+                padding: 12px 25px;
+            }
+            
+            .hit-count span {
+                font-size: 1.5rem;
+            }
+            
+            .instructions {
+                font-size: 1rem;
+                padding: 15px;
+            }
+            
+            .btn {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .container {
+                height: 95vh;
+            }
+            
+            header {
+                padding: 15px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .wooden-fish-container {
+                height: 220px;
+            }
+            
+            .wooden-fish {
+                max-width: 220px;
+            }
+            
+            .mallet {
+                top: 10px;
+                right: 10px;
+                width: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>祈福平安</h1>
+            <div class="subtitle">静心祈福 平安喜乐</div>
+            <div class="pray-count">本次祈福 <span id="count">152</span> 次</div>
+        </header>
+        
+        <div class="content">
+            <!-- 左侧木鱼区域 -->
+            <div class="left-panel">
+                <div class="wooden-fish-container">
+                    <img src="muyu.png" alt="木鱼" class="wooden-fish" id="woodenFish" onerror="this.src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9df.svg'">
+                    <img src="muchui.png" alt="木槌" class="mallet" id="mallet">
+                </div>
+            </div>
+            
+            <!-- 右侧控制区域 -->
+            <div class="right-panel">
+                <div class="hit-count">今日已祈福 <span id="todayCount">0</span> 次</div>
+                
+                <div class="instructions">
+                    <i class="fas fa-hands-praying"></i> 点击木鱼或使用下方按钮进行祈福，每次祈福都会增加计数
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-primary" id="prayOnce">
+                        <i class="fas fa-hands-praying"></i> 敲一敲
+                    </button>
+                    
+                    <button class="btn btn-secondary" id="autoPray">
+                        <i class="fas fa-play"></i> 开启自动敲击
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            木鱼祈福 · 心诚则灵 · 愿您平安喜乐
+        </footer>
+    </div>
+    
+    <script>
+        // 获取DOM元素
+        const woodenFish = document.getElementById('woodenFish');
+        const mallet = document.getElementById('mallet');
+        const countElement = document.getElementById('count');
+        const todayCountElement = document.getElementById('todayCount');
+        const prayOnceBtn = document.getElementById('prayOnce');
+        const autoPrayBtn = document.getElementById('autoPray');
+        
+        // 初始化计数
+        let totalCount = 152;
+        let todayCount = 0;
+        
+        // 自动敲击相关变量
+        let autoPrayInterval = null;
+        let isAutoPraying = false;
+        const prayerSpeed = 800; // 固定速度（毫秒）
+        
+        // 木鱼敲击音效（默认开启）
+        const woodSound = new Audio('wooden-fish.wav');
+        woodSound.volume = 0.4;
+        
+        // 敲击木鱼动画 - 使用Promise确保动画同步
+        function hitWoodenFish() {
+            return new Promise((resolve) => {
+                // 添加敲击动画类
+                woodenFish.classList.add('hit');
+                mallet.classList.add('swing');
+                
+                // 播放音效
+                woodSound.currentTime = 0;
+                woodSound.play();
+                
+                // 增加计数
+                totalCount++;
+                todayCount++;
+                
+                // 更新显示
+                countElement.textContent = totalCount;
+                todayCountElement.textContent = todayCount;
+                
+                // 添加一个小的视觉反馈
+                document.querySelector('.pray-count').style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    document.querySelector('.pray-count').style.transform = 'scale(1)';
+                }, 150);
+                
+                // 移除动画类以便下次使用
+                setTimeout(() => {
+                    woodenFish.classList.remove('hit');
+                }, 150);
+                
+                setTimeout(() => {
+                    mallet.classList.remove('swing');
+                    resolve(); // 动画完成后resolve
+                }, 300);
+                
+                // 如果祈福次数达到特殊数字，显示特殊效果
+                if (totalCount % 108 === 0) {
+                    showSpecialEffect();
+                }
+            });
+        }
+        
+        // 开始自动敲击 - 使用setTimeout递归调用确保动画同步
+        function startAutoPray() {
+            if (isAutoPraying) return;
+            
+            isAutoPraying = true;
+            autoPrayBtn.classList.remove('btn-secondary');
+            autoPrayBtn.classList.add('btn-active');
+            autoPrayBtn.innerHTML = '<i class="fas fa-stop"></i> 停止自动敲击';
+            
+            // 使用递归的setTimeout确保动画完成后再进行下一次敲击
+            function scheduleNextHit() {
+                if (!isAutoPraying) return;
+                
+                // 等待动画完成后再安排下一次
+                hitWoodenFish().then(() => {
+                    if (isAutoPraying) {
+                        autoPrayInterval = setTimeout(scheduleNextHit, prayerSpeed);
+                    }
+                });
+            }
+            
+            // 开始第一次敲击
+            scheduleNextHit();
+        }
+        
+        // 停止自动敲击
+        function stopAutoPray() {
+            if (!isAutoPraying) return;
+            
+            isAutoPraying = false;
+            autoPrayBtn.classList.remove('btn-active');
+            autoPrayBtn.classList.add('btn-secondary');
+            autoPrayBtn.innerHTML = '<i class="fas fa-play"></i> 开启自动敲击';
+            
+            // 清除定时器
+            if (autoPrayInterval) {
+                clearTimeout(autoPrayInterval);
+                autoPrayInterval = null;
+            }
+        }
+        
+        // 切换自动敲击状态
+        function toggleAutoPray() {
+            if (isAutoPraying) {
+                stopAutoPray();
+            } else {
+                startAutoPray();
+            }
+        }
+        
+        // 特殊效果：当祈福次数达到108的倍数时
+        function showSpecialEffect() {
+            const container = document.querySelector('.container');
+            const originalBg = container.style.backgroundColor;
+            
+            // 闪烁金色光效
+            container.style.transition = 'background-color 0.5s';
+            container.style.backgroundColor = '#fff8dc';
+            
+            setTimeout(() => {
+                container.style.backgroundColor = originalBg;
+                
+                // 添加金色粒子效果
+                createGoldenParticles();
+            }, 500);
+        }
+        
+        // 创建金色粒子效果
+        function createGoldenParticles() {
+            const container = document.querySelector('.content');
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.innerHTML = '✨';
+                particle.style.position = 'absolute';
+                particle.style.fontSize = Math.random() * 20 + 15 + 'px';
+                particle.style.left = Math.random() * 80 + 10 + '%';
+                particle.style.top = Math.random() * 80 + 10 + '%';
+                particle.style.opacity = '0.8';
+                particle.style.zIndex = '100';
+                particle.style.pointerEvents = 'none';
+                particle.style.animation = `floatUp ${Math.random() * 1 + 1}s ease-out forwards`;
+                
+                // 添加动画关键帧
+                if (!document.querySelector('#particle-animation')) {
+                    const style = document.createElement('style');
+                    style.id = 'particle-animation';
+                    style.innerHTML = `
+                        @keyframes floatUp {
+                            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+                            100% { transform: translateY(-60px) scale(0.5); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                container.appendChild(particle);
+                
+                // 移除粒子元素
+                setTimeout(() => {
+                    particle.remove();
+                }, 1000);
+            }
+        }
+        
+        // 事件监听
+        woodenFish.addEventListener('click', () => hitWoodenFish());
+        prayOnceBtn.addEventListener('click', () => hitWoodenFish());
+        autoPrayBtn.addEventListener('click', toggleAutoPray);
+        
+        // 添加键盘支持：空格键敲击木鱼
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') {
+                event.preventDefault();
+                hitWoodenFish();
+            }
+            
+            // 按A键切换自动敲击
+            if (event.code === 'KeyA') {
+                event.preventDefault();
+                toggleAutoPray();
+            }
+        });
+        
+        // 初始化今日计数
+        todayCountElement.textContent = todayCount;
+        
+        // 页面加载时显示一个简单的欢迎提示
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const instructions = document.querySelector('.instructions');
+                instructions.style.transition = 'all 0.5s ease';
+                instructions.style.backgroundColor = 'rgba(255, 245, 215, 0.9)';
+                instructions.style.boxShadow = '0 0 15px rgba(184, 148, 70, 0.2)';
+                
+                setTimeout(() => {
+                    instructions.style.backgroundColor = 'rgba(255, 249, 230, 0.9)';
+                    instructions.style.boxShadow = 'none';
+                }, 2000);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
