@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>木鱼祈福 - 祈福平安</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -22,13 +22,13 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: hidden;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
         
         .container {
             width: 100%;
-            height: 90vh;
-            max-height: 800px;
+            max-width: 1000px;
             background-color: #fff9e6;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(139, 107, 70, 0.15);
@@ -38,6 +38,34 @@
             background: linear-gradient(180deg, #fffaf0 0%, #fff8e1 100%);
             display: flex;
             flex-direction: column;
+        }
+        
+        /* PC端全屏样式 */
+        @media (min-width: 901px) {
+            .container {
+                height: 90vh;
+                max-height: 800px;
+            }
+            
+            body {
+                padding: 20px;
+                align-items: center;
+            }
+        }
+        
+        /* 移动端自适应样式 */
+        @media (max-width: 900px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
+            
+            .container {
+                height: auto;
+                max-height: none;
+                min-height: 500px;
+                margin-bottom: 20px;
+            }
         }
         
         /* 添加佛家装饰元素 */
@@ -95,12 +123,62 @@
             letter-spacing: 1px;
         }
         
+        .counters-container {
+            margin-top: 15px;
+            position: relative;
+        }
+        
         .counters {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 15px;
             flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+        
+        /* PC端显示所有计数器 */
+        @media (min-width: 901px) {
+            .counters {
+                flex-direction: row;
+            }
+            
+            .data-toggle-btn {
+                display: none; /* PC端隐藏数据切换按钮 */
+            }
+            
+            .counter-item {
+                display: block !important; /* PC端强制显示所有计数器 */
+            }
+        }
+        
+        /* 移动端计数器样式 */
+        @media (max-width: 900px) {
+            .counters {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            /* 默认只显示第一个计数器（本次祈福） */
+            .counter-item:nth-child(2),
+            .counter-item:nth-child(3) {
+                display: none;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            
+            /* 当显示全部数据时 */
+            .counters.show-all .counter-item {
+                display: block !important;
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .counter-item {
+                display: block;
+                transition: all 0.3s ease;
+            }
         }
         
         .counter-item {
@@ -111,6 +189,7 @@
             font-weight: 600;
             border: 1px solid rgba(255, 255, 255, 0.3);
             min-width: 160px;
+            text-align: center;
         }
         
         .counter-item span {
@@ -118,6 +197,35 @@
             font-size: 1.4rem;
             color: #fff;
             margin-top: 5px;
+        }
+        
+        /* 数据切换按钮 */
+        .data-toggle-btn {
+            margin-top: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .data-toggle-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .data-toggle-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .data-toggle-btn.active i {
+            transform: rotate(180deg);
         }
         
         .content {
@@ -128,6 +236,24 @@
             justify-content: space-between;
             flex-grow: 1;
             overflow: hidden;
+            min-height: 500px;
+        }
+        
+        /* PC端保持原有布局 */
+        @media (min-width: 901px) {
+            .content {
+                overflow: hidden;
+            }
+        }
+        
+        /* 移动端调整 */
+        @media (max-width: 900px) {
+            .content {
+                flex-direction: column;
+                padding: 20px;
+                min-height: auto;
+                overflow: visible;
+            }
         }
         
         /* 左侧木鱼区域 */
@@ -137,6 +263,14 @@
             justify-content: center;
             align-items: center;
             padding-right: 30px;
+        }
+        
+        @media (max-width: 900px) {
+            .left-panel {
+                padding-right: 0;
+                margin-bottom: 30px;
+                width: 100%;
+            }
         }
         
         .wooden-fish-container {
@@ -149,6 +283,13 @@
             height: 280px;
         }
         
+        @media (max-width: 900px) {
+            .wooden-fish-container {
+                max-width: 300px;
+                height: 250px;
+            }
+        }
+        
         .wooden-fish {
             width: 100%;
             max-width: 350px;
@@ -156,6 +297,12 @@
             cursor: pointer;
             transition: transform 0.1s ease;
             filter: drop-shadow(0 8px 15px rgba(139, 107, 70, 0.25));
+        }
+        
+        @media (max-width: 900px) {
+            .wooden-fish {
+                max-width: 250px;
+            }
         }
         
         .wooden-fish:active {
@@ -175,11 +322,19 @@
         .mallet {
             position: absolute;
             top: 0px;
-            right: 20px;
+            right: 50px;
             width: 150px;
             transform-origin: bottom right;
             transition: transform 0.2s ease;
             z-index: 10;
+        }
+        
+        @media (max-width: 900px) {
+            .mallet {
+                top: 15px;
+                right: 15px;
+                width: 100px;
+            }
         }
         
         .mallet.swing {
@@ -201,26 +356,18 @@
             align-items: center;
             padding-left: 30px;
             border-left: 1px solid rgba(184, 148, 70, 0.1);
-            min-height: 100%;
+            min-height: 400px;
         }
         
-        .hit-count {
-            font-size: 1.5rem;
-            color: #8b6b46;
-            margin-bottom: 20px;
-            text-align: center;
-            background-color: rgba(255, 249, 230, 0.8);
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: 1px solid rgba(184, 148, 70, 0.2);
-            width: 100%;
-            max-width: 300px;
-        }
-        
-        .hit-count span {
-            font-weight: 700;
-            color: #b89446;
-            font-size: 1.8rem;
+        @media (max-width: 900px) {
+            .right-panel {
+                padding-left: 0;
+                border-left: none;
+                border-top: 1px solid rgba(184, 148, 70, 0.1);
+                padding-top: 30px;
+                width: 100%;
+                min-height: auto;
+            }
         }
         
         .instructions {
@@ -236,12 +383,28 @@
             border: 1px solid rgba(184, 148, 70, 0.2);
         }
         
+        @media (max-width: 900px) {
+            .instructions {
+                font-size: 1rem;
+                padding: 15px;
+                margin-bottom: 25px;
+            }
+        }
+        
         .controls {
             display: flex;
             flex-direction: column;
             gap: 15px;
             width: 100%;
             max-width: 300px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 900px) {
+            .controls {
+                margin-bottom: 30px;
+                width: 100%;
+            }
         }
         
         .btn {
@@ -257,6 +420,14 @@
             justify-content: center;
             gap: 10px;
             box-shadow: 0 4px 10px rgba(139, 107, 70, 0.15);
+        }
+        
+        @media (max-width: 900px) {
+            .btn {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+                width: 100%;
+            }
         }
         
         .btn-primary {
@@ -297,54 +468,26 @@
         }
         
         @media (max-width: 900px) {
-            .container {
-                height: auto;
-                max-height: none;
-                min-height: 90vh;
+            footer {
+                padding: 15px 10px;
+                font-size: 0.85rem;
             }
-            
-            .content {
-                flex-direction: column;
-                padding: 20px;
-            }
-            
-            .left-panel {
-                padding-right: 0;
-                margin-bottom: 30px;
-            }
-            
-            .right-panel {
-                padding-left: 0;
-                border-left: none;
-                border-top: 1px solid rgba(184, 148, 70, 0.1);
-                padding-top: 30px;
-            }
-            
-            .wooden-fish-container {
-                max-width: 300px;
-                height: 250px;
-            }
-            
-            .wooden-fish {
-                max-width: 250px;
-            }
-            
-            .mallet {
-                top: 15px;
-                right: 15px;
-                width: 100px;
-            }
-            
+        }
+        
+        /* 小屏幕适配 */
+        @media (max-width: 600px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
-            .counters {
-                gap: 10px;
+            .subtitle {
+                font-size: 0.9rem;
             }
             
             .counter-item {
-                min-width: 140px;
+                min-width: 200px;
+                width: 100%;
+                max-width: 250px;
                 font-size: 1rem;
                 padding: 8px 15px;
             }
@@ -353,55 +496,70 @@
                 font-size: 1.2rem;
             }
             
-            .hit-count {
-                font-size: 1.3rem;
-                padding: 12px 25px;
-            }
-            
-            .hit-count span {
-                font-size: 1.5rem;
-            }
-            
-            .instructions {
-                font-size: 1rem;
+            .content {
                 padding: 15px;
             }
             
-            .btn {
-                padding: 15px 25px;
-                font-size: 1.1rem;
-            }
-        }
-        
-        @media (max-height: 700px) {
-            .container {
-                height: 95vh;
-            }
-            
-            header {
-                padding: 15px 20px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
             .wooden-fish-container {
-                height: 220px;
+                max-width: 280px;
+                height: 230px;
             }
             
             .wooden-fish {
-                max-width: 220px;
+                max-width: 230px;
             }
             
             .mallet {
-                top: 10px;
-                right: 10px;
+                top: 30px;
+                right: 50px;
                 width: 90px;
+            }
+            
+            .instructions {
+                font-size: 0.95rem;
+                padding: 12px;
+                margin-bottom: 20px;
+            }
+            
+            .data-toggle-btn {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* 超小屏幕适配 */
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.4rem;
+            }
+            
+            .counter-item {
+                min-width: 180px;
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .counter-item span {
+                font-size: 1.1rem;
+            }
+            
+            .wooden-fish-container {
+                max-width: 250px;
+                height: 200px;
+            }
+            
+            .wooden-fish {
+                max-width: 200px;
+            }
+            
+            .mallet {
+                width: 80px;
+                right: 5px;
+            }
+            
+            .btn {
+                padding: 12px 15px;
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -411,10 +569,17 @@
         <header>
             <h1>祈福平安</h1>
             <div class="subtitle">静心祈福 平安喜乐</div>
-            <div class="counters">
-                <div class="counter-item">本次祈福 <span id="sessionCount">0</span></div>
-                <div class="counter-item">今日祈福 <span id="todayCount">0</span></div>
-                <div class="counter-item">总祈福 <span id="totalCount">0</span></div>
+            <div class="counters-container">
+                <div class="counters" id="counters">
+                    <div class="counter-item">本次祈福 <span id="sessionCount">0</span></div>
+                    <div class="counter-item">今日祈福 <span id="todayCount">0</span></div>
+                    <div class="counter-item">总祈福 <span id="totalCount">0</span></div>
+                </div>
+                <!-- 数据切换按钮（仅移动端显示） -->
+                <button class="data-toggle-btn" id="dataToggleBtn">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>显示数据</span>
+                </button>
             </div>
         </header>
         
@@ -422,7 +587,7 @@
             <!-- 左侧木鱼区域 -->
             <div class="left-panel">
                 <div class="wooden-fish-container">
-                    <img src="muyu.png" alt="木鱼" class="wooden-fish" id="woodenFish" onerror="this.src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f9df.svg'">
+                    <img src="muyu.png" alt="木鱼" class="wooden-fish" id="woodenFish" onerror="this.src=''">
                     <img src="muchui.png" alt="木槌" class="mallet" id="mallet">
                 </div>
             </div>
@@ -459,6 +624,8 @@
         const totalCountElement = document.getElementById('totalCount');
         const prayOnceBtn = document.getElementById('prayOnce');
         const autoPrayBtn = document.getElementById('autoPray');
+        const dataToggleBtn = document.getElementById('dataToggleBtn');
+        const counters = document.getElementById('counters');
         
         // 初始化计数
         let sessionCount = 0; // 本次祈福（页面刷新重置）
@@ -620,6 +787,21 @@
             }
         }
         
+        // 切换数据显示
+        function toggleDataDisplay() {
+            const isShowingAll = counters.classList.contains('show-all');
+            
+            if (isShowingAll) {
+                counters.classList.remove('show-all');
+                dataToggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>显示数据</span>';
+                dataToggleBtn.classList.remove('active');
+            } else {
+                counters.classList.add('show-all');
+                dataToggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i><span>隐藏数据</span>';
+                dataToggleBtn.classList.add('active');
+            }
+        }
+        
         // 特殊效果：当祈福次数达到108的倍数时
         function showSpecialEffect() {
             const container = document.querySelector('.container');
@@ -700,6 +882,7 @@
         woodenFish.addEventListener('click', () => hitWoodenFish());
         prayOnceBtn.addEventListener('click', () => hitWoodenFish());
         autoPrayBtn.addEventListener('click', toggleAutoPray);
+        dataToggleBtn.addEventListener('click', toggleDataDisplay);
         
         // 添加键盘支持：空格键敲击木鱼
         document.addEventListener('keydown', (event) => {
@@ -713,6 +896,12 @@
                 event.preventDefault();
                 toggleAutoPray();
             }
+            
+            // 按D键切换数据显示（仅移动端）
+            if (event.code === 'KeyD' && window.innerWidth <= 900) {
+                event.preventDefault();
+                toggleDataDisplay();
+            }
         });
         
         // 页面加载时初始化
@@ -722,6 +911,11 @@
             
             // 检查是否需要重置今日数据
             checkAndResetTodayData();
+            
+            // 根据屏幕宽度决定是否显示数据切换按钮
+            if (window.innerWidth > 900) {
+                dataToggleBtn.style.display = 'none';
+            }
             
             // 显示一个简单的欢迎提示
             setTimeout(() => {
@@ -737,10 +931,35 @@
             }, 1000);
         });
         
+        // 监听窗口大小变化，调整UI
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                // PC端：显示所有数据，隐藏切换按钮
+                counters.classList.add('show-all');
+                dataToggleBtn.style.display = 'none';
+            } else {
+                // 移动端：只显示第一个计数器，显示切换按钮
+                counters.classList.remove('show-all');
+                dataToggleBtn.style.display = 'inline-flex';
+                dataToggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>显示数据</span>';
+                dataToggleBtn.classList.remove('active');
+            }
+        });
+        
         // 页面关闭或刷新前保存数据
         window.addEventListener('beforeunload', () => {
             savePrayerData();
         });
+        
+        // 移动端触摸优化：防止双击缩放
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
