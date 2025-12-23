@@ -12,6 +12,103 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
     <style>
+        /* 所有原有的CSS样式保持不变，只在适当位置添加语言选择器的样式 */
+        
+        /* 语言选择器样式 */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        @media (max-width: 900px) {
+            .language-selector {
+                top: 15px;
+                right: 15px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .language-selector {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 10px auto;
+                display: flex;
+                justify-content: center;
+            }
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .language-btn i {
+            font-size: 16px;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            margin-top: 5px;
+            display: none;
+            overflow: hidden;
+            z-index: 1000;
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            color: #5a4a42;
+        }
+        
+        .language-option:hover {
+            background: #f5f1e6;
+        }
+        
+        .language-option.active {
+            background: #fff8e1;
+            font-weight: bold;
+        }
+        
+        .language-flag {
+            width: 20px;
+            height: 15px;
+            object-fit: cover;
+            border-radius: 2px;
+            border: 1px solid #eee;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -572,19 +669,58 @@
 </head>
 <body>
     <div class="container">
+        <!-- 语言选择器 -->
+        <div class="language-selector">
+            <button class="language-btn" id="languageBtn">
+                <i class="fas fa-globe"></i>
+                <span id="currentLanguage">中文</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option active" data-lang="zh-CN">
+                    <img src="https://flagcdn.com/w20/cn.png" alt="中国国旗" class="language-flag">
+                    <span>中文</span>
+                </div>
+                <div class="language-option" data-lang="en-US">
+                    <img src="https://flagcdn.com/w20/us.png" alt="美国国旗" class="language-flag">
+                    <span>English (US)</span>
+                </div>
+                <div class="language-option" data-lang="sv-SE">
+                    <img src="https://flagcdn.com/w20/se.png" alt="瑞典国旗" class="language-flag">
+                    <span>Svenska</span>
+                </div>
+                <div class="language-option" data-lang="de-DE">
+                    <img src="https://flagcdn.com/w20/de.png" alt="德国国旗" class="language-flag">
+                    <span>Deutsch</span>
+                </div>
+                <div class="language-option" data-lang="ru-RU">
+                    <img src="https://flagcdn.com/w20/ru.png" alt="俄罗斯国旗" class="language-flag">
+                    <span>Русский</span>
+                </div>
+                <div class="language-option" data-lang="en-GB">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="英国国旗" class="language-flag">
+                    <span>English (UK)</span>
+                </div>
+                <div class="language-option" data-lang="fr-FR">
+                    <img src="https://flagcdn.com/w20/fr.png" alt="法国国旗" class="language-flag">
+                    <span>Français</span>
+                </div>
+            </div>
+        </div>
+        
         <header>
-            <h1>祈福平安</h1>
-            <div class="subtitle">静心祈福 平安喜乐</div>
+            <h1 id="headerTitle">祈福平安</h1>
+            <div class="subtitle" id="headerSubtitle">静心祈福 平安喜乐</div>
             <div class="counters-container">
                 <div class="counters" id="counters">
-                    <div class="counter-item">本次祈福 <span id="sessionCount">0</span></div>
-                    <div class="counter-item">今日祈福 <span id="todayCount">0</span></div>
-                    <div class="counter-item">总祈福 <span id="totalCount">0</span></div>
+                    <div class="counter-item"><span id="sessionCountLabel">本次祈福</span> <span id="sessionCount">0</span></div>
+                    <div class="counter-item"><span id="todayCountLabel">今日祈福</span> <span id="todayCount">0</span></div>
+                    <div class="counter-item"><span id="totalCountLabel">总祈福</span> <span id="totalCount">0</span></div>
                 </div>
                 <!-- 数据切换按钮（仅移动端显示） -->
                 <button class="data-toggle-btn" id="dataToggleBtn">
                     <i class="fas fa-chevron-down"></i>
-                    <span>显示数据</span>
+                    <span id="dataToggleText">显示数据</span>
                 </button>
             </div>
         </header>
@@ -601,23 +737,23 @@
             <!-- 右侧控制区域 -->
             <div class="right-panel">
                 <div class="instructions">
-                    <i class="fas fa-hands-praying"></i> 点击木鱼，敲击空格或使用下方按钮进行祈福，每次祈福都会增加计数
+                    <i class="fas fa-hands-praying"></i> <span id="instructionsText">点击木鱼，敲击空格或使用下方按钮进行祈福，每次祈福都会增加计数</span>
                 </div>
                 
                 <div class="controls">
                     <button class="btn btn-primary" id="prayOnce">
-                        <i class="fas fa-hands-praying"></i> 敲一敲
+                        <i class="fas fa-hands-praying"></i> <span id="prayOnceText">敲一敲</span>
                     </button>
                     
                     <button class="btn btn-secondary" id="autoPray">
-                        <i class="fas fa-play"></i> 开启自动敲击
+                        <i class="fas fa-play"></i> <span id="autoPrayText">开启自动敲击</span>
                     </button>
                 </div>
             </div>
         </div>
         
         <footer>
-            木鱼祈福 · 心诚则灵 · 愿您平安喜乐
+            <span id="footerText">木鱼祈福 · 心诚则灵 · 愿您平安喜乐</span>
         </footer>
     </div>
     
@@ -632,6 +768,9 @@
         const autoPrayBtn = document.getElementById('autoPray');
         const dataToggleBtn = document.getElementById('dataToggleBtn');
         const counters = document.getElementById('counters');
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentLanguageElement = document.getElementById('currentLanguage');
         
         // 初始化计数
         let sessionCount = 0; // 本次祈福（页面刷新重置）
@@ -646,6 +785,168 @@
         // 木鱼敲击音效（默认开启）
         const woodSound = new Audio('wooden-fish.wav');
         woodSound.volume = 0.4;
+        
+        // 翻译字典
+        const translations = {
+            'zh-CN': {
+                'title': '祈福平安',
+                'subtitle': '静心祈福 平安喜乐',
+                'sessionCountLabel': '本次祈福',
+                'todayCountLabel': '今日祈福',
+                'totalCountLabel': '总祈福',
+                'dataToggleTextShow': '显示数据',
+                'dataToggleTextHide': '隐藏数据',
+                'instructionsText': '点击木鱼，敲击空格或使用下方按钮进行祈福，每次祈福都会增加计数',
+                'prayOnceText': '敲一敲',
+                'autoPrayText': '开启自动敲击',
+                'stopAutoPrayText': '停止自动敲击',
+                'footerText': '木鱼祈福 · 心诚则灵 · 愿您平安喜乐',
+                'languageName': '中文'
+            },
+            'en-US': {
+                'title': 'Wooden Fish Blessing',
+                'subtitle': 'Meditate and Pray for Peace and Happiness',
+                'sessionCountLabel': 'This Session',
+                'todayCountLabel': 'Today',
+                'totalCountLabel': 'Total',
+                'dataToggleTextShow': 'Show Data',
+                'dataToggleTextHide': 'Hide Data',
+                'instructionsText': 'Click the wooden fish, press Space or use buttons below to pray. Each prayer increases the count.',
+                'prayOnceText': 'Tap Once',
+                'autoPrayText': 'Start Auto Tap',
+                'stopAutoPrayText': 'Stop Auto Tap',
+                'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
+                'languageName': 'English (US)'
+            },
+            'sv-SE': {
+                'title': 'Träfiskbön',
+                'subtitle': 'Meditera och Be för Fred och Lycka',
+                'sessionCountLabel': 'Denna Session',
+                'todayCountLabel': 'Idag',
+                'totalCountLabel': 'Totalt',
+                'dataToggleTextShow': 'Visa Data',
+                'dataToggleTextHide': 'Dölj Data',
+                'instructionsText': 'Klicka på träfisken, tryck på mellanslag eller använd knapparna nedan för att be. Varje bön ökar räknaren.',
+                'prayOnceText': 'Knacka En Gång',
+                'autoPrayText': 'Starta Automatisk Knackning',
+                'stopAutoPrayText': 'Stoppa Automatisk Knackning',
+                'footerText': 'Träfiskbön · Uppriktighet För Välsignelser · Önskar Er Frid och Glädje',
+                'languageName': 'Svenska'
+            },
+            'de-DE': {
+                'title': 'Holzfisch Gebet',
+                'subtitle': 'Meditieren und Beten für Frieden und Glück',
+                'sessionCountLabel': 'Diese Sitzung',
+                'todayCountLabel': 'Heute',
+                'totalCountLabel': 'Gesamt',
+                'dataToggleTextShow': 'Daten Anzeigen',
+                'dataToggleTextHide': 'Daten Ausblenden',
+                'instructionsText': 'Klicken Sie auf den Holzfisch, drücken Sie die Leertaste oder verwenden Sie die Schaltflächen unten, um zu beten. Jedes Gebet erhöht den Zähler.',
+                'prayOnceText': 'Einmal Klopfen',
+                'autoPrayText': 'Automatisches Klopfen Starten',
+                'stopAutoPrayText': 'Automatisches Klopfen Stoppen',
+                'footerText': 'Holzfisch Gebet · Aufrichtigkeit Bringt Segen · Wünsche Ihnen Frieden und Freude',
+                'languageName': 'Deutsch'
+            },
+            'ru-RU': {
+                'title': 'Молитва с Деревянной Рыбой',
+                'subtitle': 'Медитируйте и Молитесь о Мире и Счастье',
+                'sessionCountLabel': 'Эта Сессия',
+                'todayCountLabel': 'Сегодня',
+                'totalCountLabel': 'Всего',
+                'dataToggleTextShow': 'Показать Данные',
+                'dataToggleTextHide': 'Скрыть Данные',
+                'instructionsText': 'Нажмите на деревянную рыбу, нажмите пробел или используйте кнопки ниже для молитвы. Каждая молитва увеличивает счетчик.',
+                'prayOnceText': 'Постучать Раз',
+                'autoPrayText': 'Запустить Авто-Стук',
+                'stopAutoPrayText': 'Остановить Авто-Стук',
+                'footerText': 'Молитва с Деревянной Рыбой · Искренность Приносит Благословение · Желаем Вам Мира и Радости',
+                'languageName': 'Русский'
+            },
+            'en-GB': {
+                'title': 'Wooden Fish Blessing',
+                'subtitle': 'Meditate and Pray for Peace and Happiness',
+                'sessionCountLabel': 'This Session',
+                'todayCountLabel': 'Today',
+                'totalCountLabel': 'Total',
+                'dataToggleTextShow': 'Show Data',
+                'dataToggleTextHide': 'Hide Data',
+                'instructionsText': 'Click the wooden fish, press Space or use the buttons below to pray. Each prayer increases the count.',
+                'prayOnceText': 'Tap Once',
+                'autoPrayText': 'Start Auto Tap',
+                'stopAutoPrayText': 'Stop Auto Tap',
+                'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
+                'languageName': 'English (UK)'
+            },
+            'fr-FR': {
+                'title': 'Prière avec Poisson en Bois',
+                'subtitle': 'Méditez et Priez pour la Paix et le Bonheur',
+                'sessionCountLabel': 'Cette Séance',
+                'todayCountLabel': 'Aujourd\'hui',
+                'totalCountLabel': 'Total',
+                'dataToggleTextShow': 'Afficher les Données',
+                'dataToggleTextHide': 'Masquer les Données',
+                'instructionsText': 'Cliquez sur le poisson en bois, appuyez sur Espace ou utilisez les boutons ci-dessous pour prier. Chaque prière augmente le compteur.',
+                'prayOnceText': 'Taper une Fois',
+                'autoPrayText': 'Démarrer le Tap Automatique',
+                'stopAutoPrayText': 'Arrêter le Tap Automatique',
+                'footerText': 'Prière avec Poisson en Bois · La Sincérité Apporte des Bénédictions · Vous Souhaitant Paix et Joie',
+                'languageName': 'Français'
+            }
+        };
+
+        // 当前语言
+        let currentLanguage = localStorage.getItem('prayerLanguage') || 'zh-CN';
+
+        // 应用翻译
+        function applyTranslations() {
+            const lang = translations[currentLanguage];
+            
+            // 更新页面元素
+            document.getElementById('headerTitle').textContent = lang.title;
+            document.getElementById('headerSubtitle').textContent = lang.subtitle;
+            document.getElementById('sessionCountLabel').textContent = lang.sessionCountLabel;
+            document.getElementById('todayCountLabel').textContent = lang.todayCountLabel;
+            document.getElementById('totalCountLabel').textContent = lang.totalCountLabel;
+            document.getElementById('instructionsText').textContent = lang.instructionsText;
+            document.getElementById('prayOnceText').textContent = lang.prayOnceText;
+            document.getElementById('footerText').textContent = lang.footerText;
+            currentLanguageElement.textContent = lang.languageName;
+            
+            // 更新数据切换按钮文本
+            const isShowingAll = counters.classList.contains('show-all');
+            document.getElementById('dataToggleText').textContent = isShowingAll ? lang.dataToggleTextHide : lang.dataToggleTextShow;
+            
+            // 更新自动敲击按钮文本
+            if (isAutoPraying) {
+                document.getElementById('autoPrayText').textContent = lang.stopAutoPrayText;
+            } else {
+                document.getElementById('autoPrayText').textContent = lang.autoPrayText;
+            }
+            
+            // 更新HTML lang属性
+            document.documentElement.lang = currentLanguage;
+            
+            // 更新语言选择器中的活动状态
+            document.querySelectorAll('.language-option').forEach(option => {
+                if (option.dataset.lang === currentLanguage) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            // 保存语言偏好
+            localStorage.setItem('prayerLanguage', currentLanguage);
+        }
+
+        // 切换语言
+        function switchLanguage(langCode) {
+            if (translations[langCode]) {
+                currentLanguage = langCode;
+                applyTranslations();
+            }
+        }
         
         // 从localStorage加载数据
         function loadPrayerData() {
@@ -750,7 +1051,7 @@
             isAutoPraying = true;
             autoPrayBtn.classList.remove('btn-secondary');
             autoPrayBtn.classList.add('btn-active');
-            autoPrayBtn.innerHTML = '<i class="fas fa-stop"></i> 停止自动敲击';
+            document.getElementById('autoPrayText').textContent = translations[currentLanguage].stopAutoPrayText;
             
             // 使用递归的setTimeout确保动画完成后再进行下一次敲击
             function scheduleNextHit() {
@@ -775,7 +1076,7 @@
             isAutoPraying = false;
             autoPrayBtn.classList.remove('btn-active');
             autoPrayBtn.classList.add('btn-secondary');
-            autoPrayBtn.innerHTML = '<i class="fas fa-play"></i> 开启自动敲击';
+            document.getElementById('autoPrayText').textContent = translations[currentLanguage].autoPrayText;
             
             // 清除定时器
             if (autoPrayInterval) {
@@ -799,11 +1100,11 @@
             
             if (isShowingAll) {
                 counters.classList.remove('show-all');
-                dataToggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>显示数据</span>';
+                document.getElementById('dataToggleText').textContent = translations[currentLanguage].dataToggleTextShow;
                 dataToggleBtn.classList.remove('active');
             } else {
                 counters.classList.add('show-all');
-                dataToggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i><span>隐藏数据</span>';
+                document.getElementById('dataToggleText').textContent = translations[currentLanguage].dataToggleTextHide;
                 dataToggleBtn.classList.add('active');
             }
         }
@@ -890,6 +1191,25 @@
         autoPrayBtn.addEventListener('click', toggleAutoPray);
         dataToggleBtn.addEventListener('click', toggleDataDisplay);
         
+        // 语言选择器事件
+        languageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const langCode = option.dataset.lang;
+                switchLanguage(langCode);
+                languageDropdown.classList.remove('active');
+            });
+        });
+        
+        // 点击页面其他区域关闭语言选择器
+        document.addEventListener('click', () => {
+            languageDropdown.classList.remove('active');
+        });
+        
         // 添加键盘支持：空格键敲击木鱼
         document.addEventListener('keydown', (event) => {
             if (event.code === 'Space') {
@@ -908,10 +1228,47 @@
                 event.preventDefault();
                 toggleDataDisplay();
             }
+            
+            // 按L键切换语言选择器
+            if (event.code === 'KeyL') {
+                event.preventDefault();
+                languageDropdown.classList.toggle('active');
+            }
         });
         
         // 页面加载时初始化
         window.addEventListener('load', () => {
+            // 加载语言设置
+            const savedLang = localStorage.getItem('prayerLanguage');
+            // 在页面加载时初始化的语言检测部分修改
+            // 查找以下代码并进行修改
+            if (savedLang && translations[savedLang]) {
+                currentLanguage = savedLang;
+            } else {
+                // 尝试根据浏览器语言自动选择
+                const browserLang = navigator.language || navigator.userLanguage;
+                if (browserLang.startsWith('en')) {
+                    // 如果是英语，根据具体地区选择
+                    if (browserLang.includes('GB') || browserLang.includes('UK')) {
+                        currentLanguage = 'en-GB';
+                    } else {
+                        currentLanguage = 'en-US';
+                    }
+                } else if (browserLang.startsWith('sv')) {
+                    currentLanguage = 'sv-SE';
+                } else if (browserLang.startsWith('de')) {
+                    currentLanguage = 'de-DE';
+                } else if (browserLang.startsWith('ru')) {
+                    currentLanguage = 'ru-RU';
+                } else if (browserLang.startsWith('fr')) {
+                    currentLanguage = 'fr-FR';
+                }
+                // 注意：这里保留了zh-CN作为默认值，如果都不匹配会使用zh-CN
+            }
+            
+            // 应用翻译
+            applyTranslations();
+            
             // 加载数据
             loadPrayerData();
             
@@ -947,7 +1304,7 @@
                 // 移动端：只显示第一个计数器，显示切换按钮
                 counters.classList.remove('show-all');
                 dataToggleBtn.style.display = 'inline-flex';
-                dataToggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>显示数据</span>';
+                document.getElementById('dataToggleText').textContent = translations[currentLanguage].dataToggleTextShow;
                 dataToggleBtn.classList.remove('active');
             }
         });
