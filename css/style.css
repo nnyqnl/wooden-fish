@@ -1,0 +1,651 @@
+/* 语言选择器样式 */
+.language-selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+@media (max-width: 900px) {
+    .language-selector {
+        top: 15px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .language-selector {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 10px auto;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.language-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.language-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.language-btn i {
+    font-size: 16px;
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    margin-top: 5px;
+    display: none;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.language-dropdown.active {
+    display: block;
+}
+
+.language-option {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    color: #5a4a42;
+}
+
+.language-option:hover {
+    background: #f5f1e6;
+}
+
+.language-option.active {
+    background: #fff8e1;
+    font-weight: bold;
+}
+
+.language-flag {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+    border: 1px solid #eee;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+
+body {
+    background-color: #f5f1e6;
+    background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+    color: #5a4a42;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #fff9e6;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(139, 107, 70, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(232, 211, 162, 0.5);
+    position: relative;
+    background: linear-gradient(180deg, #fffaf0 0%, #fff8e1 100%);
+    display: flex;
+    flex-direction: column;
+}
+
+/* PC端全屏样式 */
+@media (min-width: 901px) {
+    .container {
+        height: 90vh;
+        max-height: 800px;
+    }
+    
+    body {
+        padding: 20px;
+        align-items: center;
+    }
+}
+
+/* 移动端自适应样式 */
+@media (max-width: 900px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+    }
+    
+    .container {
+        height: auto;
+        max-height: none;
+        min-height: 500px;
+        margin-bottom: 20px;
+    }
+}
+
+/* 添加佛家装饰元素 */
+.container::before {
+    content: "卍";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    color: rgba(139, 107, 70, 0.1);
+    transform: rotate(0deg);
+}
+
+.container::after {
+    content: "卍";
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: rgba(139, 107, 70, 0.1);
+    transform: rotate(0deg);
+}
+
+header {
+    background: linear-gradient(to right, #b89446, #d4b15f);
+    color: #fff;
+    padding: 20px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(to right, #ffd700, #ffed4e, #ffd700);
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    font-size: 1rem;
+    opacity: 0.95;
+    letter-spacing: 1px;
+}
+
+.counters-container {
+    margin-top: 15px;
+    position: relative;
+}
+
+.counters {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
+}
+
+/* PC端显示所有计数器 */
+@media (min-width: 901px) {
+    .counters {
+        flex-direction: row;
+    }
+    
+    .data-toggle-btn {
+        display: none; /* PC端隐藏数据切换按钮 */
+    }
+    
+    .counter-item {
+        display: block !important; /* PC端强制显示所有计数器 */
+    }
+}
+
+/* 移动端计数器样式 */
+@media (max-width: 900px) {
+    .counters {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    /* 默认只显示第一个计数器（本次祈福） */
+    .counter-item:nth-child(2),
+    .counter-item:nth-child(3) {
+        display: none;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    /* 当显示全部数据时 */
+    .counters.show-all .counter-item {
+        display: block !important;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .counter-item {
+        display: block;
+        transition: all 0.3s ease;
+    }
+}
+
+.counter-item {
+    background-color: rgba(255, 255, 255, 0.25);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-width: 160px;
+    text-align: center;
+}
+
+.counter-item span {
+    display: block;
+    font-size: 1.4rem;
+    color: #fff;
+    margin-top: 5px;
+}
+
+/* 数据切换按钮 */
+.data-toggle-btn {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.data-toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.data-toggle-btn i {
+    transition: transform 0.3s ease;
+}
+
+.data-toggle-btn.active i {
+    transform: rotate(180deg);
+}
+
+.content {
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    overflow: hidden;
+    min-height: 500px;
+}
+
+/* PC端保持原有布局 */
+@media (min-width: 901px) {
+    .content {
+        overflow: hidden;
+    }
+}
+
+/* 移动端调整 */
+@media (max-width: 900px) {
+    .content {
+        flex-direction: column;
+        padding: 20px;
+        min-height: auto;
+        overflow: visible;
+    }
+}
+
+/* 左侧木鱼区域 */
+.left-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 30px;
+}
+
+@media (max-width: 900px) {
+    .left-panel {
+        padding-right: 0;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+}
+
+.wooden-fish-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 280px;
+}
+
+@media (max-width: 900px) {
+    .wooden-fish-container {
+        max-width: 300px;
+        height: 250px;
+    }
+}
+
+.wooden-fish {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    filter: drop-shadow(0 8px 15px rgba(139, 107, 70, 0.25));
+}
+
+@media (max-width: 900px) {
+    .wooden-fish {
+        max-width: 250px;
+    }
+}
+
+.wooden-fish:active {
+    transform: scale(0.95);
+}
+
+.wooden-fish.hit {
+    animation: hitAnimation 0.15s ease;
+}
+
+@keyframes hitAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.96); }
+    100% { transform: scale(1); }
+}
+
+.mallet {
+    position: absolute;
+    top: 0px;
+    right: 50px;
+    width: 150px;
+    transform-origin: bottom right;
+    transition: transform 0.2s ease;
+    z-index: 10;
+}
+
+@media (max-width: 900px) {
+    .mallet {
+        top: 15px;
+        right: 15px;
+        width: 100px;
+    }
+}
+
+.mallet.swing {
+    animation: malletSwing 0.3s ease;
+}
+
+@keyframes malletSwing {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-25deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* 右侧控制区域 */
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+    border-left: 1px solid rgba(184, 148, 70, 0.1);
+    min-height: 400px;
+}
+
+@media (max-width: 900px) {
+    .right-panel {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid rgba(184, 148, 70, 0.1);
+        padding-top: 30px;
+        width: 100%;
+        min-height: auto;
+    }
+}
+
+.instructions {
+    background-color: rgba(255, 249, 230, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #8b6b46;
+    max-width: 350px;
+    text-align: center;
+    line-height: 1.6;
+    border: 1px solid rgba(184, 148, 70, 0.2);
+}
+
+@media (max-width: 900px) {
+    .instructions {
+        font-size: 1rem;
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+    .controls {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+}
+
+.btn {
+    padding: 18px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(139, 107, 70, 0.15);
+}
+
+@media (max-width: 900px) {
+    .btn {
+        padding: 15px 25px;
+        font-size: 1.1rem;
+        width: 100%;
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(to right, #b89446, #d4b15f);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary {
+    background: linear-gradient(to right, #8b6b46, #a87d4a);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-active {
+    background: linear-gradient(to right, #d45f5f, #e68a8a);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(139, 107, 70, 0.25);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+footer {
+    padding: 15px;
+    text-align: center;
+    color: #8b6b46;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(184, 148, 70, 0.2);
+    background-color: rgba(255, 249, 230, 0.8);
+    flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+    footer {
+        padding: 15px 10px;
+        font-size: 0.85rem;
+    }
+}
+
+/* 小屏幕适配 */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .counter-item {
+        min-width: 200px;
+        width: 100%;
+        max-width: 250px;
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+    
+    .counter-item span {
+        font-size: 1.2rem;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .wooden-fish-container {
+        max-width: 280px;
+        height: 230px;
+    }
+    
+    .wooden-fish {
+        max-width: 230px;
+    }
+    
+    .mallet {
+        top: 30px;
+        right: 50px;
+        width: 90px;
+    }
+    
+    .instructions {
+        font-size: 0.95rem;
+        padding: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .data-toggle-btn {
+        padding: 6px 15px;
+        font-size: 0.85rem;
+    }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 380px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+    
+    .counter-item {
+        min-width: 180px;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .counter-item span {
+        font-size: 1.1rem;
+    }
+    
+    .wooden-fish-container {
+        max-width: 250px;
+        height: 200px;
+    }
+    
+    .wooden-fish {
+        max-width: 200px;
+    }
+    
+    .mallet {
+        width: 80px;
+        right: 5px;
+    }
+    
+    .btn {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+}
