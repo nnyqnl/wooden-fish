@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <meta name="description" content="提供免费的在线木鱼敲击祈福工具。点击敲击木鱼，记录祈福次数，在繁忙生活中获得片刻宁静，祈愿平安、健康与喜乐。">
     <meta property="og:title" content="在线木鱼祈福 - 静心祈福，平安喜乐" id="ogTitle">
     <meta property="og:description" content="提供免费的在线木鱼敲击祈福工具。点击敲击木鱼，记录祈福次数，在繁忙生活中获得片刻宁静，祈愿平安、健康与喜乐。" id="ogDescription">
@@ -11,8 +15,15 @@
     
     <title>在线木鱼祈福 - 静心祈福，平安喜乐</title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <!-- 动态版本号防止缓存 -->
+    <script>
+        // 使用构建时间作为版本号（自动更新）
+        const BUILD_VERSION = '202512.23.1';
+        document.write(`
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <link rel="stylesheet" href="css/style.css?v=${BUILD_VERSION}">
+        `);
+    </script>
     
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -22,7 +33,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- 桌面端语言选择器（移动端隐藏） -->
+        <!-- 桌面端语言选择器 -->
         <div class="language-selector">
             <button class="language-btn" id="languageBtn">
                 <i class="fas fa-globe"></i>
@@ -123,9 +134,24 @@
         </div>
     </div>
     
-    <!-- 加载翻译数据 -->
-    <script src="js/translations.js"></script>
-    <!-- 加载主逻辑 -->
-    <script src="js/script.js"></script>
+    <!-- 动态加载带版本号的JS文件 -->
+    <script>
+        // 使用相同的构建版本号
+        const JS_VERSION = '202512.23.1';
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src + '?v=' + JS_VERSION;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+        
+        // 顺序加载JS文件
+        loadScript('js/translations.js')
+            .then(() => loadScript('js/script.js'))
+            .catch(err => console.error('脚本加载失败:', err));
+    </script>
 </body>
 </html>
