@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- 语言选择器 -->
+        <!-- 桌面端语言选择器（移动端隐藏） -->
         <div class="language-selector">
             <button class="language-btn" id="languageBtn">
                 <i class="fas fa-globe"></i>
@@ -108,6 +108,19 @@
         <footer>
             <span id="footerText">木鱼祈福 · 心诚则灵 · 愿您平安喜乐</span>
         </footer>
+    </div>
+    
+    <!-- 移动端语言切换组件 -->
+    <div class="mobile-language-btn" id="mobileLanguageBtn">中</div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-language-drawer" id="mobileLanguageDrawer">
+        <div class="drawer-header">
+            <h3 id="drawerTitle">选择语言</h3>
+            <button class="close-drawer" id="closeDrawerBtn">×</button>
+        </div>
+        <div class="mobile-language-options" id="mobileLanguageOptions">
+            <!-- 选项由JavaScript动态生成 -->
+        </div>
     </div>
     
     <!-- 加载翻译数据 -->

@@ -1,4 +1,4 @@
-/* 语言选择器样式 */
+/* 语言选择器样式 - 桌面端 */
 .language-selector {
     position: absolute;
     top: 20px;
@@ -8,19 +8,7 @@
 
 @media (max-width: 900px) {
     .language-selector {
-        top: 15px;
-        right: 15px;
-    }
-}
-
-@media (max-width: 600px) {
-    .language-selector {
-        position: relative;
-        top: 0;
-        right: 0;
-        margin: 10px auto;
-        display: flex;
-        justify-content: center;
+        display: none !important;
     }
 }
 
@@ -93,6 +81,158 @@
     border: 1px solid #eee;
 }
 
+/* 移动端语言切换器 */
+.mobile-language-btn {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #b89446, #d4b15f);
+    color: white;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(184, 148, 70, 0.4);
+    z-index: 1001;
+    cursor: pointer;
+    border: none;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.mobile-language-btn:active {
+    transform: scale(0.95);
+}
+
+.mobile-language-drawer {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: #fff9e6;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -5px 25px rgba(139, 107, 70, 0.2);
+    z-index: 1002;
+    padding: 20px;
+    transition: bottom 0.4s ease;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.mobile-language-drawer.active {
+    bottom: 0;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(184, 148, 70, 0.1);
+}
+
+.drawer-header h3 {
+    color: #5a4a42;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.close-drawer {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #8b6b46;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-drawer:active {
+    background-color: rgba(139, 107, 70, 0.1);
+}
+
+.mobile-language-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mobile-language-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(184, 148, 70, 0.1);
+}
+
+.mobile-language-option:active {
+    background: rgba(184, 148, 70, 0.1);
+}
+
+.mobile-language-option.active {
+    background: linear-gradient(135deg, rgba(184, 148, 70, 0.15), rgba(212, 177, 95, 0.1));
+    border-color: #b89446;
+}
+
+.mobile-language-flag {
+    width: 28px;
+    height: 21px;
+    object-fit: cover;
+    border-radius: 3px;
+    margin-right: 15px;
+    border: 1px solid #eee;
+}
+
+.mobile-language-name {
+    color: #5a4a42;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.drawer-overlay.active {
+    display: block;
+}
+
+/* 响应式控制 */
+@media (max-width: 900px) {
+    .mobile-language-btn {
+        display: flex;
+    }
+}
+
+@media (min-width: 901px) {
+    .mobile-language-btn,
+    .drawer-overlay,
+    .mobile-language-drawer {
+        display: none !important;
+    }
+}
+
+/* 基础样式 */
 * {
     margin: 0;
     padding: 0;
@@ -230,11 +370,11 @@ h1 {
     }
     
     .data-toggle-btn {
-        display: none; /* PC端隐藏数据切换按钮 */
+        display: none;
     }
     
     .counter-item {
-        display: block !important; /* PC端强制显示所有计数器 */
+        display: block !important;
     }
 }
 
@@ -246,7 +386,6 @@ h1 {
         gap: 10px;
     }
     
-    /* 默认只显示第一个计数器（本次祈福） */
     .counter-item:nth-child(2),
     .counter-item:nth-child(3) {
         display: none;
@@ -255,7 +394,6 @@ h1 {
         transition: opacity 0.3s ease, transform 0.3s ease;
     }
     
-    /* 当显示全部数据时 */
     .counters.show-all .counter-item {
         display: block !important;
         opacity: 1;
@@ -611,6 +749,18 @@ footer {
     .data-toggle-btn {
         padding: 6px 15px;
         font-size: 0.85rem;
+    }
+    
+    .mobile-language-btn {
+        bottom: 70px;
+        right: 15px;
+        width: 52px;
+        height: 52px;
+        font-size: 14px;
+    }
+    
+    .mobile-language-drawer {
+        padding: 15px;
     }
 }
 

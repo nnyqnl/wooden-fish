@@ -12,22 +12,54 @@ const languageBtn = document.getElementById('languageBtn');
 const languageDropdown = document.getElementById('languageDropdown');
 const currentLanguageElement = document.getElementById('currentLanguage');
 
+// 移动端语言切换器元素
+const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+const mobileLanguageDrawer = document.getElementById('mobileLanguageDrawer');
+const drawerOverlay = document.getElementById('drawerOverlay');
+const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+const mobileLanguageOptions = document.getElementById('mobileLanguageOptions');
+const drawerTitle = document.getElementById('drawerTitle');
+
 // 初始化计数
-let sessionCount = 0; // 本次祈福（页面刷新重置）
-let todayCount = 0;   // 今日祈福（每天重置）
-let totalCount = 0;   // 总祈福（永久保存）
+let sessionCount = 0;
+let todayCount = 0;
+let totalCount = 0;
 
 // 自动敲击相关变量
 let autoPrayInterval = null;
 let isAutoPraying = false;
-const prayerSpeed = 800; // 固定速度（毫秒）
+const prayerSpeed = 800;
 
-// 木鱼敲击音效（默认开启）
+// 木鱼敲击音效
 const woodSound = new Audio('wooden-fish.wav');
 woodSound.volume = 0.4;
 
 // 当前语言
 let currentLanguage = localStorage.getItem('prayerLanguage') || 'zh-CN';
+
+// 移动端语言选项数据
+const mobileLanguageList = [
+    { code: 'zh-CN', name: '中文', short: '中', flag: 'https://flagcdn.com/w20/cn.png' },
+    { code: 'en-US', name: 'English (US)', short: 'EN', flag: 'https://flagcdn.com/w20/us.png' },
+    { code: 'en-GB', name: 'English (UK)', short: 'UK', flag: 'https://flagcdn.com/w20/gb.png' },
+    { code: 'fr-FR', name: 'Français', short: 'FR', flag: 'https://flagcdn.com/w20/fr.png' },
+    { code: 'sv-SE', name: 'Svenska', short: 'SV', flag: 'https://flagcdn.com/w20/se.png' },
+    { code: 'de-DE', name: 'Deutsch', short: 'DE', flag: 'https://flagcdn.com/w20/de.png' },
+    { code: 'ru-RU', name: 'Русский', short: 'RU', flag: 'https://flagcdn.com/w20/ru.png' }
+];
+
+// 抽屉标题翻译映射
+const drawerTitleMap = {
+    'zh-CN': '选择语言',
+    'en-US': 'Select Language',
+    'en-GB': 'Select Language',
+    'fr-FR': 'Choisir la langue',
+    'sv-SE': 'Välj språk',
+    'de-DE': 'Sprache auswählen',
+    'ru-RU': 'Выберите язык'
+};
+
+// ==================== 核心功能函数 ====================
 
 // 应用翻译
 function applyTranslations() {
@@ -44,22 +76,20 @@ function applyTranslations() {
     document.getElementById('footerText').textContent = lang.footerText;
     currentLanguageElement.textContent = lang.languageName;
     
-    // 更新页面标题
+    // 更新页面标题和meta信息
     document.title = lang.pageTitle;
-    
-    // 更新 meta description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
         metaDescription.setAttribute('content', lang.metaDescription);
     }
     
-    // 更新 Open Graph 标签
+    // 更新Open Graph标签
     const ogTitle = document.querySelector('meta[property="og:title"]');
     const ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogTitle) ogTitle.setAttribute('content', lang.pageTitle);
     if (ogDescription) ogDescription.setAttribute('content', lang.metaDescription);
     
-    // 更新 Twitter 标签
+    // 更新Twitter标签
     const twitterTitle = document.querySelector('meta[name="twitter:title"]');
     const twitterDescription = document.querySelector('meta[name="twitter:description"]');
     if (twitterTitle) twitterTitle.setAttribute('content', lang.title);
@@ -88,6 +118,11 @@ function applyTranslations() {
         }
     });
     
+    // 更新移动端组件
+    updateMobileLanguageButton();
+    initMobileLanguageOptions();
+    updateDrawerTitle();
+    
     // 保存语言偏好
     localStorage.setItem('prayerLanguage', currentLanguage);
 }
@@ -109,29 +144,24 @@ function loadPrayerData() {
     }
     
     // 加载今日祈福次数
-    const today = new Date().toDateString(); // 获取今天的日期字符串
+    const today = new Date().toDateString();
     const savedToday = localStorage.getItem('todayPrayData');
     if (savedToday) {
         const todayData = JSON.parse(savedToday);
-        // 检查是否是今天的数据
         if (todayData.date === today) {
             todayCount = todayData.count;
         } else {
-            // 不是今天的数据，重置今日计数
             todayCount = 0;
         }
     }
     
-    // 更新显示
     updateCounters();
 }
 
 // 保存数据到localStorage
 function savePrayerData() {
-    // 保存总祈福次数
     localStorage.setItem('totalPrayCount', totalCount.toString());
     
-    // 保存今日祈福数据
     const today = new Date().toDateString();
     const todayData = {
         date: today,
@@ -147,29 +177,23 @@ function updateCounters() {
     totalCountElement.textContent = totalCount;
 }
 
-// 敲击木鱼动画 - 使用Promise确保动画同步
+// 敲击木鱼动画
 function hitWoodenFish() {
     return new Promise((resolve) => {
-        // 添加敲击动画类
         woodenFish.classList.add('hit');
         mallet.classList.add('swing');
         
-        // 播放音效
         woodSound.currentTime = 0;
         woodSound.play();
         
-        // 增加计数
         sessionCount++;
         todayCount++;
         totalCount++;
         
-        // 更新显示
         updateCounters();
-        
-        // 保存数据
         savePrayerData();
         
-        // 添加一个小的视觉反馈
+        // 视觉反馈
         const counterItems = document.querySelectorAll('.counter-item');
         counterItems.forEach(item => {
             item.style.transform = 'scale(1.05)';
@@ -179,24 +203,23 @@ function hitWoodenFish() {
             }, 200);
         });
         
-        // 移除动画类以便下次使用
         setTimeout(() => {
             woodenFish.classList.remove('hit');
         }, 150);
         
         setTimeout(() => {
             mallet.classList.remove('swing');
-            resolve(); // 动画完成后resolve
+            resolve();
         }, 300);
         
-        // 如果祈福次数达到特殊数字，显示特殊效果
+        // 特殊效果
         if (totalCount % 108 === 0) {
             showSpecialEffect();
         }
     });
 }
 
-// 开始自动敲击 - 使用setTimeout递归调用确保动画同步
+// 开始自动敲击
 function startAutoPray() {
     if (isAutoPraying) return;
     
@@ -205,11 +228,9 @@ function startAutoPray() {
     autoPrayBtn.classList.add('btn-active');
     document.getElementById('autoPrayText').textContent = translations[currentLanguage].stopAutoPrayText;
     
-    // 使用递归的setTimeout确保动画完成后再进行下一次敲击
     function scheduleNextHit() {
         if (!isAutoPraying) return;
         
-        // 等待动画完成后再安排下一次
         hitWoodenFish().then(() => {
             if (isAutoPraying) {
                 autoPrayInterval = setTimeout(scheduleNextHit, prayerSpeed);
@@ -217,7 +238,6 @@ function startAutoPray() {
         });
     }
     
-    // 开始第一次敲击
     scheduleNextHit();
 }
 
@@ -230,7 +250,6 @@ function stopAutoPray() {
     autoPrayBtn.classList.add('btn-secondary');
     document.getElementById('autoPrayText').textContent = translations[currentLanguage].autoPrayText;
     
-    // 清除定时器
     if (autoPrayInterval) {
         clearTimeout(autoPrayInterval);
         autoPrayInterval = null;
@@ -261,19 +280,16 @@ function toggleDataDisplay() {
     }
 }
 
-// 特殊效果：当祈福次数达到108的倍数时
+// 特殊效果
 function showSpecialEffect() {
     const container = document.querySelector('.container');
     const originalBg = container.style.backgroundColor;
     
-    // 闪烁金色光效
     container.style.transition = 'background-color 0.5s';
     container.style.backgroundColor = '#fff8dc';
     
     setTimeout(() => {
         container.style.backgroundColor = originalBg;
-        
-        // 添加金色粒子效果
         createGoldenParticles();
     }, 500);
 }
@@ -294,7 +310,6 @@ function createGoldenParticles() {
         particle.style.pointerEvents = 'none';
         particle.style.animation = `floatUp ${Math.random() * 1 + 1}s ease-out forwards`;
         
-        // 添加动画关键帧
         if (!document.querySelector('#particle-animation')) {
             const style = document.createElement('style');
             style.id = 'particle-animation';
@@ -309,14 +324,13 @@ function createGoldenParticles() {
         
         container.appendChild(particle);
         
-        // 移除粒子元素
         setTimeout(() => {
             particle.remove();
         }, 1000);
     }
 }
 
-// 检查并重置今天的数据（如果日期已变更）
+// 检查并重置今天的数据
 function checkAndResetTodayData() {
     const today = new Date().toDateString();
     const savedToday = localStorage.getItem('todayPrayData');
@@ -324,10 +338,8 @@ function checkAndResetTodayData() {
     if (savedToday) {
         const todayData = JSON.parse(savedToday);
         if (todayData.date !== today) {
-            // 日期已变更，重置今日计数
             todayCount = 0;
             updateCounters();
-            // 立即保存新的今日数据
             const newTodayData = {
                 date: today,
                 count: todayCount
@@ -337,13 +349,92 @@ function checkAndResetTodayData() {
     }
 }
 
-// 事件监听
+// ==================== 移动端语言切换器功能 ====================
+
+// 更新移动端按钮文字
+function updateMobileLanguageButton() {
+    const currentLangData = mobileLanguageList.find(lang => lang.code === currentLanguage);
+    if (currentLangData) {
+        mobileLanguageBtn.textContent = currentLangData.short;
+    }
+}
+
+// 更新抽屉标题
+function updateDrawerTitle() {
+    drawerTitle.textContent = drawerTitleMap[currentLanguage] || 'Select Language';
+}
+
+// 初始化移动端语言选项列表
+function initMobileLanguageOptions() {
+    mobileLanguageOptions.innerHTML = '';
+    
+    mobileLanguageList.forEach(lang => {
+        const option = document.createElement('div');
+        option.className = `mobile-language-option ${currentLanguage === lang.code ? 'active' : ''}`;
+        option.dataset.lang = lang.code;
+        
+        option.innerHTML = `
+            <img src="${lang.flag}" alt="${lang.name}" class="mobile-language-flag">
+            <span class="mobile-language-name">${lang.name}</span>
+        `;
+        
+        option.addEventListener('click', () => {
+            switchLanguage(lang.code);
+            closeMobileDrawer();
+            
+            // 同步更新桌面端选项状态
+            document.querySelectorAll('.language-option').forEach(desktopOption => {
+                if(desktopOption.dataset.lang === lang.code) {
+                    desktopOption.classList.add('active');
+                } else {
+                    desktopOption.classList.remove('active');
+                }
+            });
+        });
+        
+        mobileLanguageOptions.appendChild(option);
+    });
+}
+
+// 打开移动端抽屉
+function openMobileDrawer() {
+    mobileLanguageDrawer.classList.add('active');
+    drawerOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// 关闭移动端抽屉
+function closeMobileDrawer() {
+    mobileLanguageDrawer.classList.remove('active');
+    drawerOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// 根据屏幕宽度切换UI显示
+function toggleLanguageUIByScreenSize() {
+    const isMobile = window.innerWidth <= 900;
+    
+    if (isMobile) {
+        // 移动端：显示浮动按钮，隐藏桌面选择器
+        mobileLanguageBtn.style.display = 'flex';
+        document.querySelector('.language-selector').style.display = 'none';
+    } else {
+        // 桌面端：隐藏浮动按钮和抽屉，显示桌面选择器
+        mobileLanguageBtn.style.display = 'none';
+        document.querySelector('.language-selector').style.display = 'block';
+        closeMobileDrawer();
+    }
+}
+
+// ==================== 事件监听 ====================
+
+// 木鱼敲击事件
 woodenFish.addEventListener('click', () => hitWoodenFish());
 prayOnceBtn.addEventListener('click', () => hitWoodenFish());
 autoPrayBtn.addEventListener('click', toggleAutoPray);
 dataToggleBtn.addEventListener('click', toggleDataDisplay);
 
-// 语言选择器事件
+// 桌面端语言选择器事件
 languageBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     languageDropdown.classList.toggle('active');
@@ -354,39 +445,56 @@ document.querySelectorAll('.language-option').forEach(option => {
         const langCode = option.dataset.lang;
         switchLanguage(langCode);
         languageDropdown.classList.remove('active');
+        
+        // 同步更新移动端选项状态
+        document.querySelectorAll('.mobile-language-option').forEach(mobileOption => {
+            if(mobileOption.dataset.lang === langCode) {
+                mobileOption.classList.add('active');
+            } else {
+                mobileOption.classList.remove('active');
+            }
+        });
     });
 });
 
-// 点击页面其他区域关闭语言选择器
+// 移动端语言选择器事件
+mobileLanguageBtn.addEventListener('click', openMobileDrawer);
+closeDrawerBtn.addEventListener('click', closeMobileDrawer);
+drawerOverlay.addEventListener('click', closeMobileDrawer);
+
+// 点击页面其他区域关闭桌面端下拉菜单
 document.addEventListener('click', () => {
     languageDropdown.classList.remove('active');
 });
 
-// 添加键盘支持：空格键敲击木鱼
+// 键盘快捷键
 document.addEventListener('keydown', (event) => {
     if (event.code === 'Space') {
         event.preventDefault();
         hitWoodenFish();
     }
     
-    // 按A键切换自动敲击
     if (event.code === 'KeyA') {
         event.preventDefault();
         toggleAutoPray();
     }
     
-    // 按D键切换数据显示（仅移动端）
     if (event.code === 'KeyD' && window.innerWidth <= 900) {
         event.preventDefault();
         toggleDataDisplay();
     }
     
-    // 按L键切换语言选择器
     if (event.code === 'KeyL') {
         event.preventDefault();
-        languageDropdown.classList.toggle('active');
+        if (window.innerWidth <= 900) {
+            openMobileDrawer();
+        } else {
+            languageDropdown.classList.toggle('active');
+        }
     }
 });
+
+// ==================== 页面初始化 ====================
 
 // 页面加载时初始化
 window.addEventListener('load', () => {
@@ -395,10 +503,8 @@ window.addEventListener('load', () => {
     if (savedLang && translations[savedLang]) {
         currentLanguage = savedLang;
     } else {
-        // 尝试根据浏览器语言自动选择
         const browserLang = navigator.language || navigator.userLanguage;
         if (browserLang.startsWith('en')) {
-            // 如果是英语，根据具体地区选择
             if (browserLang.includes('GB') || browserLang.includes('UK')) {
                 currentLanguage = 'en-GB';
             } else {
@@ -413,7 +519,6 @@ window.addEventListener('load', () => {
         } else if (browserLang.startsWith('fr')) {
             currentLanguage = 'fr-FR';
         }
-        // 注意：这里保留了zh-CN作为默认值，如果都不匹配会使用zh-CN
     }
     
     // 应用翻译
@@ -425,12 +530,13 @@ window.addEventListener('load', () => {
     // 检查是否需要重置今日数据
     checkAndResetTodayData();
     
-    // 根据屏幕宽度决定是否显示数据切换按钮
-    if (window.innerWidth > 900) {
-        dataToggleBtn.style.display = 'none';
-    }
+    // 初始化UI显示
+    toggleLanguageUIByScreenSize();
     
-    // 显示一个简单的欢迎提示
+    // 初始检查屏幕尺寸
+    checkScreenSize();
+    
+    // 显示欢迎提示
     setTimeout(() => {
         const instructions = document.querySelector('.instructions');
         instructions.style.transition = 'all 0.5s ease';
@@ -444,20 +550,34 @@ window.addEventListener('load', () => {
     }, 1000);
 });
 
-// 监听窗口大小变化，调整UI
+// 监听窗口大小变化
 window.addEventListener('resize', () => {
+    toggleLanguageUIByScreenSize();
+    
+    // PC端数据显示控制
     if (window.innerWidth > 900) {
-        // PC端：显示所有数据，隐藏切换按钮
         counters.classList.add('show-all');
         dataToggleBtn.style.display = 'none';
     } else {
-        // 移动端：只显示第一个计数器，显示切换按钮
         counters.classList.remove('show-all');
         dataToggleBtn.style.display = 'inline-flex';
         document.getElementById('dataToggleText').textContent = translations[currentLanguage].dataToggleTextShow;
         dataToggleBtn.classList.remove('active');
     }
 });
+
+// 屏幕尺寸检查函数
+function checkScreenSize() {
+    if (window.innerWidth > 900) {
+        counters.classList.add('show-all');
+        dataToggleBtn.style.display = 'none';
+    } else {
+        counters.classList.remove('show-all');
+        dataToggleBtn.style.display = 'inline-flex';
+        document.getElementById('dataToggleText').textContent = translations[currentLanguage].dataToggleTextShow;
+        dataToggleBtn.classList.remove('active');
+    }
+}
 
 // 页面关闭或刷新前保存数据
 window.addEventListener('beforeunload', () => {
