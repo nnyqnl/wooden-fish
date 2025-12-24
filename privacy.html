@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="木鱼祈福应用 - 隐私保护政策">
+    
+    <title>隐私政策 - 木鱼祈福</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f1e6;
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+            color: #5a4a42;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff9e6;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(139, 107, 70, 0.15);
+            overflow: hidden;
+            border: 1px solid rgba(232, 211, 162, 0.5);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            padding: 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #ffd700, #ffed4e, #ffd700);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            letter-spacing: 1px;
+        }
+        
+        /* 内容样式 */
+        .content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+        
+        .page-content {
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .page-content h2 {
+            color: #b89446;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(184, 148, 70, 0.2);
+            font-size: 1.5rem;
+        }
+        
+        .page-content h3 {
+            color: #8b6b46;
+            margin: 25px 0 10px 0;
+            font-size: 1.2rem;
+        }
+        
+        .page-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .page-content ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .page-content li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box {
+            background-color: rgba(255, 249, 230, 0.9);
+            border: 1px solid rgba(184, 148, 70, 0.2);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .last-updated {
+            text-align: right;
+            font-style: italic;
+            color: #8b6b46;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(139, 107, 70, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(139, 107, 70, 0.25);
+        }
+        
+        .back-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页脚样式 */
+        footer {
+            padding: 15px;
+            text-align: center;
+            color: #8b6b46;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(184, 148, 70, 0.2);
+            background-color: rgba(255, 249, 230, 0.8);
+        }
+        
+        /* 语言选择器 */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: block;
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .language-btn i {
+            font-size: 16px;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            margin-top: 5px;
+            display: none;
+            overflow: hidden;
+            z-index: 1000;
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            color: #5a4a42;
+        }
+        
+        .language-option:hover {
+            background: #f5f1e6;
+        }
+        
+        .language-option.active {
+            background: #fff8e1;
+            font-weight: bold;
+        }
+        
+        .language-flag {
+            width: 20px;
+            height: 15px;
+            object-fit: cover;
+            border-radius: 2px;
+            border: 1px solid #eee;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .page-content {
+                font-size: 1rem;
+            }
+            
+            .language-selector {
+                display: none;
+            }
+            
+            .mobile-language-btn {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+                background: linear-gradient(135deg, #b89446, #d4b15f);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 16px;
+                box-shadow: 0 4px 12px rgba(184, 148, 70, 0.4);
+                z-index: 1001;
+                cursor: pointer;
+                border: none;
+                user-select: none;
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-language-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .mobile-language-drawer {
+                position: fixed;
+                bottom: -100%;
+                left: 0;
+                right: 0;
+                background: #fff9e6;
+                border-radius: 20px 20px 0 0;
+                box-shadow: 0 -5px 25px rgba(139, 107, 70, 0.2);
+                z-index: 1002;
+                padding: 20px;
+                transition: bottom 0.4s ease;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+            
+            .mobile-language-drawer.active {
+                bottom: 0;
+            }
+            
+            .drawer-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid rgba(184, 148, 70, 0.1);
+            }
+            
+            .drawer-header h3 {
+                color: #5a4a42;
+                font-size: 1.2rem;
+                margin: 0;
+            }
+            
+            .close-drawer {
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #8b6b46;
+                cursor: pointer;
+                padding: 0;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+            }
+            
+            .close-drawer:active {
+                background-color: rgba(139, 107, 70, 0.1);
+            }
+            
+            .mobile-language-options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .mobile-language-option {
+                display: flex;
+                align-items: center;
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 12px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border: 1px solid rgba(184, 148, 70, 0.1);
+            }
+            
+            .mobile-language-option:active {
+                background: rgba(184, 148, 70, 0.1);
+            }
+            
+            .mobile-language-option.active {
+                background: linear-gradient(135deg, rgba(184, 148, 70, 0.15), rgba(212, 177, 95, 0.1));
+                border-color: #b89446;
+            }
+            
+            .mobile-language-flag {
+                width: 28px;
+                height: 21px;
+                object-fit: cover;
+                border-radius: 3px;
+                margin-right: 15px;
+                border: 1px solid #eee;
+            }
+            
+            .mobile-language-name {
+                color: #5a4a42;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+            
+            .drawer-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                display: none;
+            }
+            
+            .drawer-overlay.active {
+                display: block;
+            }
+        }
+        
+        @media (min-width: 901px) {
+            .mobile-language-btn,
+            .drawer-overlay,
+            .mobile-language-drawer {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 桌面端语言选择器 -->
+        <div class="language-selector">
+            <button class="language-btn" id="languageBtn">
+                <i class="fas fa-globe"></i>
+                <span id="currentLanguage">中文</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option active" data-lang="zh-CN">
+                    <img src="https://flagcdn.com/w20/cn.png" alt="中国国旗" class="language-flag">
+                    <span>中文</span>
+                </div>
+                <div class="language-option" data-lang="en-US">
+                    <img src="https://flagcdn.com/w20/us.png" alt="美国国旗" class="language-flag">
+                    <span>English (US)</span>
+                </div>
+                <div class="language-option" data-lang="en-GB">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="英国国旗" class="language-flag">
+                    <span>English (UK)</span>
+                </div>
+                <div class="language-option" data-lang="fr-FR">
+                    <img src="https://flagcdn.com/w20/fr.png" alt="法国国旗" class="language-flag">
+                    <span>Français</span>
+                </div>
+                <div class="language-option" data-lang="sv-SE">
+                    <img src="https://flagcdn.com/w20/se.png" alt="瑞典国旗" class="language-flag">
+                    <span>Svenska</span>
+                </div>
+                <div class="language-option" data-lang="de-DE">
+                    <img src="https://flagcdn.com/w20/de.png" alt="德国国旗" class="language-flag">
+                    <span>Deutsch</span>
+                </div>
+                <div class="language-option" data-lang="ru-RU">
+                    <img src="https://flagcdn.com/w20/ru.png" alt="俄罗斯国旗" class="language-flag">
+                    <span>Русский</span>
+                </div>
+            </div>
+        </div>
+        
+        <header>
+            <h1 id="headerTitle">隐私政策</h1>
+            <div class="subtitle" id="headerSubtitle">保护您的隐私是我们的首要任务</div>
+        </header>
+        
+        <div class="content">
+            <div class="page-content">
+                <!-- <div class="last-updated" id="lastUpdated">最后更新日期：2024年12月23日</div> -->
+                
+                <h2 id="privacyTitle">隐私政策</h2>
+                <p id="privacyContent1">欢迎使用木鱼祈福应用。我们高度重视您的隐私保护，并致力于透明地说明我们如何处理您的信息。本隐私政策旨在帮助您了解我们收集哪些信息、为何收集这些信息以及您如何管理自己的信息。</p>
+                
+                <div class="highlight-box">
+                    <p id="privacyContent2">重要提示：木鱼祈福应用是一款完全本地运行的应用程序。您的所有数据（包括祈福计数、语言偏好等）都存储在您的设备本地，不会发送到任何服务器。我们不会收集、存储或分享您的任何个人信息。</p>
+                </div>
+                
+                <h2 id="dataCollectionTitle">数据收集</h2>
+                <p id="privacyContent3">木鱼祈福应用仅收集和存储以下信息：</p>
+                <ul id="dataCollectionList">
+                    <li><strong>应用使用数据：</strong>您的祈福计数（本次、今日和总计数）存储在您设备的本地存储中</li>
+                    <li><strong>偏好设置：</strong>您的语言选择存储在您设备的本地存储中</li>
+                    <li><strong>技术信息：</strong>为提供应用功能，我们可能需要访问您设备的浏览器存储功能</li>
+                </ul>
+                <p id="privacyContent4">所有数据都存储在您的设备本地，不会传输到我们的服务器或其他第三方。</p>
+                
+                <h2 id="dataStorageTitle">数据存储与安全</h2>
+                <p id="privacyContent5">您的所有数据都使用浏览器的本地存储功能存储在您的设备上。这意味着：</p>
+                <ul id="dataStorageList">
+                    <li>数据仅存在于您的设备上</li>
+                    <li>清除浏览器数据将删除所有存储的应用数据</li>
+                    <li>更换设备或浏览器将不会保留之前的数据</li>
+                    <li>我们无法访问您设备上存储的任何数据</li>
+                </ul>
+                
+                <h2 id="cookiesTitle">Cookie与跟踪技术</h2>
+                <p id="privacyContent6">木鱼祈福应用不使用任何Cookie、分析工具或第三方跟踪技术。我们不会跟踪您的使用习惯、位置信息或其他任何个人信息。</p>
+                
+                <h2 id="thirdPartyTitle">第三方服务</h2>
+                <p id="privacyContent7">木鱼祈福应用不集成任何第三方服务、广告或分析工具。我们使用的唯一外部资源是用于显示国旗图像的公共CDN服务，这些服务不会收集您的个人信息。</p>
+                
+                <h2 id="childrenPrivacyTitle">儿童隐私</h2>
+                <p id="privacyContent8">木鱼祈福应用适合所有年龄段用户使用。由于我们不收集任何个人信息，因此不存在儿童隐私问题。我们鼓励家长指导儿童使用互联网应用。</p>
+                
+                <h2 id="policyChangesTitle">政策变更</h2>
+                <p id="privacyContent9">我们可能会不时更新本隐私政策。任何重大变更都将在应用内或通过我们的网站通知您。我们建议您定期查看本页面以了解最新信息。</p>
+                
+                <!-- <h2 id="contactTitle">联系我们</h2>
+                <p id="privacyContent10">如果您对本隐私政策有任何疑问或建议，请通过<a href="contact.html">联系我们</a>页面与我们联系。</p> -->
+                
+                <a href="index.html" class="back-btn" id="backToHome">
+                    <i class="fas fa-home"></i>
+                    <span>返回首页</span>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <span id="footerText">木鱼祈福 · 心诚则灵 · 愿您平安喜乐</span>
+        </footer>
+    </div>
+    
+    <!-- 移动端语言切换组件 -->
+    <div class="mobile-language-btn" id="mobileLanguageBtn">中</div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-language-drawer" id="mobileLanguageDrawer">
+        <div class="drawer-header">
+            <h3 id="drawerTitle">选择语言</h3>
+            <button class="close-drawer" id="closeDrawerBtn">×</button>
+        </div>
+        <div class="mobile-language-options" id="mobileLanguageOptions">
+            <!-- 选项由JavaScript动态生成 -->
+        </div>
+    </div>
+    
+    <script>
+        // 翻译字典
+        const translations = {
+            'zh-CN': {
+                'headerTitle': '隐私政策',
+                'headerSubtitle': '保护您的隐私是我们的首要任务',
+                'lastUpdated': '最后更新日期：2024年12月23日',
+                'privacyTitle': '隐私政策',
+                'privacyContent1': '欢迎使用木鱼祈福应用。我们高度重视您的隐私保护，并致力于透明地说明我们如何处理您的信息。本隐私政策旨在帮助您了解我们收集哪些信息、为何收集这些信息以及您如何管理自己的信息。',
+                'privacyContent2': '重要提示：木鱼祈福应用是一款完全本地运行的应用程序。您的所有数据（包括祈福计数、语言偏好等）都存储在您的设备本地，不会发送到任何服务器。我们不会收集、存储或分享您的任何个人信息。',
+                'dataCollectionTitle': '数据收集',
+                'privacyContent3': '木鱼祈福应用仅收集和存储以下信息：',
+                'dataCollectionList': `<li><strong>应用使用数据：</strong>您的祈福计数（本次、今日和总计数）存储在您设备的本地存储中</li>
+                                      <li><strong>偏好设置：</strong>您的语言选择存储在您设备的本地存储中</li>
+                                      <li><strong>技术信息：</strong>为提供应用功能，我们可能需要访问您设备的浏览器存储功能</li>`,
+                'privacyContent4': '所有数据都存储在您的设备本地，不会传输到我们的服务器或其他第三方。',
+                'dataStorageTitle': '数据存储与安全',
+                'privacyContent5': '您的所有数据都使用浏览器的本地存储功能存储在您的设备上。这意味着：',
+                'dataStorageList': `<li>数据仅存在于您的设备上</li>
+                                   <li>清除浏览器数据将删除所有存储的应用数据</li>
+                                   <li>更换设备或浏览器将不会保留之前的数据</li>
+                                   <li>我们无法访问您设备上存储的任何数据</li>`,
+                'cookiesTitle': 'Cookie与跟踪技术',
+                'privacyContent6': '木鱼祈福应用不使用任何Cookie、分析工具或第三方跟踪技术。我们不会跟踪您的使用习惯、位置信息或其他任何个人信息。',
+                'thirdPartyTitle': '第三方服务',
+                'privacyContent7': '木鱼祈福应用不集成任何第三方服务、广告或分析工具。我们使用的唯一外部资源是用于显示国旗图像的公共CDN服务，这些服务不会收集您的个人信息。',
+                'childrenPrivacyTitle': '儿童隐私',
+                'privacyContent8': '木鱼祈福应用适合所有年龄段用户使用。由于我们不收集任何个人信息，因此不存在儿童隐私问题。我们鼓励家长指导儿童使用互联网应用。',
+                'policyChangesTitle': '政策变更',
+                'privacyContent9': '我们可能会不时更新本隐私政策。任何重大变更都将在应用内或通过我们的网站通知您。我们建议您定期查看本页面以了解最新信息。',
+                'contactTitle': '联系我们',
+                'privacyContent10': '如果您对本隐私政策有任何疑问或建议，请通过<a href="contact.html">联系我们</a>页面与我们联系。',
+                'footerText': '木鱼祈福 · 心诚则灵 · 愿您平安喜乐',
+                'backToHome': '返回首页',
+                'drawerTitle': '选择语言',
+                'languageName': '中文'
+            },
+            'en-US': {
+                'headerTitle': 'Privacy Policy',
+                'headerSubtitle': 'Protecting Your Privacy is Our Top Priority',
+                'lastUpdated': 'Last Updated: December 23, 2024',
+                'privacyTitle': 'Privacy Policy',
+                'privacyContent1': 'Welcome to Wooden Fish Blessing. We highly value your privacy protection and are committed to transparently explaining how we handle your information. This privacy policy aims to help you understand what information we collect, why we collect it, and how you can manage your information.',
+                'privacyContent2': 'Important Note: Wooden Fish Blessing is a fully locally-run application. All your data (including prayer counts, language preferences, etc.) is stored locally on your device and is not sent to any server. We do not collect, store, or share any of your personal information.',
+                'dataCollectionTitle': 'Data Collection',
+                'privacyContent3': 'Wooden Fish Blessing only collects and stores the following information:',
+                'dataCollectionList': `<li><strong>App Usage Data:</strong> Your prayer counts (session, today, and total) stored in your device\'s local storage</li>
+                                      <li><strong>Preference Settings:</strong> Your language selection stored in your device\'s local storage</li>
+                                      <li><strong>Technical Information:</strong> To provide app functionality, we may need to access your device\'s browser storage capabilities</li>`,
+                'privacyContent4': 'All data is stored locally on your device and is not transmitted to our servers or any third parties.',
+                'dataStorageTitle': 'Data Storage & Security',
+                'privacyContent5': 'All your data is stored on your device using your browser\'s local storage feature. This means:',
+                'dataStorageList': `<li>Data exists only on your device</li>
+                                   <li>Clearing browser data will delete all stored app data</li>
+                                   <li>Changing devices or browsers will not retain previous data</li>
+                                   <li>We cannot access any data stored on your device</li>`,
+                'cookiesTitle': 'Cookies & Tracking Technologies',
+                'privacyContent6': 'Wooden Fish Blessing does not use any cookies, analytics tools, or third-party tracking technologies. We do not track your usage habits, location information, or any other personal information.',
+                'thirdPartyTitle': 'Third-Party Services',
+                'privacyContent7': 'Wooden Fish Blessing does not integrate any third-party services, advertisements, or analytics tools. The only external resources we use are public CDN services for displaying flag images, which do not collect your personal information.',
+                'childrenPrivacyTitle': 'Children\'s Privacy',
+                'privacyContent8': 'Wooden Fish Blessing is suitable for users of all ages. Since we do not collect any personal information, there are no children\'s privacy issues. We encourage parents to guide their children in using internet applications.',
+                'policyChangesTitle': 'Policy Changes',
+                'privacyContent9': 'We may update this privacy policy from time to time. Any significant changes will be notified within the app or through our website. We recommend that you check this page regularly for the latest information.',
+                'contactTitle': 'Contact Us',
+                'privacyContent10': 'If you have any questions or suggestions about this privacy policy, please contact us through our <a href="contact.html">Contact Us</a> page.',
+                'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
+                'backToHome': 'Back to Home',
+                'drawerTitle': 'Select Language',
+                'languageName': 'English (US)'
+            },
+            'en-GB': {
+                'headerTitle': 'Privacy Policy',
+                'headerSubtitle': 'Protecting Your Privacy is Our Top Priority',
+                'lastUpdated': 'Last Updated: 23 December 2024',
+                'privacyTitle': 'Privacy Policy',
+                'privacyContent1': 'Welcome to Wooden Fish Blessing. We highly value your privacy protection and are committed to transparently explaining how we handle your information. This privacy policy aims to help you understand what information we collect, why we collect it, and how you can manage your information.',
+                'privacyContent2': 'Important Note: Wooden Fish Blessing is a fully locally-run application. All your data (including prayer counts, language preferences, etc.) is stored locally on your device and is not sent to any server. We do not collect, store, or share any of your personal information.',
+                'dataCollectionTitle': 'Data Collection',
+                'privacyContent3': 'Wooden Fish Blessing only collects and stores the following information:',
+                'dataCollectionList': `<li><strong>App Usage Data:</strong> Your prayer counts (session, today, and total) stored in your device\'s local storage</li>
+                                      <li><strong>Preference Settings:</strong> Your language selection stored in your device\'s local storage</li>
+                                      <li><strong>Technical Information:</strong> To provide app functionality, we may need to access your device\'s browser storage capabilities</li>`,
+                'privacyContent4': 'All data is stored locally on your device and is not transmitted to our servers or any third parties.',
+                'dataStorageTitle': 'Data Storage & Security',
+                'privacyContent5': 'All your data is stored on your device using your browser\'s local storage feature. This means:',
+                'dataStorageList': `<li>Data exists only on your device</li>
+                                   <li>Clearing browser data will delete all stored app data</li>
+                                   <li>Changing devices or browsers will not retain previous data</li>
+                                   <li>We cannot access any data stored on your device</li>`,
+                'cookiesTitle': 'Cookies & Tracking Technologies',
+                'privacyContent6': 'Wooden Fish Blessing does not use any cookies, analytics tools, or third-party tracking technologies. We do not track your usage habits, location information, or any other personal information.',
+                'thirdPartyTitle': 'Third-Party Services',
+                'privacyContent7': 'Wooden Fish Blessing does not integrate any third-party services, advertisements, or analytics tools. The only external resources we use are public CDN services for displaying flag images, which do not collect your personal information.',
+                'childrenPrivacyTitle': 'Children\'s Privacy',
+                'privacyContent8': 'Wooden Fish Blessing is suitable for users of all ages. Since we do not collect any personal information, there are no children\'s privacy issues. We encourage parents to guide their children in using internet applications.',
+                'policyChangesTitle': 'Policy Changes',
+                'privacyContent9': 'We may update this privacy policy from time to time. Any significant changes will be notified within the app or through our website. We recommend that you check this page regularly for the latest information.',
+                'contactTitle': 'Contact Us',
+                'privacyContent10': 'If you have any questions or suggestions about this privacy policy, please contact us through our <a href="contact.html">Contact Us</a> page.',
+                'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
+                'backToHome': 'Back to Home',
+                'drawerTitle': 'Select Language',
+                'languageName': 'English (UK)'
+            },
+            'fr-FR': {
+                'headerTitle': 'Politique de Confidentialité',
+                'headerSubtitle': 'Protéger votre vie privée est notre priorité',
+                'lastUpdated': 'Dernière mise à jour : 23 décembre 2024',
+                'privacyTitle': 'Politique de Confidentialité',
+                'privacyContent1': 'Bienvenue dans Prière avec Poisson en Bois. Nous accordons une grande importance à la protection de votre vie privée et nous nous engageons à expliquer de manière transparente comment nous traitons vos informations. Cette politique de confidentialité vise à vous aider à comprendre quelles informations nous collectons, pourquoi nous les collectons et comment vous pouvez gérer vos informations.',
+                'privacyContent2': 'Note importante : Prière avec Poisson en Bois est une application entièrement exécutée localement. Toutes vos données (y compris les comptes de prière, les préférences linguistiques, etc.) sont stockées localement sur votre appareil et ne sont envoyées à aucun serveur. Nous ne collectons, ne stockons ni ne partageons aucune de vos informations personnelles.',
+                'dataCollectionTitle': 'Collecte de données',
+                'privacyContent3': 'Prière avec Poisson en Bois ne collecte et ne stocke que les informations suivantes :',
+                'dataCollectionList': `<li><strong>Données d\'utilisation de l\'application :</strong> Vos comptes de prière (session, aujourd\'hui et total) stockés dans le stockage local de votre appareil</li>
+                                      <li><strong>Paramètres de préférences :</strong> Votre sélection de langue stockée dans le stockage local de votre appareil</li>
+                                      <li><strong>Informations techniques :</strong> Pour fournir les fonctionnalités de l\'application, nous devons peut-être accéder aux capacités de stockage du navigateur de votre appareil</li>`,
+                'privacyContent4': 'Toutes les données sont stockées localement sur votre appareil et ne sont pas transmises à nos serveurs ou à des tiers.',
+                'dataStorageTitle': 'Stockage et sécurité des données',
+                'privacyContent5': 'Toutes vos données sont stockées sur votre appareil en utilisant la fonction de stockage local de votre navigateur. Cela signifie :',
+                'dataStorageList': `<li>Les données n\'existent que sur votre appareil</li>
+                                   <li>Effacer les données du navigateur supprimera toutes les données d\'application stockées</li>
+                                   <li>Changer d\'appareil ou de navigateur ne conservera pas les données précédentes</li>
+                                   <li>Nous ne pouvons pas accéder aux données stockées sur votre appareil</li>`,
+                'cookiesTitle': 'Cookies et technologies de suivi',
+                'privacyContent6': 'Prière avec Poisson en Bois n\'utilise aucun cookie, outil d\'analyse ou technologie de suivi tierce. Nous ne suivons pas vos habitudes d\'utilisation, vos informations de localisation ou toute autre information personnelle.',
+                'thirdPartyTitle': 'Services tiers',
+                'privacyContent7': 'Prière avec Poisson en Bois n\'intègre aucun service tiers, publicité ou outil d\'analyse. Les seules ressources externes que nous utilisons sont des services CDN publics pour afficher les images de drapeaux, qui ne collectent pas vos informations personnelles.',
+                'childrenPrivacyTitle': 'Confidentialité des enfants',
+                'privacyContent8': 'Prière avec Poisson en Bois convient aux utilisateurs de tous âges. Comme nous ne collectons aucune information personnelle, il n\'y a pas de problèmes de confidentialité pour les enfants. Nous encourageons les parents à guider leurs enfants dans l\'utilisation des applications Internet.',
+                'policyChangesTitle': 'Modifications de la politique',
+                'privacyContent9': 'Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Toute modification importante sera notifiée dans l\'application ou via notre site Web. Nous vous recommandons de consulter régulièrement cette page pour les dernières informations.',
+                'contactTitle': 'Contactez-nous',
+                'privacyContent10': 'Si vous avez des questions ou des suggestions concernant cette politique de confidentialité, veuillez nous contacter via notre page <a href="contact.html">Contactez-nous</a>.',
+                'footerText': 'Prière avec Poisson en Bois · La Sincérité Apporte des Bénédictions · Vous Souhaitant Paix et Joie',
+                'backToHome': 'Retour à l\'Accueil',
+                'drawerTitle': 'Choisir la langue',
+                'languageName': 'Français'
+            },
+            'sv-SE': {
+                'headerTitle': 'Integritetspolicy',
+                'headerSubtitle': 'Att skydda din integritet är vår högsta prioritet',
+                'lastUpdated': 'Senast uppdaterad: 23 december 2024',
+                'privacyTitle': 'Integritetspolicy',
+                'privacyContent1': 'Välkommen till Träfiskbön. Vi sätter stort värde på ditt integritetsskydd och åtar oss att förklara på ett transparent sätt hur vi hanterar din information. Denna integritetspolicy syftar till att hjälpa dig att förstå vilken information vi samlar in, varför vi samlar in den och hur du kan hantera din information.',
+                'privacyContent2': 'Viktig notis: Träfiskbön är en helt lokalt körd applikation. Alla dina data (inklusive bönräkningar, språkpreferenser etc.) lagras lokalt på din enhet och skickas inte till någon server. Vi samlar inte in, lagrar eller delar någon av dina personuppgifter.',
+                'dataCollectionTitle': 'Datainsamling',
+                'privacyContent3': 'Träfiskbön samlar endast in och lagrar följande information:',
+                'dataCollectionList': `<li><strong>Appanvändningsdata:</strong> Dina bönräkningar (session, idag och totalt) lagrade i din enhets lokala lagring</li>
+                                      <li><strong>Preferensinställningar:</strong> Ditt språkval lagrat i din enhets lokala lagring</li>
+                                      <li><strong>Teknisk information:</strong> För att tillhandahålla appfunktionalitet kan vi behöva komma åt din enhets webbläsarlagringsfunktioner</li>`,
+                'privacyContent4': 'All data lagras lokalt på din enhet och överförs inte till våra servrar eller tredje part.',
+                'dataStorageTitle': 'Datalagring & Säkerhet',
+                'privacyContent5': 'Alla dina data lagras på din enhet med hjälp av din webbläsares lokala lagringsfunktion. Det betyder:',
+                'dataStorageList': `<li>Data finns endast på din enhet</li>
+                                   <li>Rensa webbläsardata kommer att ta bort all lagrad appdata</li>
+                                   <li>Byte av enhet eller webbläsare kommer inte att behålla tidigare data</li>
+                                   <li>Vi kan inte komma åt någon data som lagras på din enhet</li>`,
+                'cookiesTitle': 'Cookies & Spårningsteknik',
+                'privacyContent6': 'Träfiskbön använder inte några cookies, analysverktyg eller tredjepartsspårningsteknik. Vi spårar inte dina användningsvanor, platsinformation eller annan personlig information.',
+                'thirdPartyTitle': 'Tredjepartstjänster',
+                'privacyContent7': 'Träfiskbön integrerar inte några tredjepartstjänster, annonser eller analysverktyg. De enda externa resurser vi använder är offentliga CDN-tjänster för att visa flaggbilder, som inte samlar in din personliga information.',
+                'childrenPrivacyTitle': 'Barns integritet',
+                'privacyContent8': 'Träfiskbön är lämplig för användare i alla åldrar. Eftersom vi inte samlar in någon personlig information finns det inga integritetsproblem för barn. Vi uppmuntrar föräldrar att vägleda sina barn i användningen av internetapplikationer.',
+                'policyChangesTitle': 'Policyändringar',
+                'privacyContent9': 'Vi kan uppdatera denna integritetspolicy från tid till annan. Eventuella betydande ändringar kommer att meddelas i appen eller via vår webbplats. Vi rekommenderar att du regelbundet kontrollerar denna sida för den senaste informationen.',
+                'contactTitle': 'Kontakta oss',
+                'privacyContent10': 'Om du har några frågor eller förslag om denna integritetspolicy, vänligen kontakta oss via vår sida <a href="contact.html">Kontakta oss</a>.',
+                'footerText': 'Träfiskbön · Uppriktighet För Välsignelser · Önskar Er Frid och Glädje',
+                'backToHome': 'Tillbaka till Hem',
+                'drawerTitle': 'Välj språk',
+                'languageName': 'Svenska'
+            },
+            'de-DE': {
+                'headerTitle': 'Datenschutzrichtlinie',
+                'headerSubtitle': 'Der Schutz Ihrer Privatsphäre hat für uns höchste Priorität',
+                'lastUpdated': 'Zuletzt aktualisiert: 23. Dezember 2024',
+                'privacyTitle': 'Datenschutzrichtlinie',
+                'privacyContent1': 'Willkommen bei Holzfisch Gebet. Wir legen großen Wert auf Ihren Datenschutz und verpflichten uns, transparent zu erklären, wie wir mit Ihren Informationen umgehen. Diese Datenschutzrichtlinie soll Ihnen helfen zu verstehen, welche Informationen wir sammeln, warum wir sie sammeln und wie Sie Ihre Informationen verwalten können.',
+                'privacyContent2': 'Wichtiger Hinweis: Holzfisch Gebet ist eine vollständig lokal ausgeführte Anwendung. Alle Ihre Daten (einschließlich Gebetszählungen, Spracheinstellungen usw.) werden lokal auf Ihrem Gerät gespeichert und an keinen Server gesendet. Wir sammeln, speichern oder teilen keine Ihrer persönlichen Daten.',
+                'dataCollectionTitle': 'Datenerfassung',
+                'privacyContent3': 'Holzfisch Gebet sammelt und speichert nur die folgenden Informationen:',
+                'dataCollectionList': `<li><strong>App-Nutzungsdaten:</strong> Ihre Gebetszählungen (Sitzung, heute und gesamt) gespeichert im lokalen Speicher Ihres Geräts</li>
+                                      <li><strong>Präferenzeinstellungen:</strong> Ihre Sprachauswahl gespeichert im lokalen Speicher Ihres Geräts</li>
+                                      <li><strong>Technische Informationen:</strong> Zur Bereitstellung der App-Funktionalität müssen wir möglicherweise auf die Browser-Speicherfunktionen Ihres Geräts zugreifen</li>`,
+                'privacyContent4': 'Alle Daten werden lokal auf Ihrem Gerät gespeichert und nicht an unsere Server oder Dritte übertragen.',
+                'dataStorageTitle': 'Datenspeicherung & Sicherheit',
+                'privacyContent5': 'Alle Ihre Daten werden auf Ihrem Gerät unter Verwendung der lokalen Speicherfunktion Ihres Browsers gespeichert. Das bedeutet:',
+                'dataStorageList': `<li>Daten existieren nur auf Ihrem Gerät</li>
+                                   <li>Das Löschen von Browserdaten löscht alle gespeicherten App-Daten</li>
+                                   <li>Das Wechseln von Geräten oder Browsern behält frühere Daten nicht bei</li>
+                                   <li>Wir können nicht auf Daten zugreifen, die auf Ihrem Gerät gespeichert sind</li>`,
+                'cookiesTitle': 'Cookies & Tracking-Technologien',
+                'privacyContent6': 'Holzfisch Gebet verwendet keine Cookies, Analyse-Tools oder Tracking-Technologien von Drittanbietern. Wir verfolgen nicht Ihre Nutzungsgewohnheiten, Standortinformationen oder andere persönliche Daten.',
+                'thirdPartyTitle': 'Drittanbieterdienste',
+                'privacyContent7': 'Holzfisch Gebet integriert keine Drittanbieterdienste, Werbung oder Analyse-Tools. Die einzigen externen Ressourcen, die wir verwenden, sind öffentliche CDN-Dienste zur Anzeige von Flaggenbildern, die Ihre persönlichen Daten nicht sammeln.',
+                'childrenPrivacyTitle': 'Datenschutz für Kinder',
+                'privacyContent8': 'Holzfisch Gebet ist für Nutzer aller Altersgruppen geeignet. Da wir keine persönlichen Daten sammeln, gibt es keine Datenschutzprobleme für Kinder. Wir ermutigen Eltern, ihre Kinder bei der Nutzung von Internetanwendungen anzuleiten.',
+                'policyChangesTitle': 'Richtlinienänderungen',
+                'privacyContent9': 'Wir können diese Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Alle wesentlichen Änderungen werden in der App oder über unsere Website mitgeteilt. Wir empfehlen Ihnen, diese Seite regelmäßig auf die neuesten Informationen zu überprüfen.',
+                'contactTitle': 'Kontaktieren Sie uns',
+                'privacyContent10': 'Wenn Sie Fragen oder Vorschläge zu dieser Datenschutzrichtlinie haben, kontaktieren Sie uns bitte über unsere Seite <a href="contact.html">Kontaktieren Sie uns</a>.',
+                'footerText': 'Holzfisch Gebet · Aufrichtigkeit Bringt Segen · Wünsche Ihnen Frieden und Freude',
+                'backToHome': 'Zurück zur Startseite',
+                'drawerTitle': 'Sprache auswählen',
+                'languageName': 'Deutsch'
+            },
+            'ru-RU': {
+                'headerTitle': 'Политика Конфиденциальности',
+                'headerSubtitle': 'Защита вашей конфиденциальности - наш главный приоритет',
+                'lastUpdated': 'Последнее обновление: 23 декабря 2024',
+                'privacyTitle': 'Политика Конфиденциальности',
+                'privacyContent1': 'Добро пожаловать в Молитва с Деревянной Рыбой. Мы высоко ценим защиту вашей конфиденциальности и стремимся прозрачно объяснить, как мы обрабатываем вашу информацию. Настоящая политика конфиденциальности призвана помочь вам понять, какую информацию мы собираем, почему мы ее собираем и как вы можете управлять своей информацией.',
+                'privacyContent2': 'Важное примечание: Молитва с Деревянной Рыбой - это полностью локально запущенное приложение. Все ваши данные (включая количество молитв, языковые предпочтения и т.д.) хранятся локально на вашем устройстве и не отправляются на какие-либо серверы. Мы не собираем, не храним и не делимся какой-либо вашей личной информацией.',
+                'dataCollectionTitle': 'Сбор данных',
+                'privacyContent3': 'Молитва с Деревянной Рыбой собирает и хранит только следующую информацию:',
+                'dataCollectionList': `<li><strong>Данные об использовании приложения:</strong> Количество ваших молитв (сеанс, сегодня и всего) хранится в локальном хранилище вашего устройства</li>
+                                      <li><strong>Настройки предпочтений:</strong> Ваш выбор языка хранится в локальном хранилище вашего устройства</li>
+                                      <li><strong>Техническая информация:</strong> Для предоставления функциональности приложения нам может потребоваться доступ к функциям хранения браузера вашего устройства</li>`,
+                'privacyContent4': 'Все данные хранятся локально на вашем устройстве и не передаются на наши серверы или третьим лицам.',
+                'dataStorageTitle': 'Хранение и безопасность данных',
+                'privacyContent5': 'Все ваши данные хранятся на вашем устройстве с использованием функции локального хранилища вашего браузера. Это означает:',
+                'dataStorageList': `<li>Данные существуют только на вашем устройстве</li>
+                                   <li>Очистка данных браузера удалит все сохраненные данные приложения</li>
+                                   <li>Смена устройства или браузера не сохранит предыдущие данные</li>
+                                   <li>Мы не можем получить доступ к каким-либо данным, хранящимся на вашем устройстве</li>`,
+                'cookiesTitle': 'Cookie и технологии отслеживания',
+                'privacyContent6': 'Молитва с Деревянной Рыбой не использует никакие cookie, аналитические инструменты или технологии отслеживания третьих сторон. Мы не отслеживаем ваши привычки использования, информацию о местоположении или любую другую личную информацию.',
+                'thirdPartyTitle': 'Сервисы третьих сторон',
+                'privacyContent7': 'Молитва с Деревянной Рыбой не интегрирует никакие сторонние сервисы, рекламу или аналитические инструменты. Единственные внешние ресурсы, которые мы используем, - это публичные CDN-сервисы для отображения изображений флагов, которые не собирают вашу личную информацию.',
+                'childrenPrivacyTitle': 'Конфиденциальность детей',
+                'privacyContent8': 'Молитва с Деревянной Рыбой подходит для пользователей всех возрастов. Поскольку мы не собираем никакой личной информации, проблем с конфиденциальностью детей не существует. Мы призываем родителей направлять своих детей в использовании интернет-приложений.',
+                'policyChangesTitle': 'Изменения политики',
+                'privacyContent9': 'Мы можем время от времени обновлять эту политику конфиденциальности. О любых значительных изменениях будет сообщено в приложении или через наш веб-сайт. Мы рекомендуем вам регулярно проверять эту страницу для получения последней информации.',
+                'contactTitle': 'Свяжитесь с нами',
+                'privacyContent10': 'Если у вас есть какие-либо вопросы или предложения относительно этой политики конфиденциальности, пожалуйста, свяжитесь с нами через нашу страницу <a href="contact.html">Свяжитесь с нами</a>.',
+                'footerText': 'Молитва с Деревянной Рыбой · Искренность Приносит Благословение · Желаем Вам Мира и Радости',
+                'backToHome': 'Вернуться на Главную',
+                'drawerTitle': 'Выберите язык',
+                'languageName': 'Русский'
+            }
+        };
+
+        // 移动端语言选项数据
+        const mobileLanguageList = [
+            { code: 'zh-CN', name: '中文', short: '中', flag: 'https://flagcdn.com/w20/cn.png' },
+            { code: 'en-US', name: 'English (US)', short: 'EN', flag: 'https://flagcdn.com/w20/us.png' },
+            { code: 'en-GB', name: 'English (UK)', short: 'UK', flag: 'https://flagcdn.com/w20/gb.png' },
+            { code: 'fr-FR', name: 'Français', short: 'FR', flag: 'https://flagcdn.com/w20/fr.png' },
+            { code: 'sv-SE', name: 'Svenska', short: 'SV', flag: 'https://flagcdn.com/w20/se.png' },
+            { code: 'de-DE', name: 'Deutsch', short: 'DE', flag: 'https://flagcdn.com/w20/de.png' },
+            { code: 'ru-RU', name: 'Русский', short: 'RU', flag: 'https://flagcdn.com/w20/ru.png' }
+        ];
+
+        // DOM 元素获取
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentLanguageElement = document.getElementById('currentLanguage');
+        const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+        const mobileLanguageDrawer = document.getElementById('mobileLanguageDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        const mobileLanguageOptions = document.getElementById('mobileLanguageOptions');
+        const drawerTitle = document.getElementById('drawerTitle');
+
+        // 当前语言
+        let currentLanguage = localStorage.getItem('prayerLanguage') || 'zh-CN';
+
+        // 更新移动端按钮文字
+        function updateMobileLanguageButton() {
+            const currentLangData = mobileLanguageList.find(lang => lang.code === currentLanguage);
+            if (currentLangData && mobileLanguageBtn) {
+                mobileLanguageBtn.textContent = currentLangData.short;
+            }
+        }
+
+        // 更新抽屉标题
+        function updateDrawerTitle() {
+            if (drawerTitle) {
+                drawerTitle.textContent = translations[currentLanguage]?.drawerTitle || '选择语言';
+            }
+        }
+
+        // 初始化移动端语言选项列表
+        function initMobileLanguageOptions() {
+            if (!mobileLanguageOptions) return;
+            
+            mobileLanguageOptions.innerHTML = '';
+            
+            mobileLanguageList.forEach(lang => {
+                const option = document.createElement('div');
+                option.className = `mobile-language-option ${currentLanguage === lang.code ? 'active' : ''}`;
+                option.dataset.lang = lang.code;
+                
+                option.innerHTML = `
+                    <img src="${lang.flag}" alt="${lang.name}" class="mobile-language-flag">
+                    <span class="mobile-language-name">${lang.name}</span>
+                `;
+                
+                option.addEventListener('click', () => {
+                    switchLanguage(lang.code);
+                    closeMobileDrawer();
+                });
+                
+                mobileLanguageOptions.appendChild(option);
+            });
+        }
+
+        // 打开移动端抽屉
+        function openMobileDrawer() {
+            if (!mobileLanguageDrawer || !drawerOverlay) return;
+            
+            mobileLanguageDrawer.classList.add('active');
+            drawerOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭移动端抽屉
+        function closeMobileDrawer() {
+            if (!mobileLanguageDrawer || !drawerOverlay) return;
+            
+            mobileLanguageDrawer.classList.remove('active');
+            drawerOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // 应用翻译
+        function applyTranslations() {
+            const lang = translations[currentLanguage];
+            if (!lang) return;
+            
+            // 更新页面元素
+            const updateElement = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = text;
+            };
+            
+            updateElement('headerTitle', lang.headerTitle);
+            updateElement('headerSubtitle', lang.headerSubtitle);
+            updateElement('lastUpdated', lang.lastUpdated);
+            updateElement('privacyTitle', lang.privacyTitle);
+            updateElement('privacyContent1', lang.privacyContent1);
+            updateElement('privacyContent2', lang.privacyContent2);
+            updateElement('dataCollectionTitle', lang.dataCollectionTitle);
+            updateElement('privacyContent3', lang.privacyContent3);
+            
+            const dataCollectionListElement = document.getElementById('dataCollectionList');
+            if (dataCollectionListElement) dataCollectionListElement.innerHTML = lang.dataCollectionList;
+            
+            updateElement('privacyContent4', lang.privacyContent4);
+            updateElement('dataStorageTitle', lang.dataStorageTitle);
+            updateElement('privacyContent5', lang.privacyContent5);
+            
+            const dataStorageListElement = document.getElementById('dataStorageList');
+            if (dataStorageListElement) dataStorageListElement.innerHTML = lang.dataStorageList;
+            
+            updateElement('cookiesTitle', lang.cookiesTitle);
+            updateElement('privacyContent6', lang.privacyContent6);
+            updateElement('thirdPartyTitle', lang.thirdPartyTitle);
+            updateElement('privacyContent7', lang.privacyContent7);
+            updateElement('childrenPrivacyTitle', lang.childrenPrivacyTitle);
+            updateElement('privacyContent8', lang.privacyContent8);
+            updateElement('policyChangesTitle', lang.policyChangesTitle);
+            updateElement('privacyContent9', lang.privacyContent9);
+            updateElement('contactTitle', lang.contactTitle);
+            updateElement('privacyContent10', lang.privacyContent10);
+            updateElement('footerText', lang.footerText);
+            updateElement('backToHome', lang.backToHome);
+            
+            if (currentLanguageElement) {
+                currentLanguageElement.textContent = lang.languageName || lang.headerTitle;
+            }
+            
+            // 更新页面标题
+            document.title = `${lang.headerTitle} - 木鱼祈福`;
+            
+            // 更新HTML lang属性
+            document.documentElement.lang = currentLanguage;
+            
+            // 更新语言选择器中的活动状态
+            document.querySelectorAll('.language-option').forEach(option => {
+                if (option.dataset.lang === currentLanguage) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            // 更新移动端组件
+            updateMobileLanguageButton();
+            updateDrawerTitle();
+            initMobileLanguageOptions();
+            
+            // 保存语言偏好
+            localStorage.setItem('prayerLanguage', currentLanguage);
+        }
+
+        // 切换语言
+        function switchLanguage(langCode) {
+            if (translations[langCode]) {
+                currentLanguage = langCode;
+                applyTranslations();
+            }
+        }
+
+        // 事件监听
+        if (languageBtn) {
+            languageBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (languageDropdown) {
+                    languageDropdown.classList.toggle('active');
+                }
+            });
+        }
+
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const langCode = option.dataset.lang;
+                switchLanguage(langCode);
+                if (languageDropdown) {
+                    languageDropdown.classList.remove('active');
+                }
+            });
+        });
+
+        if (mobileLanguageBtn) mobileLanguageBtn.addEventListener('click', openMobileDrawer);
+        if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeMobileDrawer);
+        if (drawerOverlay) drawerOverlay.addEventListener('click', closeMobileDrawer);
+
+        // 点击页面其他区域关闭桌面端下拉菜单
+        document.addEventListener('click', () => {
+            if (languageDropdown) {
+                languageDropdown.classList.remove('active');
+            }
+        });
+
+        // 页面初始化
+        function initPage() {
+            // 加载语言设置
+            const savedLang = localStorage.getItem('prayerLanguage');
+            if (savedLang && translations[savedLang]) {
+                currentLanguage = savedLang;
+            }
+            
+            // 应用翻译
+            applyTranslations();
+            
+            // 初始化移动端语言选项
+            initMobileLanguageOptions();
+            updateMobileLanguageButton();
+            
+            // 根据屏幕宽度切换语言UI
+            toggleLanguageUIByScreenSize();
+            
+            // 监听窗口大小变化
+            window.addEventListener('resize', toggleLanguageUIByScreenSize);
+        }
+
+        // 根据屏幕宽度切换语言UI显示
+        function toggleLanguageUIByScreenSize() {
+            const isMobile = window.innerWidth <= 900;
+            const desktopSelector = document.querySelector('.language-selector');
+            
+            if (!desktopSelector || !mobileLanguageBtn) return;
+            
+            if (isMobile) {
+                mobileLanguageBtn.style.display = 'flex';
+                desktopSelector.style.display = 'none';
+                
+                if (languageDropdown) {
+                    languageDropdown.classList.remove('active');
+                }
+            } else {
+                mobileLanguageBtn.style.display = 'none';
+                desktopSelector.style.display = 'block';
+                
+                closeMobileDrawer();
+            }
+        }
+
+        // 页面加载完成后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPage);
+        } else {
+            initPage();
+        }
+    </script>
+</body>
+</html>

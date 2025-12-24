@@ -51,7 +51,7 @@ const prayerSpeed = 800;
 let currentLanguage = localStorage.getItem('prayerLanguage') || 'zh-CN';
 
 // 木鱼敲击音效
-const woodSound = new Audio('wooden-fish.wav');
+const woodSound = new Audio('assets/audio/wooden-fish.wav');
 woodSound.volume = 0.4;
 
 // 移动端语言选项数据
@@ -155,6 +155,16 @@ function applyTranslations() {
     updateElement('instructionsText', lang.instructionsText);
     updateElement('prayOnceText', lang.prayOnceText);
     updateElement('footerText', lang.footerText);
+    updateElement('about', lang.about);
+    updateElement('aboutTitle', lang.aboutTitle);
+    updateElement('aboutContent', lang.aboutContent);
+    updateElement('privacy', lang.privacy);
+    updateElement('privacyTitle', lang.privacyTitle);
+    updateElement('privacyContent', lang.privacyContent);
+    updateElement('contact', lang.contact);
+    updateElement('contactTitle', lang.contactTitle);
+    updateElement('contactContent', lang.contactContent);
+    updateElement('backToHome', lang.backToHome);
     
     if (currentLanguageElement) {
         currentLanguageElement.textContent = lang.languageName;

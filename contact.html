@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="木鱼祈福应用 - 联系我们">
+    
+    <title>联系我们 - 木鱼祈福</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f1e6;
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+            color: #5a4a42;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff9e6;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(139, 107, 70, 0.15);
+            overflow: hidden;
+            border: 1px solid rgba(232, 211, 162, 0.5);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            padding: 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #ffd700, #ffed4e, #ffd700);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            letter-spacing: 1px;
+        }
+        
+        /* 内容样式 */
+        .content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+        
+        .page-content {
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .page-content h2 {
+            color: #b89446;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(184, 148, 70, 0.2);
+            font-size: 1.5rem;
+        }
+        
+        .page-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        /* 联系信息卡片 */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .contact-card {
+            background-color: rgba(255, 249, 230, 0.9);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(184, 148, 70, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(139, 107, 70, 0.15);
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: #b89446;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .contact-title {
+            font-size: 1.3rem;
+            color: #8b6b46;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .contact-details {
+            text-align: center;
+        }
+        
+        .contact-details p {
+            margin-bottom: 10px;
+        }
+        
+        .email-link {
+            color: #b89446;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .email-link:hover {
+            color: #8b6b46;
+            text-decoration: underline;
+        }
+        
+        /* 表单样式 */
+        .contact-form {
+            background-color: rgba(255, 249, 230, 0.9);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(184, 148, 70, 0.2);
+            margin: 30px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8b6b46;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(184, 148, 70, 0.3);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #b89446;
+            box-shadow: 0 0 0 3px rgba(184, 148, 70, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(139, 107, 70, 0.15);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(139, 107, 70, 0.25);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 注意信息 */
+        .note-box {
+            background-color: rgba(255, 245, 215, 0.9);
+            border-left: 4px solid #b89446;
+            padding: 15px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(139, 107, 70, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(139, 107, 70, 0.25);
+        }
+        
+        .back-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页脚样式 */
+        footer {
+            padding: 15px;
+            text-align: center;
+            color: #8b6b46;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(184, 148, 70, 0.2);
+            background-color: rgba(255, 249, 230, 0.8);
+        }
+        
+        /* 语言选择器 */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: block;
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .language-btn i {
+            font-size: 16px;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            margin-top: 5px;
+            display: none;
+            overflow: hidden;
+            z-index: 1000;
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            color: #5a4a42;
+        }
+        
+        .language-option:hover {
+            background: #f5f1e6;
+        }
+        
+        .language-option.active {
+            background: #fff8e1;
+            font-weight: bold;
+        }
+        
+        .language-flag {
+            width: 20px;
+            height: 15px;
+            object-fit: cover;
+            border-radius: 2px;
+            border: 1px solid #eee;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .page-content {
+                font-size: 1rem;
+            }
+            
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .language-selector {
+                display: none;
+            }
+            
+            .mobile-language-btn {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+                background: linear-gradient(135deg, #b89446, #d4b15f);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 16px;
+                box-shadow: 0 4px 12px rgba(184, 148, 70, 0.4);
+                z-index: 1001;
+                cursor: pointer;
+                border: none;
+                user-select: none;
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-language-btn:active {
+                transform: scale(0.95);
+            }
+            
+            .mobile-language-drawer {
+                position: fixed;
+                bottom: -100%;
+                left: 0;
+                right: 0;
+                background: #fff9e6;
+                border-radius: 20px 20px 0 0;
+                box-shadow: 0 -5px 25px rgba(139, 107, 70, 0.2);
+                z-index: 1002;
+                padding: 20px;
+                transition: bottom 0.4s ease;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+            
+            .mobile-language-drawer.active {
+                bottom: 0;
+            }
+            
+            .drawer-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid rgba(184, 148, 70, 0.1);
+            }
+            
+            .drawer-header h3 {
+                color: #5a4a42;
+                font-size: 1.2rem;
+                margin: 0;
+            }
+            
+            .close-drawer {
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #8b6b46;
+                cursor: pointer;
+                padding: 0;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+            }
+            
+            .close-drawer:active {
+                background-color: rgba(139, 107, 70, 0.1);
+            }
+            
+            .mobile-language-options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .mobile-language-option {
+                display: flex;
+                align-items: center;
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 12px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border: 1px solid rgba(184, 148, 70, 0.1);
+            }
+            
+            .mobile-language-option:active {
+                background: rgba(184, 148, 70, 0.1);
+            }
+            
+            .mobile-language-option.active {
+                background: linear-gradient(135deg, rgba(184, 148, 70, 0.15), rgba(212, 177, 95, 0.1));
+                border-color: #b89446;
+            }
+            
+            .mobile-language-flag {
+                width: 28px;
+                height: 21px;
+                object-fit: cover;
+                border-radius: 3px;
+                margin-right: 15px;
+                border: 1px solid #eee;
+            }
+            
+            .mobile-language-name {
+                color: #5a4a42;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+            
+            .drawer-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                display: none;
+            }
+            
+            .drawer-overlay.active {
+                display: block;
+            }
+        }
+        
+        @media (min-width: 901px) {
+            .mobile-language-btn,
+            .drawer-overlay,
+            .mobile-language-drawer {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 桌面端语言选择器 -->
+        <div class="language-selector">
+            <button class="language-btn" id="languageBtn">
+                <i class="fas fa-globe"></i>
+                <span id="currentLanguage">中文</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option active" data-lang="zh-CN">
+                    <img src="https://flagcdn.com/w20/cn.png" alt="中国国旗" class="language-flag">
+                    <span>中文</span>
+                </div>
+                <div class="language-option" data-lang="en-US">
+                    <img src="https://flagcdn.com/w20/us.png" alt="美国国旗" class="language-flag">
+                    <span>English (US)</span>
+                </div>
+                <div class="language-option" data-lang="en-GB">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="英国国旗" class="language-flag">
+                    <span>English (UK)</span>
+                </div>
+                <div class="language-option" data-lang="fr-FR">
+                    <img src="https://flagcdn.com/w20/fr.png" alt="法国国旗" class="language-flag">
+                    <span>Français</span>
+                </div>
+                <div class="language-option" data-lang="sv-SE">
+                    <img src="https://flagcdn.com/w20/se.png" alt="瑞典国旗" class="language-flag">
+                    <span>Svenska</span>
+                </div>
+                <div class="language-option" data-lang="de-DE">
+                    <img src="https://flagcdn.com/w20/de.png" alt="德国国旗" class="language-flag">
+                    <span>Deutsch</span>
+                </div>
+                <div class="language-option" data-lang="ru-RU">
+                    <img src="https://flagcdn.com/w20/ru.png" alt="俄罗斯国旗" class="language-flag">
+                    <span>Русский</span>
+                </div>
+            </div>
+        </div>
+        
+        <header>
+            <h1 id="headerTitle">联系我们</h1>
+            <div class="subtitle" id="headerSubtitle">我们随时准备为您提供帮助</div>
+        </header>
+        
+        <div class="content">
+            <div class="page-content">
+                <h2 id="contactTitle">与我们联系</h2>
+                <p id="contactContent1">如果您对木鱼祈福应用有任何疑问、建议或反馈，我们非常乐意听取您的意见。无论是技术问题、功能建议，还是只是想分享您的使用体验，我们都非常重视您的反馈。</p>
+                
+                <div class="note-box" id="noteBox">
+                    <p><strong>请注意：</strong>木鱼祈福是一个免费开源项目，由志愿者团队维护。我们尽可能及时回复所有查询，但可能需要一些时间处理。感谢您的理解与耐心。</p>
+                </div>
+                
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-title" id="emailTitle">电子邮件</div>
+                        <div class="contact-details">
+                            <p id="emailDescription">发送电子邮件至我们的支持团队</p>
+                            <p><a href="mailto:support@woodenfish.app" class="email-link">wine89721@gmail.com</a></p>
+                            <p id="responseTime">我们通常会在5-7个工作日内回复</p>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <div class="contact-title" id="bugReportTitle">报告问题</div>
+                        <div class="contact-details">
+                            <p id="bugReportDescription">如果您遇到任何技术问题或错误</p>
+                            <p><a href="mailto:bugs@woodenfish.app" class="email-link">bugs@woodenfish.app</a></p>
+                            <p id="bugReportTip">请尽可能详细地描述您遇到的问题</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="contact-title" id="suggestionTitle">功能建议</div>
+                        <div class="contact-details">
+                            <p id="suggestionDescription">如果您有新功能的想法或改进建议</p>
+                            <p><a href="mailto:ideas@woodenfish.app" class="email-link">ideas@woodenfish.app</a></p>
+                            <p id="suggestionTip">我们欢迎所有创意和反馈</p>
+                        </div>
+                    </div> -->
+                </div>
+                
+                <!-- <h2 id="formTitle">发送消息</h2>
+                <p id="formDescription">您也可以使用下面的表单直接发送消息给我们：</p>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" id="nameLabel">姓名</label>
+                            <input type="text" id="name" class="form-control" placeholder="您的姓名">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" id="emailLabel">电子邮件</label>
+                            <input type="email" id="email" class="form-control" placeholder="您的电子邮件地址">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" id="subjectLabel">主题</label>
+                            <input type="text" id="subject" class="form-control" placeholder="消息主题">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" id="messageLabel">消息内容</label>
+                            <textarea id="message" class="form-control" placeholder="请详细描述您的问题或建议..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span id="submitText">发送消息</span>
+                        </button>
+                    </form>
+                </div> -->
+                
+                <div class="note-box" id="technicalNote">
+                    <p><strong>技术说明：</strong>由于木鱼祈福是一个完全本地运行的应用程序，目前表单提交功能尚未实现。请使用上面提供的电子邮件地址与我们联系。我们正在努力在未来版本中添加此功能。</p>
+                </div>
+                
+                <a href="index.html" class="back-btn" id="backToHome">
+                    <i class="fas fa-home"></i>
+                    <span>返回首页</span>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <span id="footerText">木鱼祈福 · 心诚则灵 · 愿您平安喜乐</span>
+        </footer>
+    </div>
+    
+    <!-- 移动端语言切换组件 -->
+    <div class="mobile-language-btn" id="mobileLanguageBtn">中</div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-language-drawer" id="mobileLanguageDrawer">
+        <div class="drawer-header">
+            <h3 id="drawerTitle">选择语言</h3>
+            <button class="close-drawer" id="closeDrawerBtn">×</button>
+        </div>
+        <div class="mobile-language-options" id="mobileLanguageOptions">
+            <!-- 选项由JavaScript动态生成 -->
+        </div>
+    </div>
+    
+    <script>
+        // 翻译字典
+        const translations = {
+            'zh-CN': {
+                'headerTitle': '联系我们',
+                'headerSubtitle': '我们随时准备为您提供帮助',
+                'contactTitle': '与我们联系',
+                'contactContent1': '如果您对木鱼祈福应用有任何疑问、建议或反馈，我们非常乐意听取您的意见。无论是技术问题、功能建议，还是只是想分享您的使用体验，我们都非常重视您的反馈。',
+                'noteBox': '<p><strong>请注意：</strong>木鱼祈福是一个免费开源项目，由志愿者团队维护。我们尽可能及时回复所有查询，但可能需要一些时间处理。感谢您的理解与耐心。</p>',
+                'emailTitle': '电子邮件',
+                'emailDescription': '发送电子邮件至我们的支持团队',
+                'responseTime': '我们通常会在5-7个工作日内回复',
+                'bugReportTitle': '报告问题',
+                'bugReportDescription': '如果您遇到任何技术问题或错误',
+                'bugReportTip': '请尽可能详细地描述您遇到的问题',
+                'suggestionTitle': '功能建议',
+                'suggestionDescription': '如果您有新功能的想法或改进建议',
+                'suggestionTip': '我们欢迎所有创意和反馈',
+                'formTitle': '发送消息',
+                'formDescription': '您也可以使用下面的表单直接发送消息给我们：',
+                'nameLabel': '姓名',
+                'emailLabel': '电子邮件',
+                'subjectLabel': '主题',
+                'messageLabel': '消息内容',
+                'submitText': '发送消息',
+                'technicalNote': '<p><strong>技术说明：</strong>由于木鱼祈福是一个完全本地运行的应用程序，目前表单提交功能尚未实现。请使用上面提供的电子邮件地址与我们联系。我们正在努力在未来版本中添加此功能。</p>',
+                'footerText': '木鱼祈福 · 心诚则灵 · 愿您平安喜乐',
+                'backToHome': '返回首页',
+                'drawerTitle': '选择语言',
+                'languageName': '中文'
+            },
+            'en-US': {
+                'headerTitle': 'Contact Us',
+                'headerSubtitle': 'We\'re Here to Help',
+                'contactTitle': 'Get in Touch',
+                'contactContent1': 'If you have any questions, suggestions, or feedback about the Wooden Fish Blessing app, we\'d love to hear from you. Whether it\'s a technical issue, feature suggestion, or just sharing your experience, we value your feedback greatly.',
+                'noteBox': '<p><strong>Please Note:</strong> Wooden Fish Blessing is a free open-source project maintained by a volunteer team. We try to respond to all inquiries promptly but it may take some time. Thank you for your understanding and patience.</p>',
+                'emailTitle': 'Email',
+                'emailDescription': 'Send email to our support team',
+                'responseTime': 'We typically respond within 5-7 business days',
+                'bugReportTitle': 'Report Issues',
+                'bugReportDescription': 'If you encounter any technical issues or bugs',
+                'bugReportTip': 'Please describe the issue you\'re experiencing in as much detail as possible',
+                'suggestionTitle': 'Feature Suggestions',
+                'suggestionDescription': 'If you have ideas for new features or improvements',
+                'suggestionTip': 'We welcome all ideas and feedback',
+                'formTitle': 'Send a Message',
+                'formDescription': 'You can also use the form below to send us a message directly:',
+                'nameLabel': 'Name',
+                'emailLabel': 'Email',
+                'subjectLabel': 'Subject',
+                'messageLabel': 'Message',
+                'submitText': 'Send Message',
+                'technicalNote': '<p><strong>Technical Note:</strong> Since Wooden Fish Blessing is a fully locally-run application, the form submission feature is not currently implemented. Please use the email addresses provided above to contact us. We\'re working to add this feature in future versions.</p>',
+                'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
+                'backToHome': 'Back to Home',
+                'drawerTitle': 'Select Language',
+                'languageName': 'English (US)'
+            },
+            'en-GB': {
+                'headerTitle': 'Contact Us',
+                'headerSubtitle': 'We\'re Here to Help',
+                'contactTitle': 'Get in Touch',
+                'contactContent1': 'If you have any questions, suggestions, or feedback about the Wooden Fish Blessing app, we\'d love to hear from you. Whether it\'s a technical issue, feature suggestion, or just sharing your experience, we value your feedback greatly.',
+                'noteBox': '<p><strong>Please Note:</strong> Wooden Fish Blessing is a free open-source project maintained by a volunteer team. We try to respond to all inquiries promptly but it may take some time. Thank you for your understanding and patience.</p>',
+                'emailTitle': 'Email',
+                'emailDescription': 'Send email to our support team',
+                'responseTime': 'We typically respond within 5-7 business days',
+                'bugReportTitle': 'Report Issues',
+                'bugReportDescription': 'If you encounter any technical issues or bugs',
+                'bugReportTip': 'Please describe the issue you\'re experiencing in as much detail as possible',
+                'suggestionTitle': 'Feature Suggestions',
+                'suggestionDescription': 'If you have ideas for new features or improvements',
+                'suggestionTip': 'We welcome all ideas and feedback',
+                'formTitle': 'Send a Message',
+                'formDescription': 'You can also use the form below to send us a message directly:',
+                'nameLabel': 'Name',
+                'emailLabel': 'Email',
+                'subjectLabel': 'Subject',
+                'messageLabel': 'Message',
+                'submitText': 'Send Message',
+                'technicalNote': '<p><strong>Technical Note:</strong> Since Wooden Fish Blessing is a fully locally-run application, the form submission feature is not currently implemented. Please use the email addresses provided above to contact us. We\'re working to add this feature in future versions.</p>',
+                'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
+                'backToHome': 'Back to Home',
+                'drawerTitle': 'Select Language',
+                'languageName': 'English (UK)'
+            },
+            'fr-FR': {
+                'headerTitle': 'Contactez-nous',
+                'headerSubtitle': 'Nous sommes là pour vous aider',
+                'contactTitle': 'Entrer en contact',
+                'contactContent1': 'Si vous avez des questions, des suggestions ou des commentaires concernant l\'application Prière avec Poisson en Bois, nous serions ravis d\'avoir de vos nouvelles. Qu\'il s\'agisse d\'un problème technique, d\'une suggestion de fonctionnalité ou simplement du partage de votre expérience, nous accordons une grande importance à vos commentaires.',
+                'noteBox': '<p><strong>Veuillez noter :</strong> Prière avec Poisson en Bois est un projet open-source gratuit maintenu par une équipe de bénévoles. Nous essayons de répondre à toutes les demandes rapidement, mais cela peut prendre un certain temps. Merci de votre compréhension et de votre patience.</p>',
+                'emailTitle': 'E-mail',
+                'emailDescription': 'Envoyer un e-mail à notre équipe de support',
+                'responseTime': 'Nous répondons généralement dans les 5 à 7 jours ouvrables',
+                'bugReportTitle': 'Signaler des problèmes',
+                'bugReportDescription': 'Si vous rencontrez des problèmes techniques ou des bugs',
+                'bugReportTip': 'Veuillez décrire le problème que vous rencontrez de manière aussi détaillée que possible',
+                'suggestionTitle': 'Suggestions de fonctionnalités',
+                'suggestionDescription': 'Si vous avez des idées pour de nouvelles fonctionnalités ou améliorations',
+                'suggestionTip': 'Nous accueillons toutes les idées et commentaires',
+                'formTitle': 'Envoyer un message',
+                'formDescription': 'Vous pouvez également utiliser le formulaire ci-dessous pour nous envoyer un message directement :',
+                'nameLabel': 'Nom',
+                'emailLabel': 'E-mail',
+                'subjectLabel': 'Sujet',
+                'messageLabel': 'Message',
+                'submitText': 'Envoyer le message',
+                'technicalNote': '<p><strong>Note technique :</strong> Puisque Prière avec Poisson en Bois est une application entièrement exécutée localement, la fonction de soumission de formulaire n\'est pas actuellement implémentée. Veuillez utiliser les adresses e-mail fournies ci-dessus pour nous contacter. Nous travaillons à l\'ajout de cette fonctionnalité dans les versions futures.</p>',
+                'footerText': 'Prière avec Poisson en Bois · La Sincérité Apporte des Bénédictions · Vous Souhaitant Paix et Joie',
+                'backToHome': 'Retour à l\'Accueil',
+                'drawerTitle': 'Choisir la langue',
+                'languageName': 'Français'
+            },
+            'sv-SE': {
+                'headerTitle': 'Kontakta Oss',
+                'headerSubtitle': 'Vi är här för att hjälpa',
+                'contactTitle': 'Kontakta oss',
+                'contactContent1': 'Om du har några frågor, förslag eller feedback om Träfiskbön-appen, skulle vi älska att höra från dig. Oavsett om det är ett tekniskt problem, ett funktionsförslag eller bara att dela din erfarenhet, värdesätter vi din feedback mycket.',
+                'noteBox': '<p><strong>Observera:</strong> Träfiskbön är ett gratis open-source-projekt som underhålls av ett team av volontärer. Vi försöker svara på alla förfrågningar omgående, men det kan ta lite tid. Tack för din förståelse och tålamod.</p>',
+                'emailTitle': 'E-post',
+                'emailDescription': 'Skicka e-post till vårt supportteam',
+                'responseTime': 'Vi svarar vanligtvis inom 5-7 arbetsdagar',
+                'bugReportTitle': 'Rapportera problem',
+                'bugReportDescription': 'Om du stöter på några tekniska problem eller buggar',
+                'bugReportTip': 'Beskriv problemet du upplever så detaljerat som möjligt',
+                'suggestionTitle': 'Funktionsförslag',
+                'suggestionDescription': 'Om du har idéer för nya funktioner eller förbättringar',
+                'suggestionTip': 'Vi välkomnar alla idéer och återkoppling',
+                'formTitle': 'Skicka ett meddelande',
+                'formDescription': 'Du kan också använda formuläret nedan för att skicka ett meddelande direkt till oss:',
+                'nameLabel': 'Namn',
+                'emailLabel': 'E-post',
+                'subjectLabel': 'Ämne',
+                'messageLabel': 'Meddelande',
+                'submitText': 'Skicka meddelande',
+                'technicalNote': '<p><strong>Teknisk notis:</strong> Eftersom Träfiskbön är en helt lokalt körd applikation, är formulärinsändningsfunktionen för närvarande inte implementerad. Använd de e-postadresser som anges ovan för att kontakta oss. Vi arbetar med att lägga till denna funktion i framtida versioner.</p>',
+                'footerText': 'Träfiskbön · Uppriktighet För Välsignelser · Önskar Er Frid och Glädje',
+                'backToHome': 'Tillbaka till Hem',
+                'drawerTitle': 'Välj språk',
+                'languageName': 'Svenska'
+            },
+            'de-DE': {
+                'headerTitle': 'Kontaktieren Sie uns',
+                'headerSubtitle': 'Wir sind hier, um zu helfen',
+                'contactTitle': 'Kontakt aufnehmen',
+                'contactContent1': 'Wenn Sie Fragen, Vorschläge oder Feedback zur Holzfisch Gebet App haben, würden wir uns freuen, von Ihnen zu hören. Egal, ob es sich um ein technisches Problem, einen Funktionsvorschlag handelt oder Sie nur Ihre Erfahrungen teilen möchten, wir schätzen Ihr Feedback sehr.',
+                'noteBox': '<p><strong>Bitte beachten Sie:</strong> Holzfisch Gebet ist ein kostenloses Open-Source-Projekt, das von einem Team von Freiwilligen gewartet wird. Wir versuchen, alle Anfragen prompt zu beantworten, aber es kann einige Zeit dauern. Vielen Dank für Ihr Verständnis und Ihre Geduld.</p>',
+                'emailTitle': 'E-Mail',
+                'emailDescription': 'Senden Sie eine E-Mail an unser Support-Team',
+                'responseTime': 'Wir antworten in der Regel innerhalb von 5-7 Werktagen',
+                'bugReportTitle': 'Probleme melden',
+                'bugReportDescription': 'Wenn Sie auf technische Probleme oder Fehler stoßen',
+                'bugReportTip': 'Bitte beschreiben Sie das Problem, das Sie erleben, so detailliert wie möglich',
+                'suggestionTitle': 'Funktionsvorschläge',
+                'suggestionDescription': 'Wenn Sie Ideen für neue Funktionen oder Verbesserungen haben',
+                'suggestionTip': 'Wir begrüßen alle Ideen und Rückmeldungen',
+                'formTitle': 'Nachricht senden',
+                'formDescription': 'Sie können auch das untenstehende Formular verwenden, um uns direkt eine Nachricht zu senden:',
+                'nameLabel': 'Name',
+                'emailLabel': 'E-Mail',
+                'subjectLabel': 'Betreff',
+                'messageLabel': 'Nachricht',
+                'submitText': 'Nachricht senden',
+                'technicalNote': '<p><strong>Technischer Hinweis:</strong> Da Holzfisch Gebet eine vollständig lokal ausgeführte Anwendung ist, ist die Formularübermittlungsfunktion derzeit nicht implementiert. Bitte verwenden Sie die oben angegebenen E-Mail-Adressen, um uns zu kontaktieren. Wir arbeiten daran, diese Funktion in zukünftigen Versionen hinzuzufügen.</p>',
+                'footerText': 'Holzfisch Gebet · Aufrichtigkeit Bringt Segen · Wünsche Ihnen Frieden und Freude',
+                'backToHome': 'Zurück zur Startseite',
+                'drawerTitle': 'Sprache auswählen',
+                'languageName': 'Deutsch'
+            },
+            'ru-RU': {
+                'headerTitle': 'Свяжитесь с нами',
+                'headerSubtitle': 'Мы здесь, чтобы помочь',
+                'contactTitle': 'Связаться с нами',
+                'contactContent1': 'Если у вас есть какие-либо вопросы, предложения или отзывы о приложении Молитва с Деревянной Рыбой, мы будем рады услышать от вас. Будь то техническая проблема, предложение функции или просто обмен опытом, мы очень ценим ваши отзывы.',
+                'noteBox': '<p><strong>Обратите внимание:</strong> Молитва с Деревянной Рыбой - это бесплатный проект с открытым исходным кодом, поддерживаемый командой волонтеров. Мы стараемся оперативно отвечать на все запросы, но это может занять некоторое время. Спасибо за ваше понимание и терпение.</p>',
+                'emailTitle': 'Электронная почта',
+                'emailDescription': 'Отправьте электронное письмо в нашу службу поддержки',
+                'responseTime': 'Обычно мы отвечаем в течение 5-7 рабочих дней',
+                'bugReportTitle': 'Сообщить о проблемах',
+                'bugReportDescription': 'Если вы столкнулись с какими-либо техническими проблемами или ошибками',
+                'bugReportTip': 'Пожалуйста, опишите проблему, с которой вы столкнулись, как можно подробнее',
+                'suggestionTitle': 'Предложения по функциям',
+                'suggestionDescription': 'Если у вас есть идеи для новых функций или улучшений',
+                'suggestionTip': 'Мы приветствуем все идеи и отзывы',
+                'formTitle': 'Отправить сообщение',
+                'formDescription': 'Вы также можете использовать форму ниже, чтобы отправить нам сообщение напрямую:',
+                'nameLabel': 'Имя',
+                'emailLabel': 'Электронная почта',
+                'subjectLabel': 'Тема',
+                'messageLabel': 'Сообщение',
+                'submitText': 'Отправить сообщение',
+                'technicalNote': '<p><strong>Техническое примечание:</strong> Поскольку Молитва с Деревянной Рыбой - это полностью локально запущенное приложение, функция отправки формы в настоящее время не реализована. Пожалуйста, используйте указанные выше адреса электронной почты, чтобы связаться с нами. Мы работаем над добавлением этой функции в будущих версиях.</p>',
+                'footerText': 'Молитва с Деревянной Рыбой · Искренность Приносит Благословение · Желаем Вам Мира и Радости',
+                'backToHome': 'Вернуться на Главную',
+                'drawerTitle': 'Выберите язык',
+                'languageName': 'Русский'
+            }
+        };
+
+        // 移动端语言选项数据
+        const mobileLanguageList = [
+            { code: 'zh-CN', name: '中文', short: '中', flag: 'https://flagcdn.com/w20/cn.png' },
+            { code: 'en-US', name: 'English (US)', short: 'EN', flag: 'https://flagcdn.com/w20/us.png' },
+            { code: 'en-GB', name: 'English (UK)', short: 'UK', flag: 'https://flagcdn.com/w20/gb.png' },
+            { code: 'fr-FR', name: 'Français', short: 'FR', flag: 'https://flagcdn.com/w20/fr.png' },
+            { code: 'sv-SE', name: 'Svenska', short: 'SV', flag: 'https://flagcdn.com/w20/se.png' },
+            { code: 'de-DE', name: 'Deutsch', short: 'DE', flag: 'https://flagcdn.com/w20/de.png' },
+            { code: 'ru-RU', name: 'Русский', short: 'RU', flag: 'https://flagcdn.com/w20/ru.png' }
+        ];
+
+        // DOM 元素获取
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentLanguageElement = document.getElementById('currentLanguage');
+        const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+        const mobileLanguageDrawer = document.getElementById('mobileLanguageDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        const mobileLanguageOptions = document.getElementById('mobileLanguageOptions');
+        const drawerTitle = document.getElementById('drawerTitle');
+        const contactForm = document.getElementById('contactForm');
+
+        // 当前语言
+        let currentLanguage = localStorage.getItem('prayerLanguage') || 'zh-CN';
+
+        // 更新移动端按钮文字
+        function updateMobileLanguageButton() {
+            const currentLangData = mobileLanguageList.find(lang => lang.code === currentLanguage);
+            if (currentLangData && mobileLanguageBtn) {
+                mobileLanguageBtn.textContent = currentLangData.short;
+            }
+        }
+
+        // 更新抽屉标题
+        function updateDrawerTitle() {
+            if (drawerTitle) {
+                drawerTitle.textContent = translations[currentLanguage]?.drawerTitle || '选择语言';
+            }
+        }
+
+        // 初始化移动端语言选项列表
+        function initMobileLanguageOptions() {
+            if (!mobileLanguageOptions) return;
+            
+            mobileLanguageOptions.innerHTML = '';
+            
+            mobileLanguageList.forEach(lang => {
+                const option = document.createElement('div');
+                option.className = `mobile-language-option ${currentLanguage === lang.code ? 'active' : ''}`;
+                option.dataset.lang = lang.code;
+                
+                option.innerHTML = `
+                    <img src="${lang.flag}" alt="${lang.name}" class="mobile-language-flag">
+                    <span class="mobile-language-name">${lang.name}</span>
+                `;
+                
+                option.addEventListener('click', () => {
+                    switchLanguage(lang.code);
+                    closeMobileDrawer();
+                });
+                
+                mobileLanguageOptions.appendChild(option);
+            });
+        }
+
+        // 打开移动端抽屉
+        function openMobileDrawer() {
+            if (!mobileLanguageDrawer || !drawerOverlay) return;
+            
+            mobileLanguageDrawer.classList.add('active');
+            drawerOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭移动端抽屉
+        function closeMobileDrawer() {
+            if (!mobileLanguageDrawer || !drawerOverlay) return;
+            
+            mobileLanguageDrawer.classList.remove('active');
+            drawerOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // 应用翻译
+        function applyTranslations() {
+            const lang = translations[currentLanguage];
+            if (!lang) return;
+            
+            // 更新页面元素
+            const updateElement = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = text;
+            };
+            
+            const updateHTML = (id, html) => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = html;
+            };
+            
+            updateElement('headerTitle', lang.headerTitle);
+            updateElement('headerSubtitle', lang.headerSubtitle);
+            updateElement('contactTitle', lang.contactTitle);
+            updateElement('contactContent1', lang.contactContent1);
+            
+            updateHTML('noteBox', lang.noteBox);
+            updateElement('emailTitle', lang.emailTitle);
+            updateElement('emailDescription', lang.emailDescription);
+            updateElement('responseTime', lang.responseTime);
+            updateElement('bugReportTitle', lang.bugReportTitle);
+            updateElement('bugReportDescription', lang.bugReportDescription);
+            updateElement('bugReportTip', lang.bugReportTip);
+            updateElement('suggestionTitle', lang.suggestionTitle);
+            updateElement('suggestionDescription', lang.suggestionDescription);
+            updateElement('suggestionTip', lang.suggestionTip);
+            updateElement('formTitle', lang.formTitle);
+            updateElement('formDescription', lang.formDescription);
+            updateElement('nameLabel', lang.nameLabel);
+            updateElement('emailLabel', lang.emailLabel);
+            updateElement('subjectLabel', lang.subjectLabel);
+            updateElement('messageLabel', lang.messageLabel);
+            updateElement('submitText', lang.submitText);
+            updateHTML('technicalNote', lang.technicalNote);
+            updateElement('footerText', lang.footerText);
+            updateElement('backToHome', lang.backToHome);
+            
+            if (currentLanguageElement) {
+                currentLanguageElement.textContent = lang.languageName || lang.headerTitle;
+            }
+            
+            // 更新表单占位符
+            // document.getElementById('name').placeholder = lang.nameLabel;
+            // document.getElementById('email').placeholder = lang.emailLabel || '您的电子邮件地址';
+            // document.getElementById('subject').placeholder = lang.subjectLabel || '消息主题';
+            // document.getElementById('message').placeholder = lang.messageLabel || '请详细描述您的问题或建议...';
+            
+            // 更新页面标题
+            document.title = `${lang.headerTitle} - 木鱼祈福`;
+            
+            // 更新HTML lang属性
+            document.documentElement.lang = currentLanguage;
+            
+            // 更新语言选择器中的活动状态
+            document.querySelectorAll('.language-option').forEach(option => {
+                if (option.dataset.lang === currentLanguage) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            // 更新移动端组件
+            updateMobileLanguageButton();
+            updateDrawerTitle();
+            initMobileLanguageOptions();
+            
+            // 保存语言偏好
+            localStorage.setItem('prayerLanguage', currentLanguage);
+        }
+
+        // 切换语言
+        function switchLanguage(langCode) {
+            if (translations[langCode]) {
+                currentLanguage = langCode;
+                applyTranslations();
+            }
+        }
+
+        // 处理表单提交
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !email || !message) {
+                    alert(currentLanguage === 'zh-CN' ? '请填写所有必填字段' : 'Please fill in all required fields');
+                    return;
+                }
+                
+                // 由于这是一个本地应用，我们只能显示一个消息
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>${currentLanguage === 'zh-CN' ? '发送中...' : 'Sending...'}</span>`;
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    // 模拟发送
+                    alert(currentLanguage === 'zh-CN' 
+                        ? '由于技术限制，表单提交功能当前不可用。请使用上面提供的电子邮件地址与我们联系。' 
+                        : 'Due to technical limitations, the form submission feature is currently unavailable. Please use the email addresses provided above to contact us.');
+                    
+                    // 重置表单
+                    contactForm.reset();
+                    
+                    // 恢复按钮
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+        }
+
+        // 事件监听
+        if (languageBtn) {
+            languageBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (languageDropdown) {
+                    languageDropdown.classList.toggle('active');
+                }
+            });
+        }
+
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const langCode = option.dataset.lang;
+                switchLanguage(langCode);
+                if (languageDropdown) {
+                    languageDropdown.classList.remove('active');
+                }
+            });
+        });
+
+        if (mobileLanguageBtn) mobileLanguageBtn.addEventListener('click', openMobileDrawer);
+        if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeMobileDrawer);
+        if (drawerOverlay) drawerOverlay.addEventListener('click', closeMobileDrawer);
+
+        // 点击页面其他区域关闭桌面端下拉菜单
+        document.addEventListener('click', () => {
+            if (languageDropdown) {
+                languageDropdown.classList.remove('active');
+            }
+        });
+
+        // 页面初始化
+        function initPage() {
+            // 加载语言设置
+            const savedLang = localStorage.getItem('prayerLanguage');
+            if (savedLang && translations[savedLang]) {
+                currentLanguage = savedLang;
+            }
+            
+            // 应用翻译
+            applyTranslations();
+            
+            // 初始化移动端语言选项
+            initMobileLanguageOptions();
+            updateMobileLanguageButton();
+            
+            // 根据屏幕宽度切换语言UI
+            toggleLanguageUIByScreenSize();
+            
+            // 监听窗口大小变化
+            window.addEventListener('resize', toggleLanguageUIByScreenSize);
+        }
+
+        // 根据屏幕宽度切换语言UI显示
+        function toggleLanguageUIByScreenSize() {
+            const isMobile = window.innerWidth <= 900;
+            const desktopSelector = document.querySelector('.language-selector');
+            
+            if (!desktopSelector || !mobileLanguageBtn) return;
+            
+            if (isMobile) {
+                mobileLanguageBtn.style.display = 'flex';
+                desktopSelector.style.display = 'none';
+                
+                if (languageDropdown) {
+                    languageDropdown.classList.remove('active');
+                }
+            } else {
+                mobileLanguageBtn.style.display = 'none';
+                desktopSelector.style.display = 'block';
+                
+                closeMobileDrawer();
+            }
+        }
+
+        // 页面加载完成后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPage);
+        } else {
+            initPage();
+        }
+    </script>
+</body>
+</html>

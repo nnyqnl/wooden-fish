@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="木鱼祈福应用 - 关于我们的故事和理念">
+    
+    <title>关于我们 - 木鱼祈福</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f1e6;
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+            color: #5a4a42;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff9e6;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(139, 107, 70, 0.15);
+            overflow: hidden;
+            border: 1px solid rgba(232, 211, 162, 0.5);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            padding: 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #ffd700, #ffed4e, #ffd700);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            letter-spacing: 1px;
+        }
+        
+        /* 内容样式 */
+        .content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+        
+        .page-content {
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .page-content h2 {
+            color: #b89446;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(184, 148, 70, 0.2);
+            font-size: 1.5rem;
+        }
+        
+        .page-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .page-content ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .page-content li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box {
+            background-color: rgba(255, 249, 230, 0.9);
+            border-left: 4px solid #b89446;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(to right, #b89446, #d4b15f);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(139, 107, 70, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(139, 107, 70, 0.25);
+        }
+        
+        .back-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页脚样式 */
+        footer {
+            padding: 15px;
+            text-align: center;
+            color: #8b6b46;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(184, 148, 70, 0.2);
+            background-color: rgba(255, 249, 230, 0.8);
+        }
+        
+        /* 语言选择器 - 在container内部 */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .language-btn i {
+            font-size: 16px;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            margin-top: 5px;
+            display: none;
+            overflow: hidden;
+            z-index: 1000;
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            color: #5a4a42;
+        }
+        
+        .language-option:hover {
+            background: #f5f1e6;
+        }
+        
+        .language-option.active {
+            background: #fff8e1;
+            font-weight: bold;
+        }
+        
+        .language-flag {
+            width: 20px;
+            height: 15px;
+            object-fit: cover;
+            border-radius: 2px;
+            border: 1px solid #eee;
+        }
+        
+        /* 移动端语言切换器 - 在body内 */
+        .mobile-language-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #b89446, #d4b15f);
+            color: white;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(184, 148, 70, 0.4);
+            z-index: 1001;
+            cursor: pointer;
+            border: none;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-language-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .mobile-language-drawer {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            right: 0;
+            background: #fff9e6;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 25px rgba(139, 107, 70, 0.2);
+            z-index: 1002;
+            padding: 20px;
+            transition: bottom 0.4s ease;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .mobile-language-drawer.active {
+            bottom: 0;
+        }
+        
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(184, 148, 70, 0.1);
+        }
+        
+        .drawer-header h3 {
+            color: #5a4a42;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        
+        .close-drawer {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #8b6b46;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-drawer:active {
+            background-color: rgba(139, 107, 70, 0.1);
+        }
+        
+        .mobile-language-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .mobile-language-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(184, 148, 70, 0.1);
+        }
+        
+        .mobile-language-option:active {
+            background: rgba(184, 148, 70, 0.1);
+        }
+        
+        .mobile-language-option.active {
+            background: linear-gradient(135deg, rgba(184, 148, 70, 0.15), rgba(212, 177, 95, 0.1));
+            border-color: #b89446;
+        }
+        
+        .mobile-language-flag {
+            width: 28px;
+            height: 21px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-right: 15px;
+            border: 1px solid #eee;
+        }
+        
+        .mobile-language-name {
+            color: #5a4a42;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .drawer-overlay.active {
+            display: block;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .page-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 桌面端语言选择器 - 在container内部 -->
+        <div class="language-selector">
+            <button class="language-btn" id="languageBtn">
+                <i class="fas fa-globe"></i>
+                <span id="currentLanguage">中文</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option active" data-lang="zh-CN">
+                    <img src="https://flagcdn.com/w20/cn.png" alt="中国国旗" class="language-flag">
+                    <span>中文</span>
+                </div>
+                <div class="language-option" data-lang="en-US">
+                    <img src="https://flagcdn.com/w20/us.png" alt="美国国旗" class="language-flag">
+                    <span>English (US)</span>
+                </div>
+                <div class="language-option" data-lang="en-GB">
+                    <img src="https://flagcdn.com/w20/gb.png" alt="英国国旗" class="language-flag">
+                    <span>English (UK)</span>
+                </div>
+                <div class="language-option" data-lang="fr-FR">
+                    <img src="https://flagcdn.com/w20/fr.png" alt="法国国旗" class="language-flag">
+                    <span>Français</span>
+                </div>
+                <div class="language-option" data-lang="sv-SE">
+                    <img src="https://flagcdn.com/w20/se.png" alt="瑞典国旗" class="language-flag">
+                    <span>Svenska</span>
+                </div>
+                <div class="language-option" data-lang="de-DE">
+                    <img src="https://flagcdn.com/w20/de.png" alt="德国国旗" class="language-flag">
+                    <span>Deutsch</span>
+                </div>
+                <div class="language-option" data-lang="ru-RU">
+                    <img src="https://flagcdn.com/w20/ru.png" alt="俄罗斯国旗" class="language-flag">
+                    <span>Русский</span>
+                </div>
+            </div>
+        </div>
+        
+        <header>
+            <h1 id="headerTitle">关于我们</h1>
+            <div class="subtitle" id="headerSubtitle">木鱼祈福的故事与理念</div>
+        </header>
+        
+        <div class="content">
+            <div class="page-content">
+                <h2 id="aboutTitle">关于木鱼祈福</h2>
+                <p id="aboutContent1">木鱼祈福是一个数字化心灵疗愈工具，旨在通过现代科技将传统冥想与祈福仪式带给全球用户。我们相信，在快节奏的现代生活中，每个人都需要一个可以静心、反思和寻求内心平静的空间。</p>
+                
+                <div class="highlight-box">
+                    <p id="aboutContent2">我们的使命是让冥想和正念练习变得简单易行，通过虚拟木鱼敲击的仪式感，帮助用户减轻压力，提升专注力，并在日常生活中找到内心的平衡与宁静。</p>
+                </div>
+                
+                <h2 id="aboutVision">愿景与价值观</h2>
+                <p id="aboutContent3">我们相信科技可以成为促进心灵健康的工具，而非分散注意力的源头。木鱼祈福应用融合了东方传统智慧与现代用户体验设计，创造出一个既尊重传统又符合现代人使用习惯的数字工具。</p>
+                
+                <ul id="aboutValues">
+                    <li><strong>可及性：</strong>让每个人都能免费使用心灵平静工具</li>
+                    <li><strong>包容性：</strong>尊重各种文化背景和信仰体系</li>
+                    <li><strong>简单性：</strong>保持界面简洁，功能直观易用</li>
+                    <li><strong>隐私保护：</strong>用户数据仅存储在本地，保护用户隐私</li>
+                </ul>
+                
+                <h2 id="aboutTeam">我们的团队</h2>
+                <p id="aboutContent4">木鱼祈福由一群热衷于正念冥想和数字健康的开发者、设计师和心理学爱好者创建。我们来自不同文化背景，但共享同一个信念：技术应当服务于人类的整体福祉，包括心灵健康。</p>
+                
+                <a href="index.html" class="back-btn" id="backToHome">
+                    <i class="fas fa-home"></i>
+                    <span>返回首页</span>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <span id="footerText">木鱼祈福 · 心诚则灵 · 愿您平安喜乐</span>
+        </footer>
+    </div>
+    
+    <!-- 移动端语言切换组件 - 在body内 -->
+    <div class="mobile-language-btn" id="mobileLanguageBtn">中</div>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="mobile-language-drawer" id="mobileLanguageDrawer">
+        <div class="drawer-header">
+            <h3 id="drawerTitle">选择语言</h3>
+            <button class="close-drawer" id="closeDrawerBtn">×</button>
+        </div>
+        <div class="mobile-language-options" id="mobileLanguageOptions">
+            <!-- 选项由JavaScript动态生成 -->
+        </div>
+    </div>
+    
+    <script>
+        // 翻译字典
+        const translations = {
+            'zh-CN': {
+                'headerTitle': '关于我们',
+                'headerSubtitle': '木鱼祈福的故事与理念',
+                'aboutTitle': '关于木鱼祈福',
+                'aboutContent1': '木鱼祈福是一个数字化心灵疗愈工具，旨在通过现代科技将传统冥想与祈福仪式带给全球用户。我们相信，在快节奏的现代生活中，每个人都需要一个可以静心、反思和寻求内心平静的空间。',
+                'aboutContent2': '我们的使命是让冥想和正念练习变得简单易行，通过虚拟木鱼敲击的仪式感，帮助用户减轻压力，提升专注力，并在日常生活中找到内心的平衡与宁静。',
+                'aboutVision': '愿景与价值观',
+                'aboutContent3': '我们相信科技可以成为促进心灵健康的工具，而非分散注意力的源头。木鱼祈福应用融合了东方传统智慧与现代用户体验设计，创造出一个既尊重传统又符合现代人使用习惯的数字工具。',
+                'aboutValues': `<li><strong>可及性：</strong>让每个人都能免费使用心灵平静工具</li>
+                               <li><strong>包容性：</strong>尊重各种文化背景和信仰体系</li>
+                               <li><strong>简单性：</strong>保持界面简洁，功能直观易用</li>
+                               <li><strong>隐私保护：</strong>用户数据仅存储在本地，保护用户隐私</li>`,
+                'aboutTeam': '我们的团队',
+                'aboutContent4': '木鱼祈福由一群热衷于正念冥想和数字健康的开发者、设计师和心理学爱好者创建。我们来自不同文化背景，但共享同一个信念：技术应当服务于人类的整体福祉，包括心灵健康。',
+                'footerText': '木鱼祈福 · 心诚则灵 · 愿您平安喜乐',
+                'backToHome': '返回首页',
+                'drawerTitle': '选择语言',
+                'languageName': '中文',
+            },
+            'en-US': {
+                'headerTitle': 'About Us',
+                'headerSubtitle': 'The Story and Philosophy of Wooden Fish Blessing',
+                'aboutTitle': 'About Wooden Fish Blessing',
+                'aboutContent1': 'Wooden Fish Blessing is a digital mindfulness tool designed to bring traditional meditation and prayer rituals to global users through modern technology. We believe that in the fast-paced modern life, everyone needs a space to calm their mind, reflect, and seek inner peace.',
+                'aboutContent2': 'Our mission is to make meditation and mindfulness practices simple and accessible. Through the ritual of virtual wooden fish tapping, we help users reduce stress, improve focus, and find balance and tranquility in daily life.',
+                'aboutVision': 'Vision & Values',
+                'aboutContent3': 'We believe technology can be a tool to promote mental wellbeing, not just a source of distraction. Wooden Fish Blessing combines Eastern traditional wisdom with modern user experience design to create a digital tool that respects tradition while fitting modern usage habits.',
+                'aboutValues': `<li><strong>Accessibility:</strong> Making mindfulness tools freely available to everyone</li>
+                               <li><strong>Inclusivity:</strong> Respecting diverse cultural backgrounds and belief systems</li>
+                               <li><strong>Simplicity:</strong> Maintaining a clean interface with intuitive functionality</li>
+                               <li><strong>Privacy Protection:</strong> User data stored locally only, protecting user privacy</li>`,
+                'aboutTeam': 'Our Team',
+                'aboutContent4': 'Wooden Fish Blessing was created by a group of developers, designers, and psychology enthusiasts passionate about mindfulness meditation and digital wellness. We come from different cultural backgrounds but share the same belief: technology should serve human holistic wellbeing, including mental health.',
+                'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
+                'backToHome': 'Back to Home',
+                'drawerTitle': 'Select Language',
+                'languageName': 'English (US)'
+            },
+            'en-GB': {
+                'headerTitle': 'About Us',
+                'headerSubtitle': 'The Story and Philosophy of Wooden Fish Blessing',
+                'aboutTitle': 'About Wooden Fish Blessing',
+                'aboutContent1': 'Wooden Fish Blessing is a digital mindfulness tool designed to bring traditional meditation and prayer rituals to global users through modern technology. We believe that in the fast-paced modern life, everyone needs a space to calm their mind, reflect, and seek inner peace.',
+                'aboutContent2': 'Our mission is to make meditation and mindfulness practices simple and accessible. Through the ritual of virtual wooden fish tapping, we help users reduce stress, improve focus, and find balance and tranquility in daily life.',
+                'aboutVision': 'Vision & Values',
+                'aboutContent3': 'We believe technology can be a tool to promote mental wellbeing, not just a source of distraction. Wooden Fish Blessing combines Eastern traditional wisdom with modern user experience design to create a digital tool that respects tradition while fitting modern usage habits.',
+                'aboutValues': `<li><strong>Accessibility:</strong> Making mindfulness tools freely available to everyone</li>
+                               <li><strong>Inclusivity:</strong> Respecting diverse cultural backgrounds and belief systems</li>
+                               <li><strong>Simplicity:</strong> Maintaining a clean interface with intuitive functionality</li>
+                               <li><strong>Privacy Protection:</strong> User data stored locally only, protecting user privacy</li>`,
+                'aboutTeam': 'Our Team',
+                'aboutContent4': 'Wooden Fish Blessing was created by a group of developers, designers, and psychology enthusiasts passionate about mindfulness meditation and digital wellness. We come from different cultural backgrounds but share the same belief: technology should serve human holistic wellbeing, including mental health.',
+                'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
+                'backToHome': 'Back to Home',
+                'drawerTitle': 'Select Language',
+                'languageName': 'English (UK)'
+            },
+            'fr-FR': {
+                'headerTitle': 'À propos',
+                'headerSubtitle': 'L\'histoire et la philosophie de Prière avec Poisson en Bois',
+                'aboutTitle': 'À propos de Prière avec Poisson en Bois',
+                'aboutContent1': 'Prière avec Poisson en Bois est un outil de pleine conscience numérique conçu pour apporter les rituels traditionnels de méditation et de prière aux utilisateurs du monde entier grâce à la technologie moderne. Nous pensons que dans la vie moderne trépidante, chacun a besoin d\'un espace pour calmer son esprit, réfléchir et chercher la paix intérieure.',
+                'aboutContent2': 'Notre mission est de rendre la méditation et les pratiques de pleine conscience simples et accessibles. Grâce au rituel du tapotement virtuel du poisson en bois, nous aidons les utilisateurs à réduire le stress, à améliorer la concentration et à trouver l\'équilibre et la tranquillité dans la vie quotidienne.',
+                'aboutVision': 'Vision et Valeurs',
+                'aboutContent3': 'Nous pensons que la technologie peut être un outil pour promouvoir le bien-être mental, et pas seulement une source de distraction. Prière avec Poisson en Bois combine la sagesse traditionnelle orientale avec la conception moderne de l\'expérience utilisateur pour créer un outil numérique qui respecte la tradition tout en s\'adaptant aux habitudes d\'utilisation modernes.',
+                'aboutValues': `<li><strong>Accessibilité :</strong> Rendre les outils de pleine conscience librement disponibles à tous</li>
+                               <li><strong>Inclusivité :</strong> Respecter les divers antécédents culturels et systèmes de croyance</li>
+                               <li><strong>Simplicité :</strong> Maintenir une interface propre avec une fonctionnalité intuitive</li>
+                               <li><strong>Protection de la vie privée :</strong> Les données utilisateur stockées localement uniquement, protégeant la vie privée des utilisateurs</li>`,
+                'aboutTeam': 'Notre Équipe',
+                'aboutContent4': 'Prière avec Poisson en Bois a été créée par un groupe de développeurs, de designers et d\'enthousiastes de la psychologie passionnés par la méditation de pleine conscience et le bien-être numérique. Nous venons de différents horizons culturels mais partageons la même conviction : la technologie doit servir le bien-être holistique humain, y compris la santé mentale.',
+                'footerText': 'Prière avec Poisson en Bois · La Sincérité Apporte des Bénédictions · Vous Souhaitant Paix et Joie',
+                'backToHome': 'Retour à l\'Accueil',
+                'drawerTitle': 'Choisir la langue',
+                'languageName': 'Français'
+            },
+            'sv-SE': {
+                'headerTitle': 'Om Oss',
+                'headerSubtitle': 'Historien och filosofin bakom Träfiskbön',
+                'aboutTitle': 'Om Träfiskbön',
+                'aboutContent1': 'Träfiskbön är ett digitalt mindfulnessverktyg designat för att bringa traditionell meditation och bönritualer till globala användare genom modern teknik. Vi tror att i det hektiska moderna livet behöver alla ett utrymme för att lugna sinnet, reflektera och söka inre frid.',
+                'aboutContent2': 'Vårt uppdrag är att göra meditation och mindfulnesspraktiker enkla och tillgängliga. Genom ritualen med virtuell träfiskknackning hjälper vi användare att minska stress, förbättra fokus och hitta balans och lugn i vardagen.',
+                'aboutVision': 'Vision & Värderingar',
+                'aboutContent3': 'Vi tror att teknik kan vara ett verktyg för att främja mental välbefinnande, inte bara en källa till distraktion. Träfiskbön kombinerar österländsk traditionell visdom med modern användarupplevelsedesign för att skapa ett digitalt verktyg som respekterar traditionen samtidigt som det passar moderna användningsvanor.',
+                'aboutValues': `<li><strong>Tillgänglighet:</strong> Göra mindfulnessverktyg fritt tillgängliga för alla</li>
+                               <li><strong>Inkludering:</strong> Respektera olika kulturella bakgrunder och trossystem</li>
+                               <li><strong>Enkelhet:</strong> Behålla ett rent gränssnitt med intuitiv funktionalitet</li>
+                               <li><strong>Integritetsskydd:</strong> Användardata lagras endast lokalt, skyddar användarnas integritet</li>`,
+                'aboutTeam': 'Vårt Team',
+                'aboutContent4': 'Träfiskbön skapades av en grupp utvecklare, designers och psykologi-entusiaster passionerade om mindfulnessmeditation och digital välbefinnande. Vi kommer från olika kulturella bakgrunder men delar samma tro: teknik bör tjäna mänskligt holistiskt välbefinnande, inklusive mental hälsa.',
+                'footerText': 'Träfiskbön · Uppriktighet För Välsignelser · Önskar Er Frid och Glädje',
+                'backToHome': 'Tillbaka till Hem',
+                'drawerTitle': 'Välj språk',
+                'languageName': 'Svenska'
+            },
+            'de-DE': {
+                'headerTitle': 'Über Uns',
+                'headerSubtitle': 'Die Geschichte und Philosophie von Holzfisch Gebet',
+                'aboutTitle': 'Über Holzfisch Gebet',
+                'aboutContent1': 'Holzfisch Gebet ist ein digitales Achtsamkeitstool, das traditionelle Meditations- und Gebetsrituale durch moderne Technologie zu globalen Nutzern bringen soll. Wir glauben, dass jeder im hektischen modernen Leben einen Raum braucht, um den Geist zu beruhigen, zu reflektieren und inneren Frieden zu suchen.',
+                'aboutContent2': 'Unsere Mission ist es, Meditation und Achtsamkeitspraktiken einfach und zugänglich zu machen. Durch das Ritual des virtuellen Holzfisch-Klopfens helfen wir Nutzern, Stress zu reduzieren, die Konzentration zu verbessern und Gleichgewicht und Ruhe im Alltag zu finden.',
+                'aboutVision': 'Vision & Werte',
+                'aboutContent3': 'Wir glauben, dass Technologie ein Werkzeug zur Förderung des mentalen Wohlbefindens sein kann, nicht nur eine Quelle der Ablenkung. Holzfisch Gebet kombiniert östliche traditionelle Weisheit mit modernem User Experience Design, um ein digitales Werkzeug zu schaffen, das die Tradition respektiert und gleichzeitig modernen Nutzungsgewohnheiten entspricht.',
+                'aboutValues': `<li><strong>Zugänglichkeit:</strong> Achtsamkeitstools für alle frei verfügbar machen</li>
+                               <li><strong>Inklusivität:</strong> Verschiedene kulturelle Hintergründe und Glaubenssysteme respektieren</li>
+                               <li><strong>Einfachheit:</strong> Saubere Oberfläche mit intuitiver Funktionalität beibehalten</li>
+                               <li><strong>Datenschutz:</strong> Nutzerdaten nur lokal speichern, Privatsphäre der Nutzer schützen</li>`,
+                'aboutTeam': 'Unser Team',
+                'aboutContent4': 'Holzfisch Gebet wurde von einer Gruppe von Entwicklern, Designern und Psychologie-Enthusiasten geschaffen, die sich für Achtsamkeitsmeditation und digitales Wohlbefinden begeistern. Wir kommen aus verschiedenen kulturellen Hintergründen, teilen aber den gleichen Glauben: Technologie sollte dem ganzheitlichen menschlichen Wohlbefinden dienen, einschließlich der mentalen Gesundheit.',
+                'footerText': 'Holzfisch Gebet · Aufrichtigkeit Bringt Segen · Wünsche Ihnen Frieden und Freude',
+                'backToHome': 'Zurück zur Startseite',
+                'drawerTitle': 'Sprache auswählen',
+                'languageName': 'Deutsch'
+            },
+            'ru-RU': {
+                'headerTitle': 'О Нас',
+                'headerSubtitle': 'История и философия Молитвы с Деревянной Рыбой',
+                'aboutTitle': 'О Молитве с Деревянной Рыбой',
+                'aboutContent1': 'Молитва с Деревянной Рыбой - это цифровой инструмент осознанности, предназначенный для привнесения традиционных ритуалов медитации и молитвы к пользователям по всему миру с помощью современных технологий. Мы верим, что в быстром темпе современной жизни каждому нужно пространство для успокоения ума, размышлений и поиска внутреннего покоя.',
+                'aboutContent2': 'Наша миссия - сделать медитацию и практики осознанности простыми и доступными. Через ритуал виртуального постукивания по деревянной рыбе мы помогаем пользователям снижать стресс, улучшать концентрацию и находить баланс и спокойствие в повседневной жизни.',
+                'aboutVision': 'Видение и Ценности',
+                'aboutContent3': 'Мы верим, что технологии могут быть инструментом для улучшения психического благополучия, а не только источником отвлечения. Молитва с Деревянной Рыбой сочетает восточную традиционную мудрость с современным дизайном пользовательского опыта, создавая цифровой инструмент, который уважает традиции, одновременно соответствуя современным привычкам использования.',
+                'aboutValues': `<li><strong>Доступность:</strong> Сделать инструменты осознанности свободно доступными для всех</li>
+                               <li><strong>Инклюзивность:</strong> Уважение различных культурных особенностей и систем верований</li>
+                               <li><strong>Простота:</strong> Поддержание чистого интерфейса с интуитивной функциональностью</li>
+                               <li><strong>Защита конфиденциальности:</strong> Данные пользователей хранятся только локально, защищая их конфиденциальность</li>`,
+                'aboutTeam': 'Наша Команда',
+                'aboutContent4': 'Молитва с Деревянной Рыбой была создана группой разработчиков, дизайнеров и энтузиастов психологии, увлеченных медитацией осознанности и цифровым благополучием. Мы из разных культурных слоев, но разделяем одну веру: технологии должны служить целостному благополучию человека, включая психическое здоровье.',
+                'footerText': 'Молитва с Деревянной Рыбой · Искренность Приносит Благословение · Желаем Вам Мира и Радости',
+                'backToHome': 'Вернуться на Главную',
+                'drawerTitle': 'Выберите язык',
+                'languageName': 'Русский'
+            }
+        };
+
+        // 移动端语言选项数据
+        const mobileLanguageList = [
+            { code: 'zh-CN', name: '中文', short: '中', flag: 'https://flagcdn.com/w20/cn.png' },
+            { code: 'en-US', name: 'English (US)', short: 'EN', flag: 'https://flagcdn.com/w20/us.png' },
+            { code: 'en-GB', name: 'English (UK)', short: 'UK', flag: 'https://flagcdn.com/w20/gb.png' },
+            { code: 'fr-FR', name: 'Français', short: 'FR', flag: 'https://flagcdn.com/w20/fr.png' },
+            { code: 'sv-SE', name: 'Svenska', short: 'SV', flag: 'https://flagcdn.com/w20/se.png' },
+            { code: 'de-DE', name: 'Deutsch', short: 'DE', flag: 'https://flagcdn.com/w20/de.png' },
+            { code: 'ru-RU', name: 'Русский', short: 'RU', flag: 'https://flagcdn.com/w20/ru.png' }
+        ];
+
+        // DOM 元素获取
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentLanguageElement = document.getElementById('currentLanguage');
+        const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+        const mobileLanguageDrawer = document.getElementById('mobileLanguageDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        const mobileLanguageOptions = document.getElementById('mobileLanguageOptions');
+        const drawerTitle = document.getElementById('drawerTitle');
+
+        // 当前语言
+        let currentLanguage = localStorage.getItem('prayerLanguage') || 'zh-CN';
+
+        // 更新移动端按钮文字
+        function updateMobileLanguageButton() {
+            const currentLangData = mobileLanguageList.find(lang => lang.code === currentLanguage);
+            if (currentLangData && mobileLanguageBtn) {
+                mobileLanguageBtn.textContent = currentLangData.short;
+            }
+        }
+
+        // 更新抽屉标题
+        function updateDrawerTitle() {
+            if (drawerTitle) {
+                drawerTitle.textContent = translations[currentLanguage]?.drawerTitle || '选择语言';
+            }
+        }
+
+        // 初始化移动端语言选项列表
+        function initMobileLanguageOptions() {
+            if (!mobileLanguageOptions) return;
+            
+            mobileLanguageOptions.innerHTML = '';
+            
+            mobileLanguageList.forEach(lang => {
+                const option = document.createElement('div');
+                option.className = `mobile-language-option ${currentLanguage === lang.code ? 'active' : ''}`;
+                option.dataset.lang = lang.code;
+                
+                option.innerHTML = `
+                    <img src="${lang.flag}" alt="${lang.name}" class="mobile-language-flag">
+                    <span class="mobile-language-name">${lang.name}</span>
+                `;
+                
+                option.addEventListener('click', () => {
+                    switchLanguage(lang.code);
+                    closeMobileDrawer();
+                });
+                
+                mobileLanguageOptions.appendChild(option);
+            });
+        }
+
+        // 打开移动端抽屉
+        function openMobileDrawer() {
+            if (!mobileLanguageDrawer || !drawerOverlay) return;
+            
+            mobileLanguageDrawer.classList.add('active');
+            drawerOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 关闭移动端抽屉
+        function closeMobileDrawer() {
+            if (!mobileLanguageDrawer || !drawerOverlay) return;
+            
+            mobileLanguageDrawer.classList.remove('active');
+            drawerOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // 应用翻译
+        function applyTranslations() {
+            const lang = translations[currentLanguage];
+            if (!lang) return;
+            
+            // 更新页面元素
+            const updateElement = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = text;
+            };
+            
+            updateElement('headerTitle', lang.headerTitle);
+            updateElement('headerSubtitle', lang.headerSubtitle);
+            updateElement('aboutTitle', lang.aboutTitle);
+            updateElement('aboutContent1', lang.aboutContent1);
+            updateElement('aboutContent2', lang.aboutContent2);
+            updateElement('aboutVision', lang.aboutVision);
+            updateElement('aboutContent3', lang.aboutContent3);
+            
+            const aboutValuesElement = document.getElementById('aboutValues');
+            if (aboutValuesElement) aboutValuesElement.innerHTML = lang.aboutValues;
+            
+            updateElement('aboutTeam', lang.aboutTeam);
+            updateElement('aboutContent4', lang.aboutContent4);
+            updateElement('footerText', lang.footerText);
+            updateElement('backToHome', lang.backToHome);
+            
+            if (currentLanguageElement) {
+                currentLanguageElement.textContent = lang.languageName || lang.headerTitle;
+            }
+            
+            // 更新页面标题
+            document.title = `${lang.headerTitle} - 木鱼祈福`;
+            
+            // 更新HTML lang属性
+            document.documentElement.lang = currentLanguage;
+            
+            // 更新语言选择器中的活动状态
+            document.querySelectorAll('.language-option').forEach(option => {
+                if (option.dataset.lang === currentLanguage) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+            
+            // 更新移动端组件
+            updateMobileLanguageButton();
+            updateDrawerTitle();
+            initMobileLanguageOptions();
+            
+            // 保存语言偏好
+            localStorage.setItem('prayerLanguage', currentLanguage);
+        }
+
+        // 切换语言
+        function switchLanguage(langCode) {
+            if (translations[langCode]) {
+                currentLanguage = langCode;
+                applyTranslations();
+            }
+        }
+
+        // 事件监听
+        if (languageBtn) {
+            languageBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (languageDropdown) {
+                    languageDropdown.classList.toggle('active');
+                }
+            });
+        }
+
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const langCode = option.dataset.lang;
+                switchLanguage(langCode);
+                if (languageDropdown) {
+                    languageDropdown.classList.remove('active');
+                }
+            });
+        });
+
+        if (mobileLanguageBtn) mobileLanguageBtn.addEventListener('click', openMobileDrawer);
+        if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeMobileDrawer);
+        if (drawerOverlay) drawerOverlay.addEventListener('click', closeMobileDrawer);
+
+        // 点击页面其他区域关闭桌面端下拉菜单
+        document.addEventListener('click', () => {
+            if (languageDropdown) {
+                languageDropdown.classList.remove('active');
+            }
+        });
+
+        // 页面初始化
+        function initPage() {
+            // 加载语言设置
+            const savedLang = localStorage.getItem('prayerLanguage');
+            if (savedLang && translations[savedLang]) {
+                currentLanguage = savedLang;
+            }
+            
+            // 应用翻译
+            applyTranslations();
+            
+            // 初始化移动端语言选项
+            initMobileLanguageOptions();
+            updateMobileLanguageButton();
+            
+            // 根据屏幕宽度切换语言UI
+            toggleLanguageUIByScreenSize();
+            
+            // 监听窗口大小变化
+            window.addEventListener('resize', toggleLanguageUIByScreenSize);
+        }
+
+        // 根据屏幕宽度切换语言UI显示
+        function toggleLanguageUIByScreenSize() {
+            const isMobile = window.innerWidth <= 900;
+            const desktopSelector = document.querySelector('.language-selector');
+            
+            if (!desktopSelector || !mobileLanguageBtn) return;
+            
+            if (isMobile) {
+                mobileLanguageBtn.style.display = 'flex';
+                desktopSelector.style.display = 'none';
+                
+                if (languageDropdown) {
+                    languageDropdown.classList.remove('active');
+                }
+            } else {
+                mobileLanguageBtn.style.display = 'none';
+                desktopSelector.style.display = 'block';
+                
+                closeMobileDrawer();
+            }
+        }
+
+        // 页面加载完成后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPage);
+        } else {
+            initPage();
+        }
+    </script>
+</body>
+</html>

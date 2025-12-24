@@ -15,7 +15,10 @@ const translations = {
         'footerText': '木鱼祈福 · 心诚则灵 · 愿您平安喜乐',
         'languageName': '中文',
         'pageTitle': '在线木鱼祈福 - 静心祈福，平安喜乐',
-        'metaDescription': '提供免费的在线木鱼敲击祈福工具。点击敲击木鱼，记录祈福次数，在繁忙生活中获得片刻宁静，祈愿平安、健康与喜乐。'
+        'metaDescription': '提供免费的在线木鱼敲击祈福工具。点击敲击木鱼，记录祈福次数，在繁忙生活中获得片刻宁静，祈愿平安、健康与喜乐。',
+        'about': '关于我们',
+        'privacy': '隐私政策',
+        'contact': '联系我们',
     },
     'en-US': {
         'title': 'Wooden Fish Blessing',
@@ -32,7 +35,10 @@ const translations = {
         'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
         'languageName': 'English (US)',
         'pageTitle': 'Wooden Fish Blessing - Online Prayer Tool',
-        'metaDescription': 'Free online wooden fish tapping tool for blessings. Click to tap the wooden fish, record prayer counts, find peace in busy life, and pray for safety, health, and happiness.'
+        'metaDescription': 'Free online wooden fish tapping tool for blessings. Click to tap the wooden fish, record prayer counts, find peace in busy life, and pray for safety, health, and happiness.',
+        'about': 'About',
+        'privacy': 'Privacy Policy',
+        'contact': 'Contact',
     },
     'en-GB': {
         'title': 'Wooden Fish Blessing',
@@ -49,7 +55,10 @@ const translations = {
         'footerText': 'Wooden Fish Prayer · Sincerity Brings Blessings · Wishing You Peace and Joy',
         'languageName': 'English (UK)',
         'pageTitle': 'Wooden Fish Blessing - Online Meditation Tool',
-        'metaDescription': 'Free online wooden fish tapping tool for blessings. Click to tap the wooden fish, record your prayer counts, find a moment of peace in busy life, and pray for safety, health, and happiness.'
+        'metaDescription': 'Free online wooden fish tapping tool for blessings. Click to tap the wooden fish, record your prayer counts, find a moment of peace in busy life, and pray for safety, health, and happiness.',
+        'about': 'About',
+        'privacy': 'Privacy Policy',
+        'contact': 'Contact'
     },
     'fr-FR': {
         'title': 'Prière avec Poisson en Bois',
@@ -66,7 +75,10 @@ const translations = {
         'footerText': 'Prière avec Poisson en Bois · La Sincérité Apporte des Bénédictions · Vous Souhaitant Paix et Joie',
         'languageName': 'Français',
         'pageTitle': 'Prière avec Poisson en Bois - Outil de Méditation en Ligne',
-        'metaDescription': 'Outil gratuit de tapotement de poisson en bois en ligne pour les bénédictions. Cliquez pour taper le poisson en bois, enregistrez le nombre de prières, trouvez la paix dans la vie bien remplie et priez pour la sécurité, la santé et le bonheur.'
+        'metaDescription': 'Outil gratuit de tapotement de poisson en bois en ligne pour les bénédictions. Cliquez pour taper le poisson en bois, enregistrez le nombre de prières, trouvez la paix dans la vie bien remplie et priez pour la sécurité, la santé et le bonheur.',
+        'about': 'À propos',
+        'privacy': 'Politique de Confidentialité',
+        'contact': 'Contact'
     },
     'sv-SE': {
         'title': 'Träfiskbön',
@@ -83,7 +95,10 @@ const translations = {
         'footerText': 'Träfiskbön · Uppriktighet För Välsignelser · Önskar Er Frid och Glädje',
         'languageName': 'Svenska',
         'pageTitle': 'Träfiskbön - Online Meditationsverktyg',
-        'metaDescription': 'Gratis online träfiskknappningsverktyg för välsignelser. Klicka för att knacka på träfisken, registrera bönantal, hitta frid i ett hektiskt liv och be för säkerhet, hälsa och lycka.'
+        'metaDescription': 'Gratis online träfiskknappningsverktyg för välsignelser. Klicka för att knacka på träfisken, registrera bönantal, hitta frid i ett hektiskt liv och be för säkerhet, hälsa och lycka.',
+        'about': 'Om Oss',
+        'privacy': 'Integritetspolicy',
+        'contact': 'Kontakta Oss'
     },
     'de-DE': {
         'title': 'Holzfisch Gebet',
@@ -100,7 +115,10 @@ const translations = {
         'footerText': 'Holzfisch Gebet · Aufrichtigkeit Bringt Segen · Wünsche Ihnen Frieden und Freude',
         'languageName': 'Deutsch',
         'pageTitle': 'Holzfisch Gebet - Online Meditationswerkzeug',
-        'metaDescription': 'Kostenloses Online-Holzfisch-Klopfwerkzeug für Segnungen. Klicken Sie, um den Holzfisch zu klopfen, zeichnen Sie die Gebetsanzahlen auf, finden Sie Frieden im hektischen Leben und beten Sie für Sicherheit, Gesundheit und Glück.'
+        'metaDescription': 'Kostenloses Online-Holzfisch-Klopfwerkzeug für Segnungen. Klicken Sie, um den Holzfisch zu klopfen, zeichnen Sie die Gebetsanzahlen auf, finden Sie Frieden im hektischen Leben und beten Sie für Sicherheit, Gesundheit und Glück.',
+        'about': 'Über Uns',
+        'privacy': 'Datenschutzrichtlinie',
+        'contact': 'Kontaktieren Sie uns'
     },
     'ru-RU': {
         'title': 'Молитва с Деревянной Рыбой',
@@ -117,6 +135,9 @@ const translations = {
         'footerText': 'Молитва с Деревянной Рыбой · Искренность Приносит Благословение · Желаем Вам Мира и Радости',
         'languageName': 'Русский',
         'pageTitle': 'Молитва с Деревянной Рыбой - Онлайн Инструмент для Медитации',
-        'metaDescription': 'Бесплатный онлайн-инструмент для постукивания по деревянной рыбе для благословений. Нажмите, чтобы постучать по деревянной рыбе, запишите количество молитв, найдите покой в напряженной жизни и молитесь о безопасности, здоровье и счастье.'
+        'metaDescription': 'Бесплатный онлайн-инструмент для постукивания по деревянной рыбе для благословений. Нажмите, чтобы постучать по деревянной рыбе, запишите количество молитв, найдите покой в напряженной жизни и молитесь о безопасности, здоровье и счастье.',
+        'about': 'О Нас',
+        'privacy': 'Политика Конфиденциальности',
+        'contact': 'Свяжитесь с нами'
     }
 };
