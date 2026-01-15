@@ -138,15 +138,18 @@ function closeMobileDrawer() {
 
 // 应用翻译
 function applyTranslations() {
+    
     const lang = translations[currentLanguage];
     if (!lang) return;
     
     // 更新页面元素
     const updateElement = (id, text) => {
         const el = document.getElementById(id);
-        if (el) el.textContent = text;
+        if (el && text) el.textContent = text;
     };
-    
+    updateElement('navbarText', lang.navbarText);
+    updateElement('navbarIndex', lang.navbarIndex);
+    updateElement('navbarArticle', lang.navbarArticle);
     updateElement('headerTitle', lang.title);
     updateElement('headerSubtitle', lang.subtitle);
     updateElement('sessionCountLabel', lang.sessionCountLabel);
@@ -688,3 +691,25 @@ if (window.console) {
     console.log('window.toggleAutoPray() - 切换自动敲击');
     console.log('当前版本:', APP_VERSION);
 }
+
+ // 移动端菜单切换
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+// 点击链接后关闭移动菜单
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+
+// 点击页面其他区域关闭菜单
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-container')) {
+        navLinks.classList.remove('active');
+    }
+});

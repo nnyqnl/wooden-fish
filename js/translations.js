@@ -1,6 +1,9 @@
 // 翻译字典
 const translations = {
     'zh-CN': {
+        'navbarText':'在线木鱼',
+        'navbarIndex':'首页',
+        'navbarArticle':'文档中心',
         'title': '祈福平安',
         'subtitle': '静心祈福 平安喜乐',
         'sessionCountLabel': '本次祈福',
@@ -21,6 +24,9 @@ const translations = {
         'contact': '联系我们',
     },
     'en-US': {
+        'navbarText':'Online Wooden Fish',
+        'navbarIndex':'Index',
+        'navbarArticle':'Articles',
         'title': 'Wooden Fish Blessing',
         'subtitle': 'Meditate and Pray for Peace and Happiness',
         'sessionCountLabel': 'This Session',

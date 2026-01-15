@@ -18,7 +18,7 @@
     <!-- 动态版本号防止缓存 -->
     <script>
         // 使用构建时间作为版本号（自动更新）
-        const BUILD_VERSION = '202512.25.1';
+        const BUILD_VERSION = '202601.15.1';
         document.write(`
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
             <link rel="stylesheet" href="css/style.css?v=${BUILD_VERSION}">
@@ -32,6 +32,25 @@
     <link rel="manifest" href="/favicon/site.webmanifest" />
 </head>
 <body>
+    <!-- 导航栏 -->
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <span class="logo" id="navbarText">在线木鱼</span>
+            
+            <!-- 菜单按钮 (移动端) -->
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+            
+            <!-- 导航链接 -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active"id="navbarIndex">首页</a></li>
+                <li><a href="article.html" id="navbarArticle">文档中心</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <!-- 桌面端语言选择器 -->
         <div class="language-selector">
@@ -147,7 +166,7 @@
     <!-- 动态加载带版本号的JS文件 -->
     <script>
         // 使用相同的构建版本号
-        const JS_VERSION = '202512.25.1';
+        const JS_VERSION = '202601.15.1';
         function loadScript(src) {
             return new Promise((resolve, reject) => {
                 const script = document.createElement('script');
