@@ -531,10 +531,10 @@ footer {
 /* ==================== 响应式设计 ==================== */
 /* PC端全屏样式 */
 @media (min-width: 901px) {
-    .container {
-        /* height: 90vh;
-        max-height: 800px; */
-    }
+    /* .container {
+        height: 90vh;
+        max-height: 800px;
+    } */
     
     body {
         padding: 20px;
