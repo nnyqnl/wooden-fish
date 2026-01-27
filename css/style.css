@@ -532,8 +532,8 @@ footer {
 /* PC端全屏样式 */
 @media (min-width: 901px) {
     .container {
-        height: 90vh;
-        max-height: 800px;
+        /* height: 90vh;
+        max-height: 800px; */
     }
     
     body {
