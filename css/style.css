@@ -59,7 +59,7 @@ body {
 header {
     background: linear-gradient(to right, #b89446, #d4b15f);
     color: #fff;
-    padding: 20px 30px;
+    padding: 35px 30px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -159,7 +159,7 @@ h1 {
     justify-content: space-between;
     flex-grow: 1;
     overflow: hidden;
-    min-height: 500px;
+    /* min-height: 500px; */
 }
 
 /* 左侧木鱼区域 */
@@ -832,7 +832,7 @@ footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 50px;
+            height: 40px;
         }
         
         /* Logo样式 */
