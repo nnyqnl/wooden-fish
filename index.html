@@ -18,7 +18,7 @@
     <!-- 动态版本号防止缓存 -->
     <script>
         // 使用构建时间作为版本号（自动更新）
-        const BUILD_VERSION = '202601.17.1';
+        const BUILD_VERSION = '202602.03.1';
         document.write(`
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
             <link rel="stylesheet" href="css/style.css?v=${BUILD_VERSION}">
@@ -166,7 +166,7 @@
     <!-- 动态加载带版本号的JS文件 -->
     <script>
         // 使用相同的构建版本号
-        const JS_VERSION = '202601.17.1';
+        const JS_VERSION = '202602.03.1';
         function loadScript(src) {
             return new Promise((resolve, reject) => {
                 const script = document.createElement('script');
